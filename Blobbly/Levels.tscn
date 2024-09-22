@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://cl628sehtynmm"]
+
+[ext_resource type="Script" path="res://CharacterBody2D.gd" id="1_xt65x"]
+[ext_resource type="PackedScene" uid="uid://ji8lw2wgl8f1" path="res://Enemey.tscn" id="2_7e41o"]
+[ext_resource type="Script" path="res://NavigationRegion2D.gd" id="2_bic3t"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_p47id"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rvn4p"]
+height = 37.3333
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jaevv"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_curc0"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_jccss"]
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[node name="GameScene" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
+scale = Vector2(30, 30)
+script = ExtResource("1_xt65x")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Player"]
+mesh = SubResource("CapsuleMesh_p47id")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+scale = Vector2(0.05, 0.05)
+shape = SubResource("CapsuleShape2D_rvn4p")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position_smoothing_enabled = true
+position_smoothing_speed = 2.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(51, 597)
+scale = Vector2(2000, 100)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+scale = Vector2(0.05, 0.05)
+shape = SubResource("RectangleShape2D_jaevv")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D"]
+mesh = SubResource("BoxMesh_curc0")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(1018, 540)
+rotation = 1.67552
+scale = Vector2(2000, 100)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+scale = Vector2(0.05, 0.05)
+shape = SubResource("RectangleShape2D_jaevv")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D2"]
+mesh = SubResource("BoxMesh_curc0")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(19, -23)
+navigation_polygon = SubResource("NavigationPolygon_jccss")
+script = ExtResource("2_bic3t")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_7e41o")]
+position = Vector2(290, 332)

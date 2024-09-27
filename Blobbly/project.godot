@@ -18,7 +18,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-player="*res://CharacterBody2D.gd"
+GameManager="*res://GameManager.gd"
 
 [input]
 

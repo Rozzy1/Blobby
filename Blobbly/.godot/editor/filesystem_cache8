@@ -1,9 +1,14 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1727459147
-Enemey.tscn::PackedScene::650239117500507264::1727008835::0::1::::<><>::res://EnemeyPathFinder.gd
-EnemeyPathFinder.gd::GDScript::-1::1727457482::0::1::::<>CharacterBody2D<>::
-GameManager.gd::GDScript::-1::1727456917::0::1::::<>Node<>::
-icon.svg::CompressedTexture2D::8010263344770721409::1727008835::1727008853::1::::<><>::
-Levels.tscn::PackedScene::5610613599727884840::1727457482::0::1::::<><>::res://PlayerScript.gd<>uid://ji8lw2wgl8f1::::res://Enemey.tscn<>res://NavigationRegion2D.gd
-NavigationRegion2D.gd::GDScript::-1::1727008835::0::1::::<>NavigationRegion2D<>::
-PlayerScript.gd::GDScript::-1::1727456917::0::1::::Player<>CharacterBody2D<>::
+::res://::1727540081
+CharacterBody2D.gd::GDScript::-1::1727514506::0::1::::<>CharacterBody2D<>::
+Enemey.gdshader::Shader::-1::1727535095::0::1::::<><>::
+Enemey.tscn::PackedScene::650239117500507264::1727535058::0::1::::<><>::res://EnemeyPathFinder.gd
+EnemeyPathFinder.gd::GDScript::-1::1727534195::0::1::::<>CharacterBody2D<>::
+EnemeySpawner.gd::GDScript::-1::1727534959::0::1::::<>Node2D<>::
+GameManager.gd::GDScript::-1::1727514506::0::1::::<>Node<>::
+HealthBar - Copy.gd::GDScript::-1::1726911300::0::1::::<>ProgressBar<>::
+HealthBar - Copy.tscn::PackedScene::3767818268840341384::1727535058::0::1::::<><>::res://HealthBar - Copy.gd
+icon.svg::CompressedTexture2D::8010263344770721409::1727514506::1727514683::1::::<><>::
+Levels.tscn::PackedScene::5610613599727884840::1727535092::0::1::::<><>::res://PlayerScript.gd<>res://NavigationRegion2D.gd<>uid://btxfofmj4rehs::::res://HealthBar - Copy.tscn<>res://EnemeySpawner.gd
+NavigationRegion2D.gd::GDScript::-1::1727514506::0::1::::<>NavigationRegion2D<>::
+PlayerScript.gd::GDScript::-1::1727533158::0::1::::Player<>CharacterBody2D<>::

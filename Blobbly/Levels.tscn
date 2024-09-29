@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cl628sehtynmm"]
+[gd_scene load_steps=11 format=3 uid="uid://cl628sehtynmm"]
 
 [ext_resource type="Script" path="res://PlayerScript.gd" id="1_xt65x"]
-[ext_resource type="PackedScene" uid="uid://ji8lw2wgl8f1" path="res://Enemey.tscn" id="2_7e41o"]
 [ext_resource type="Script" path="res://NavigationRegion2D.gd" id="2_bic3t"]
+[ext_resource type="PackedScene" uid="uid://btxfofmj4rehs" path="res://HealthBar - Copy.tscn" id="2_ce43v"]
+[ext_resource type="Script" path="res://EnemeySpawner.gd" id="4_2nt6a"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_p47id"]
 
@@ -25,6 +26,7 @@ scale = Vector2(30, 30)
 script = ExtResource("1_xt65x")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Player"]
+modulate = Color(0, 0, 0, 1)
 mesh = SubResource("CapsuleMesh_p47id")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -36,6 +38,11 @@ scale = Vector2(0.05, 0.05)
 shape = SubResource("CapsuleShape2D_rvn4p")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
+[node name="CanvasLayer" type="CanvasLayer" parent="Player"]
+
+[node name="HealthBar" parent="Player/CanvasLayer" instance=ExtResource("2_ce43v")]
+metadata/_edit_use_anchors_ = true
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(51, 597)
 scale = Vector2(2000, 100)
@@ -45,6 +52,7 @@ scale = Vector2(0.05, 0.05)
 shape = SubResource("RectangleShape2D_jaevv")
 
 [node name="Polygon" type="MeshInstance2D" parent="StaticBody2D"]
+modulate = Color(0, 0, 0, 1)
 position = Vector2(0.002, 0)
 mesh = SubResource("BoxMesh_thm7c")
 
@@ -58,6 +66,7 @@ scale = Vector2(0.05, 0.05)
 shape = SubResource("RectangleShape2D_jaevv")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D2"]
+modulate = Color(0, 0, 0, 1)
 mesh = SubResource("BoxMesh_curc0")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
@@ -65,4 +74,7 @@ position = Vector2(19, -23)
 navigation_polygon = SubResource("NavigationPolygon_jccss")
 script = ExtResource("2_bic3t")
 
-[node name="Enemey" parent="." instance=ExtResource("2_7e41o")]
+[node name="EnemeySpawner" type="Node2D" parent="."]
+position = Vector2(-764, 423)
+script = ExtResource("4_2nt6a")
+enemeypositions = PackedVector2Array(692, 420, -764, 423)

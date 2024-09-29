@@ -1,5 +1,8 @@
+Node2D
+CanvasLayer
+Node
 CollisionShape2D
-GPUParticles2D
 Area2D
+GPUParticles2D
 MeshInstance2D
 Polygon2D

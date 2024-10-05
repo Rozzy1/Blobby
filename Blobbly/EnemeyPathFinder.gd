@@ -11,7 +11,6 @@ var can_see_player : bool
 var damage : int = 4
 
 func _physics_process(delta: float) -> void:
-	print(position)
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	await get_tree().physics_frame
@@ -22,15 +21,15 @@ func _physics_process(delta: float) -> void:
 		else:
 			direction = 1
 		velocity.x = direction * speed
-		move_and_slide()
+	move_and_slide()
 
 
 func _on_area_2d_body_entered(body):
 	if body == player:
 		if player.is_dashing == true or player.gravity == player.groundpoundgravity:
+			collision.set_deferred("disabled",1)
 			Hurtbox.set_deferred("monitoring",false)
 			Sprite.visible = false
-			collision.set_deferred("disabled",1)
 			particles.emitting = true
 			player.subtract_health(-5)
 		else:

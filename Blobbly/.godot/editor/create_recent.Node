@@ -1,5 +1,6 @@
 CollisionShape2D
 Area2D
+Timer
 MeshInstance2D
 StaticBody2D
 Node2D

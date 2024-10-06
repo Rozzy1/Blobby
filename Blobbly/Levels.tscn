@@ -1,7 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://cl628sehtynmm"]
+[gd_scene load_steps=14 format=3 uid="uid://cl628sehtynmm"]
 
 [ext_resource type="Script" path="res://PlayerScript.gd" id="1_xt65x"]
-[ext_resource type="Script" path="res://NavigationRegion2D.gd" id="2_bic3t"]
 [ext_resource type="PackedScene" uid="uid://btxfofmj4rehs" path="res://HealthBar - Copy.tscn" id="2_ce43v"]
 [ext_resource type="Script" path="res://EnemeySpawner.gd" id="4_2nt6a"]
 
@@ -16,9 +15,6 @@ height = 37.3333
 
 [sub_resource type="BoxMesh" id="BoxMesh_curc0"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_jccss"]
-source_geometry_group_name = &"navigation_polygon_source_group"
-
 [sub_resource type="GDScript" id="GDScript_uh2jl"]
 script/source = "extends StaticBody2D
 @export var collision : CollisionShape2D
@@ -31,7 +27,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print(canplayerdashthrough)
 	if canplayerdashthrough == true and player.is_dashing == true:
 		collision.set_deferred(\"disabled\",1)
 	else:
@@ -56,11 +51,14 @@ func _on_area_2d_body_exited(body):
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3oneg"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mg4xg"]
+
 [node name="GameScene" type="Node2D"]
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
 position = Vector2(-923, 507)
 scale = Vector2(30, 30)
+floor_snap_length = 10.0
 script = ExtResource("1_xt65x")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Player"]
@@ -81,6 +79,9 @@ debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="HealthBar" parent="Player/CanvasLayer" instance=ExtResource("2_ce43v")]
 metadata/_edit_use_anchors_ = true
+
+[node name="Coyotetimer" type="Timer" parent="Player"]
+wait_time = 0.1
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(51, 597)
@@ -107,16 +108,6 @@ shape = SubResource("RectangleShape2D_jaevv")
 [node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D2"]
 modulate = Color(0, 0, 0, 1)
 mesh = SubResource("BoxMesh_curc0")
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-position = Vector2(19, -23)
-navigation_polygon = SubResource("NavigationPolygon_jccss")
-script = ExtResource("2_bic3t")
-
-[node name="EnemeySpawner" type="Node2D" parent="."]
-position = Vector2(125, 530)
-script = ExtResource("4_2nt6a")
-enemeypositions = PackedVector2Array(125, 530)
 
 [node name="DashWall" type="StaticBody2D" parent="." node_paths=PackedStringArray("collision")]
 position = Vector2(71, 497)
@@ -158,7 +149,91 @@ mesh = SubResource("BoxMesh_m2mky")
 scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_3oneg")
 
+[node name="EnemeySpawner" type="Node2D" parent="."]
+position = Vector2(3358, 106)
+script = ExtResource("4_2nt6a")
+enemeypositions = PackedVector2Array(125, 530, 2790, 280, 4000, -110, 4000, 250, 3350, 100)
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(904, 506)
+rotation = -0.575959
+scale = Vector2(400, 150)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+scale = Vector2(0.05, 0.05)
+shape = SubResource("RectangleShape2D_jaevv")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D3"]
+modulate = Color(0, 0, 0, 1)
+mesh = SubResource("BoxMesh_curc0")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(1432, 489)
+scale = Vector2(800, 300)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+scale = Vector2(0.05, 0.05)
+shape = SubResource("RectangleShape2D_jaevv")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D4"]
+modulate = Color(0, 0, 0, 1)
+mesh = SubResource("BoxMesh_curc0")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="."]
+position = Vector2(3284, 489)
+scale = Vector2(2000, 300)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
+scale = Vector2(0.05, 0.05)
+shape = SubResource("RectangleShape2D_jaevv")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D5"]
+modulate = Color(0, 0, 0, 1)
+mesh = SubResource("BoxMesh_curc0")
+
+[node name="KillBrick" type="Area2D" parent="."]
+position = Vector2(2060, 1022)
+scale = Vector2(50, 10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillBrick"]
+shape = SubResource("RectangleShape2D_mg4xg")
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="."]
+position = Vector2(3349, 262)
+rotation = 1.5708
+scale = Vector2(200, 200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D6"]
+scale = Vector2(0.05, 0.05)
+shape = SubResource("RectangleShape2D_jaevv")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D6"]
+modulate = Color(0, 0, 0, 1)
+mesh = SubResource("BoxMesh_curc0")
+
+[node name="StaticBody2D7" type="StaticBody2D" parent="."]
+position = Vector2(4045, 43)
+scale = Vector2(500, 100)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D7"]
+scale = Vector2(0.05, 0.05)
+shape = SubResource("RectangleShape2D_jaevv")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D7"]
+modulate = Color(0, 0, 0, 1)
+mesh = SubResource("BoxMesh_curc0")
+
+[node name="KillBrick2" type="Area2D" parent="."]
+position = Vector2(4770, 744)
+scale = Vector2(50, 10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillBrick2"]
+shape = SubResource("RectangleShape2D_mg4xg")
+
+[connection signal="timeout" from="Player/Coyotetimer" to="Player" method="_on_coyotetimer_timeout"]
 [connection signal="body_entered" from="DashWall/Area2D" to="DashWall" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="DashWall/Area2D" to="DashWall" method="_on_area_2d_body_exited"]
 [connection signal="body_entered" from="DashWall2/Area2D" to="DashWall2" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="DashWall2/Area2D" to="DashWall2" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="KillBrick" to="Player" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="KillBrick2" to="Player" method="_on_area_2d_body_entered"]

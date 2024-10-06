@@ -2,5 +2,5 @@ res://Levels.tscn
 res://Enemey.gdshader
 res://Enemey.tscn
 res://HealthBar - Copy.tscn
-res://DashWall.gd
-res://EnemeyPathFinder.gd
+res://PlayerScript.gd
+res://HealthBar - Copy.gd

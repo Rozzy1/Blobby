@@ -14,10 +14,8 @@ func _process(delta):
 func _on_area_2d_body_entered(body):
 	if body == player and player.is_dashing == true:
 		collision.set_deferred("disabled",1)
-		print("aaah")
 
 
 func _on_area_2d_body_exited(body):
 	if body == player and player.is_dashing == true:
 		collision.set_deferred("disabled",0)
-		print("aaah")

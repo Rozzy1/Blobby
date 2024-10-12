@@ -9,7 +9,7 @@ var speed :int  = 150
 var player_class = Player
 var can_see_player : bool
 var damage : int = 4
-
+var lastdirection : int
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -20,6 +20,7 @@ func _physics_process(delta: float) -> void:
 			direction = -1
 		else:
 			direction = 1
+		lastdirection = direction
 		velocity.x = direction * speed
 	move_and_slide()
 

@@ -12,6 +12,7 @@ var MaxHealth : int = Health
 var cancoyote : bool
 var lastfloor : bool
 var jumping : bool
+var friction : float = 1.2
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -28,10 +29,6 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("up") and (is_on_floor() or cancoyote):
 		velocity.y = JUMP_VELOCITY
 		jumping = true
-	if Input.is_action_pressed("down") and not is_on_floor():
-		gravity = groundpoundgravity
-	else:
-		gravity = 900
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("left", "right")
@@ -39,18 +36,25 @@ func _physics_process(delta):
 		velocity.x = direction * SPEED
 	else:
 		if is_dashing == false:
-			velocity.x = move_toward(velocity.x,0, SPEED)
+			velocity.x = velocity.x / friction
 	if Input.is_action_just_pressed("Dash"):
-		subtract_health(1)
-		for i in 10:
-			velocity.x = velocity.x + direction * dashspeed
-			await get_tree().create_timer(0).timeout
-			is_dashing = true
-		await get_tree().create_timer(0.05).timeout
-		is_dashing = false
+		var leftright =Input.get_axis("left","right")
+		var updown =Input.get_axis("up","down")
+		var directions = Vector2(leftright,updown).normalized()
+		if directions:
+			subtract_health(1)
+			for i in 10:
+				velocity += (dashspeed * directions)
+				print(directions)
+				print(velocity)
+				await get_tree().create_timer(0).timeout
+				is_dashing = true
+			for y in 10:
+				velocity.y = velocity.y / friction
+				velocity.x = velocity.x / friction
+			is_dashing = false
 	move_and_slide()
 	lastfloor = is_on_floor()
-	print(lastfloor)
 
 func subtract_health(damage_amt):#
 	print("ow")
@@ -65,7 +69,7 @@ func _on_coyotetimer_timeout():
 	cancoyote = false
 
 func respawn():
-	position = Vector2(-400,0)
+	position = Vector2(0,0)
 	Health = MaxHealth
 	healthbar.health = Health
 	velocity = Vector2(0,0)

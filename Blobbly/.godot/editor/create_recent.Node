@@ -1,10 +1,10 @@
+Polygon2D
+Node2D
+Node
 CollisionShape2D
 Area2D
 Timer
 MeshInstance2D
 StaticBody2D
-Node2D
 CanvasLayer
-Node
 GPUParticles2D
-Polygon2D

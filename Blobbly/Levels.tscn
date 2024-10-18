@@ -1,17 +1,29 @@
-[gd_scene load_steps=14 format=3 uid="uid://cl628sehtynmm"]
+[gd_scene load_steps=22 format=3 uid="uid://cl628sehtynmm"]
 
 [ext_resource type="Script" path="res://PlayerScript.gd" id="1_xt65x"]
 [ext_resource type="PackedScene" uid="uid://btxfofmj4rehs" path="res://HealthBar - Copy.tscn" id="2_ce43v"]
 [ext_resource type="Script" path="res://EnemeySpawner.gd" id="4_2nt6a"]
+[ext_resource type="Script" path="res://LevelTeleporter.gd" id="4_j4xk2"]
+[ext_resource type="Script" path="res://LevelManager.gd" id="5_j8g8e"]
+[ext_resource type="PackedScene" uid="uid://dlv0q1cyfs5sh" path="res://collision_polygons.tscn" id="6_thv5u"]
+[ext_resource type="Script" path="res://DashButton.gd" id="7_fh7uq"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_p47id"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rvn4p"]
 height = 37.3333
 
+[sub_resource type="BoxMesh" id="BoxMesh_jf3f3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gom1k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i7rc0"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mg4xg"]
+size = Vector2(13.06, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jaevv"]
+size = Vector2(19.56, 20)
 
 [sub_resource type="BoxMesh" id="BoxMesh_curc0"]
 
@@ -42,7 +54,6 @@ func _on_area_2d_body_entered(body):
 func _on_area_2d_body_exited(body):
 	if body == player:
 		canplayerdashthrough = false
-		print(\"player dashed out\")
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_diydr"]
@@ -53,14 +64,17 @@ func _on_area_2d_body_exited(body):
 
 [sub_resource type="BoxMesh" id="BoxMesh_thm7c"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ktar8"]
+
 [node name="GameScene" type="Node2D"]
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
-position = Vector2(-923, 507)
+position = Vector2(9.53674e-07, -7.99994)
 scale = Vector2(30, 30)
 floor_snap_length = 10.0
 safe_margin = 0.15
 script = ExtResource("1_xt65x")
+PlayerSpawnPoints = PackedVector2Array(0, 0, -920, 510, 0, 0)
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Player"]
 modulate = Color(0, 0, 0, 1)
@@ -85,205 +99,246 @@ metadata/_edit_use_anchors_ = true
 wait_time = 0.1
 
 [node name="EnemeySpawner" type="Node2D" parent="."]
-position = Vector2(3628, 294)
+position = Vector2(2476, -238)
 script = ExtResource("4_2nt6a")
-enemeypositions = PackedVector2Array(125, 530, 2790, 280, 4826, -37, 3760, 300)
+enemeypositions = PackedVector2Array(125, 530)
 
-[node name="Level1" type="Node2D" parent="."]
+[node name="LevelTeleporter" type="Node2D" parent="." node_paths=PackedStringArray("teleporterarea")]
+z_index = -1
+position = Vector2(2750, 325)
+scale = Vector2(100, 25)
+script = ExtResource("4_j4xk2")
+teleporterarea = NodePath("Area2D")
 
-[node name="KillBrick2" type="Area2D" parent="Level1"]
-position = Vector2(4770, 744)
+[node name="MeshInstance2D" type="MeshInstance2D" parent="LevelTeleporter"]
+mesh = SubResource("BoxMesh_jf3f3")
+
+[node name="Area2D" type="Area2D" parent="LevelTeleporter"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelTeleporter/Area2D"]
+position = Vector2(0, -3)
+scale = Vector2(0.025, 0.3)
+shape = SubResource("RectangleShape2D_gom1k")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="LevelTeleporter"]
+scale = Vector2(0.05, 0.05)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelTeleporter/StaticBody2D"]
+shape = SubResource("RectangleShape2D_i7rc0")
+
+[node name="LevelManager" type="Node" parent="."]
+script = ExtResource("5_j8g8e")
+
+[node name="Level1" type="Node2D" parent="LevelManager"]
+visible = false
+
+[node name="KillBrick" type="Area2D" parent="LevelManager/Level1"]
+position = Vector2(2481, -783)
 scale = Vector2(50, 10)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1/KillBrick2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level1/KillBrick"]
+position = Vector2(0.16, 0.0999994)
 shape = SubResource("RectangleShape2D_mg4xg")
 
-[node name="StaticBody2D7" type="StaticBody2D" parent="Level1"]
-position = Vector2(4045, 43)
-scale = Vector2(500, 100)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1/StaticBody2D7"]
-scale = Vector2(0.05, 0.05)
-shape = SubResource("RectangleShape2D_jaevv")
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Level1/StaticBody2D7"]
-modulate = Color(0, 0, 0, 1)
-mesh = SubResource("BoxMesh_curc0")
-
-[node name="StaticBody2D6" type="StaticBody2D" parent="Level1"]
-position = Vector2(3349, 262)
-rotation = 1.5708
-scale = Vector2(200, 200)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1/StaticBody2D6"]
-scale = Vector2(0.05, 0.05)
-shape = SubResource("RectangleShape2D_jaevv")
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Level1/StaticBody2D6"]
-modulate = Color(0, 0, 0, 1)
-mesh = SubResource("BoxMesh_curc0")
-
-[node name="KillBrick" type="Area2D" parent="Level1"]
-position = Vector2(2060, 1022)
-scale = Vector2(50, 10)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1/KillBrick"]
-shape = SubResource("RectangleShape2D_mg4xg")
-
-[node name="StaticBody2D5" type="StaticBody2D" parent="Level1"]
-position = Vector2(3284, 489)
-scale = Vector2(2000, 300)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1/StaticBody2D5"]
-scale = Vector2(0.05, 0.05)
-shape = SubResource("RectangleShape2D_jaevv")
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Level1/StaticBody2D5"]
-modulate = Color(0, 0, 0, 1)
-mesh = SubResource("BoxMesh_curc0")
-
-[node name="StaticBody2D4" type="StaticBody2D" parent="Level1"]
-position = Vector2(1499, 494)
-scale = Vector2(900, 300)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1/StaticBody2D4"]
-scale = Vector2(0.05, 0.05)
-shape = SubResource("RectangleShape2D_jaevv")
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Level1/StaticBody2D4"]
-modulate = Color(0, 0, 0, 1)
-scale = Vector2(1.0507, 1)
-mesh = SubResource("BoxMesh_curc0")
-
-[node name="StaticBody2D3" type="StaticBody2D" parent="Level1"]
+[node name="StaticBody2D3" type="StaticBody2D" parent="LevelManager/Level1"]
 position = Vector2(904, 506)
 rotation = -0.575959
 scale = Vector2(400, 150)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1/StaticBody2D3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level1/StaticBody2D3"]
 scale = Vector2(0.05, 0.05)
 shape = SubResource("RectangleShape2D_jaevv")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Level1/StaticBody2D3"]
+[node name="MeshInstance2D" type="MeshInstance2D" parent="LevelManager/Level1/StaticBody2D3"]
 modulate = Color(0, 0, 0, 1)
+position = Vector2(0.00405341, 0.161212)
+scale = Vector2(1.00811, 1.31119)
 mesh = SubResource("BoxMesh_curc0")
 
-[node name="DashWall2" type="StaticBody2D" parent="Level1" node_paths=PackedStringArray("collision")]
-position = Vector2(222, 497)
-scale = Vector2(5, 5)
+[node name="DashWall2" type="StaticBody2D" parent="LevelManager/Level1" node_paths=PackedStringArray("collision")]
+position = Vector2(156, 490)
+scale = Vector2(3, 68)
 script = SubResource("GDScript_uh2jl")
 collision = NodePath("CollisionShape2D")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1/DashWall2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level1/DashWall2"]
 shape = SubResource("RectangleShape2D_diydr")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Level1/DashWall2"]
+[node name="MeshInstance2D" type="MeshInstance2D" parent="LevelManager/Level1/DashWall2"]
 self_modulate = Color(0, 0, 0.443137, 1)
 scale = Vector2(20, 20)
 mesh = SubResource("BoxMesh_m2mky")
 
-[node name="Area2D" type="Area2D" parent="Level1/DashWall2"]
+[node name="Area2D" type="Area2D" parent="LevelManager/Level1/DashWall2"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1/DashWall2/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level1/DashWall2/Area2D"]
 scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_3oneg")
 
-[node name="DashWall" type="StaticBody2D" parent="Level1" node_paths=PackedStringArray("collision")]
-position = Vector2(71, 497)
-scale = Vector2(5, 5)
-script = SubResource("GDScript_uh2jl")
-collision = NodePath("CollisionShape2D")
+[node name="StaticBody2D" type="StaticBody2D" parent="LevelManager/Level1"]
+position = Vector2(0, 900)
+scale = Vector2(2500, 700)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1/DashWall"]
-shape = SubResource("RectangleShape2D_diydr")
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Level1/DashWall"]
-self_modulate = Color(0, 0, 0.443137, 1)
-scale = Vector2(20, 20)
-mesh = SubResource("BoxMesh_m2mky")
-
-[node name="Area2D" type="Area2D" parent="Level1/DashWall"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1/DashWall/Area2D"]
-scale = Vector2(5, 5)
-shape = SubResource("RectangleShape2D_3oneg")
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="Level1"]
-position = Vector2(-993, -353)
-rotation = 1.5708
-scale = Vector2(2000, 100)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1/StaticBody2D2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level1/StaticBody2D"]
 scale = Vector2(0.05, 0.05)
 shape = SubResource("RectangleShape2D_jaevv")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Level1/StaticBody2D2"]
-modulate = Color(0, 0, 0, 1)
-mesh = SubResource("BoxMesh_curc0")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Level1"]
-position = Vector2(51, 597)
-scale = Vector2(2000, 100)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1/StaticBody2D"]
-scale = Vector2(0.05, 0.05)
-shape = SubResource("RectangleShape2D_jaevv")
-
-[node name="Polygon" type="MeshInstance2D" parent="Level1/StaticBody2D"]
+[node name="Polygon" type="MeshInstance2D" parent="LevelManager/Level1/StaticBody2D"]
 modulate = Color(0, 0, 0, 1)
 position = Vector2(0.002, 0)
 mesh = SubResource("BoxMesh_thm7c")
 
-[node name="StaticBody2D8" type="StaticBody2D" parent="Level1"]
-position = Vector2(4800, 43)
-scale = Vector2(500, 100)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1/StaticBody2D8"]
-scale = Vector2(0.05, 0.05)
-shape = SubResource("RectangleShape2D_jaevv")
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Level1/StaticBody2D8"]
-modulate = Color(0, 0, 0, 1)
-mesh = SubResource("BoxMesh_curc0")
-
-[node name="DashWall3" type="StaticBody2D" parent="Level1" node_paths=PackedStringArray("collision")]
-position = Vector2(4601, -149)
-scale = Vector2(5, 15)
+[node name="DashWall" type="StaticBody2D" parent="LevelManager/Level1" node_paths=PackedStringArray("collision")]
+z_index = -1
+position = Vector2(32, 496)
+scale = Vector2(3, 68)
 script = SubResource("GDScript_uh2jl")
 collision = NodePath("CollisionShape2D")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1/DashWall3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level1/DashWall"]
 shape = SubResource("RectangleShape2D_diydr")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Level1/DashWall3"]
+[node name="MeshInstance2D" type="MeshInstance2D" parent="LevelManager/Level1/DashWall"]
 self_modulate = Color(0, 0, 0.443137, 1)
 scale = Vector2(20, 20)
 mesh = SubResource("BoxMesh_m2mky")
 
-[node name="Area2D" type="Area2D" parent="Level1/DashWall3"]
+[node name="Area2D" type="Area2D" parent="LevelManager/Level1/DashWall"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1/DashWall3/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level1/DashWall/Area2D"]
 scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_3oneg")
 
-[node name="StaticBody2D9" type="StaticBody2D" parent="Level1"]
-position = Vector2(4800, -331)
-scale = Vector2(500, 100)
+[node name="StaticBody2D10" type="StaticBody2D" parent="LevelManager/Level1"]
+position = Vector2(991, -299)
+scale = Vector2(4000, 600)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1/StaticBody2D9"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level1/StaticBody2D10"]
 scale = Vector2(0.05, 0.05)
 shape = SubResource("RectangleShape2D_jaevv")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Level1/StaticBody2D9"]
+[node name="MeshInstance2D" type="MeshInstance2D" parent="LevelManager/Level1/StaticBody2D10"]
 modulate = Color(0, 0, 0, 1)
 mesh = SubResource("BoxMesh_curc0")
 
+[node name="StaticBody2D11" type="StaticBody2D" parent="LevelManager/Level1"]
+position = Vector2(-1496, 404)
+rotation = 1.5708
+scale = Vector2(2000, 1000)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level1/StaticBody2D11"]
+scale = Vector2(0.05, 0.05)
+shape = SubResource("RectangleShape2D_jaevv")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="LevelManager/Level1/StaticBody2D11"]
+modulate = Color(0, 0, 0, 1)
+mesh = SubResource("BoxMesh_curc0")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="LevelManager/Level1"]
+position = Vector2(2033, 684)
+scale = Vector2(2000, 700)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level1/StaticBody2D2"]
+scale = Vector2(0.05, 0.05)
+shape = SubResource("RectangleShape2D_jaevv")
+
+[node name="Polygon" type="MeshInstance2D" parent="LevelManager/Level1/StaticBody2D2"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0.002, 0)
+mesh = SubResource("BoxMesh_thm7c")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="LevelManager/Level1"]
+position = Vector2(3481, -19)
+scale = Vector2(1000, 1500)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level1/StaticBody2D4"]
+scale = Vector2(0.05, 0.05)
+shape = SubResource("RectangleShape2D_jaevv")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="LevelManager/Level1/StaticBody2D4"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0.00405341, 0.161212)
+scale = Vector2(1.00811, 1.31119)
+mesh = SubResource("BoxMesh_curc0")
+
+[node name="Level2" type="Node2D" parent="LevelManager"]
+position = Vector2(0, 1)
+
+[node name="1" parent="LevelManager/Level2" instance=ExtResource("6_thv5u")]
+position = Vector2(0, 239)
+
+[node name="Polygon2D" parent="LevelManager/Level2/1" index="0"]
+polygon = PackedVector2Array(0, 0, 1056, 0, 1048, 688, 0, 688)
+
+[node name="2" parent="LevelManager/Level2" instance=ExtResource("6_thv5u")]
+position = Vector2(1048, 143)
+
+[node name="Polygon2D" parent="LevelManager/Level2/2" index="0"]
+polygon = PackedVector2Array(0, 0, 1152, 0, 1144, 768, 0, 776)
+
+[node name="3" parent="LevelManager/Level2" instance=ExtResource("6_thv5u")]
+position = Vector2(1048, 143)
+
+[node name="Polygon2D" parent="LevelManager/Level2/3" index="0"]
+polygon = PackedVector2Array(0, 0, -208, 96, 0, 96)
+
+[node name="4" parent="LevelManager/Level2" instance=ExtResource("6_thv5u")]
+position = Vector2(0, 143)
+
+[node name="Polygon2D" parent="LevelManager/Level2/4" index="0"]
+polygon = PackedVector2Array(0, 792, -1208, 792, -1192, -1096, -8, -1096)
+
+[node name="5" parent="LevelManager/Level2" instance=ExtResource("6_thv5u")]
+position = Vector2(2768, 135)
+
+[node name="Polygon2D" parent="LevelManager/Level2/5" index="0"]
+polygon = PackedVector2Array(432, 768, -576, 776, -576, -584, 424, -584)
+
+[node name="6" parent="LevelManager/Level2" instance=ExtResource("6_thv5u")]
+position = Vector2(1040, -537)
+
+[node name="Polygon2D" parent="LevelManager/Level2/6" index="0"]
+polygon = PackedVector2Array(-464, 88, 1160, 88, 1160, 408, -464, 408)
+
+[node name="DashButton" type="StaticBody2D" parent="LevelManager/Level2" node_paths=PackedStringArray("collision", "activatewhat")]
+position = Vector2(1912, 87)
+rotation = 0.785398
+scale = Vector2(50, 50)
+script = ExtResource("7_fh7uq")
+collision = NodePath("CollisionShape2D")
+activatewhat = NodePath("")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level2/DashButton"]
+position = Vector2(0.00899887, 0)
+scale = Vector2(0.05, 0.05)
+shape = SubResource("RectangleShape2D_jaevv")
+
+[node name="Polygon" type="MeshInstance2D" parent="LevelManager/Level2/DashButton"]
+modulate = Color(0.980392, 0.431373, 0.403922, 1)
+position = Vector2(0.002, 0)
+mesh = SubResource("BoxMesh_thm7c")
+
+[node name="Area2D" type="Area2D" parent="LevelManager/Level2/DashButton"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level2/DashButton/Area2D"]
+scale = Vector2(0.2, 0.2)
+shape = SubResource("RectangleShape2D_ktar8")
+
 [connection signal="timeout" from="Player/Coyotetimer" to="Player" method="_on_coyotetimer_timeout"]
-[connection signal="body_entered" from="Level1/KillBrick2" to="Player" method="_on_area_2d_body_entered"]
-[connection signal="body_entered" from="Level1/KillBrick" to="Player" method="_on_area_2d_body_entered"]
-[connection signal="body_entered" from="Level1/DashWall2/Area2D" to="Level1/DashWall2" method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Level1/DashWall2/Area2D" to="Level1/DashWall2" method="_on_area_2d_body_exited"]
-[connection signal="body_entered" from="Level1/DashWall/Area2D" to="Level1/DashWall" method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Level1/DashWall/Area2D" to="Level1/DashWall" method="_on_area_2d_body_exited"]
-[connection signal="body_entered" from="Level1/DashWall3/Area2D" to="Level1/DashWall3" method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Level1/DashWall3/Area2D" to="Level1/DashWall3" method="_on_area_2d_body_exited"]
+[connection signal="LevelChange" from="LevelTeleporter" to="Player" method="_on_level_teleporter_level_change"]
+[connection signal="LevelChange" from="LevelTeleporter" to="LevelManager" method="_on_level_teleporter_level_change"]
+[connection signal="body_entered" from="LevelTeleporter/Area2D" to="LevelTeleporter" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="LevelManager/Level1/KillBrick" to="Player" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="LevelManager/Level1/DashWall2/Area2D" to="LevelManager/Level1/DashWall2" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="LevelManager/Level1/DashWall2/Area2D" to="LevelManager/Level1/DashWall2" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="LevelManager/Level1/DashWall/Area2D" to="LevelManager/Level1/DashWall" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="LevelManager/Level1/DashWall/Area2D" to="LevelManager/Level1/DashWall" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="LevelManager/Level2/DashButton/Area2D" to="LevelManager/Level2/DashButton" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="LevelManager/Level2/DashButton/Area2D" to="LevelManager/Level2/DashButton" method="_on_area_2d_body_exited"]
+
+[editable path="LevelManager/Level2/1"]
+[editable path="LevelManager/Level2/2"]
+[editable path="LevelManager/Level2/3"]
+[editable path="LevelManager/Level2/4"]
+[editable path="LevelManager/Level2/5"]
+[editable path="LevelManager/Level2/6"]

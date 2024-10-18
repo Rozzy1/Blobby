@@ -1,10 +1,12 @@
-Polygon2D
-Node2D
-Node
+Path2D
+StaticBody2D
 CollisionShape2D
 Area2D
-Timer
+Polygon2D
+CollisionPolygon2D
+Node2D
+Node
 MeshInstance2D
-StaticBody2D
+Timer
 CanvasLayer
 GPUParticles2D

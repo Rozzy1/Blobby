@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_2d_body_entered(body):
 	if body == player:
-		if player.is_dashing == true or player.gravity == player.groundpoundgravity:
+		if player.is_dashing == true:
 			collision.set_deferred("disabled",1)
 			Hurtbox.set_deferred("monitoring",false)
 			Sprite.visible = false

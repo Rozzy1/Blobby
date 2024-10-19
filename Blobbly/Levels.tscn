@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cl628sehtynmm"]
+[gd_scene load_steps=25 format=3 uid="uid://cl628sehtynmm"]
 
 [ext_resource type="Script" path="res://PlayerScript.gd" id="1_xt65x"]
 [ext_resource type="PackedScene" uid="uid://btxfofmj4rehs" path="res://HealthBar - Copy.tscn" id="2_ce43v"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://LevelManager.gd" id="5_j8g8e"]
 [ext_resource type="PackedScene" uid="uid://dlv0q1cyfs5sh" path="res://collision_polygons.tscn" id="6_thv5u"]
 [ext_resource type="Script" path="res://DashButton.gd" id="7_fh7uq"]
+[ext_resource type="Script" path="res://MovingPlatform.gd" id="8_7s70f"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_p47id"]
 
@@ -65,6 +66,10 @@ func _on_area_2d_body_exited(body):
 [sub_resource type="BoxMesh" id="BoxMesh_thm7c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ktar8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wy1rh"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_bclus"]
 
 [node name="GameScene" type="Node2D"]
 
@@ -300,13 +305,12 @@ position = Vector2(1040, -537)
 [node name="Polygon2D" parent="LevelManager/Level2/6" index="0"]
 polygon = PackedVector2Array(-464, 88, 1160, 88, 1160, 408, -464, 408)
 
-[node name="DashButton" type="StaticBody2D" parent="LevelManager/Level2" node_paths=PackedStringArray("collision", "activatewhat")]
+[node name="DashButton" type="StaticBody2D" parent="LevelManager/Level2" node_paths=PackedStringArray("activatewhat")]
 position = Vector2(1912, 87)
 rotation = 0.785398
 scale = Vector2(50, 50)
 script = ExtResource("7_fh7uq")
-collision = NodePath("CollisionShape2D")
-activatewhat = NodePath("")
+activatewhat = NodePath("../../../MovingPlatform")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level2/DashButton"]
 position = Vector2(0.00899887, 0)
@@ -323,6 +327,24 @@ mesh = SubResource("BoxMesh_thm7c")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level2/DashButton/Area2D"]
 scale = Vector2(0.2, 0.2)
 shape = SubResource("RectangleShape2D_ktar8")
+
+[node name="MovingPlatform" type="Node2D" parent="."]
+position = Vector2(304, -152)
+script = ExtResource("8_7s70f")
+TimeBetweenPoints = 2.5
+NextPathPosition = Vector2(0, 500)
+
+[node name="Platform" type="AnimatableBody2D" parent="MovingPlatform"]
+scale = Vector2(700, 50)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingPlatform/Platform"]
+scale = Vector2(0.05, 0.05)
+shape = SubResource("RectangleShape2D_wy1rh")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="MovingPlatform/Platform"]
+modulate = Color(0, 0.384314, 0, 1)
+z_index = -1
+mesh = SubResource("BoxMesh_bclus")
 
 [connection signal="timeout" from="Player/Coyotetimer" to="Player" method="_on_coyotetimer_timeout"]
 [connection signal="LevelChange" from="LevelTeleporter" to="Player" method="_on_level_teleporter_level_change"]

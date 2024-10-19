@@ -1,9 +1,7 @@
 res://Levels.tscn
 res://Enemey.gdshader
-res://DashButton.gd
-res://LevelTeleporter.gd
 res://Enemey.tscn
 res://HealthBar - Copy.tscn
 res://collision_polygons.tscn
-res://testscript.gd
-res://PlayerScript.gd
+res://DashButton.gd
+res://MovingPlatform.gd

@@ -1,20 +1,22 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1729271410
-CharacterBody2D.gd::GDScript::-1::1727027256::0::1::::<>CharacterBody2D<>::
-CollisionPolygonsLevelBlocks.gd::GDScript::-1::1729184907::0::1::::<>StaticBody2D<>::
-collision_polygons.tscn::PackedScene::7976239131249141827::1729185637::0::1::::<><>::res://CollisionPolygonsLevelBlocks.gd
-DashWallScript.gd::GDScript::-1::1728741796::0::1::::<>StaticBody2D<>::
-Enemey.gdshader::Shader::-1::1729266743::0::1::::<><>::
-Enemey.tscn::PackedScene::650239117500507264::1729185637::0::1::::<><>::res://EnemeyPathFinder.gd
-EnemeyPathFinder.gd::GDScript::-1::1729182773::0::1::::<>CharacterBody2D<>::
-EnemeySpawner.gd::GDScript::-1::1727627021::0::1::::<>Node2D<>::
-GameManager.gd::GDScript::-1::1727456917::0::1::::<>Node<>::
-HealthBar - Copy.gd::GDScript::-1::1728238425::0::1::::<>ProgressBar<>::
-HealthBar - Copy.tscn::PackedScene::3767818268840341384::1729185637::0::1::::<><>::res://HealthBar - Copy.gd
-icon.svg::CompressedTexture2D::8010263344770721409::1727008835::1728741815::1::::<><>::
-LevelManager.gd::GDScript::-1::1729185001::0::1::::<>Node<>::
-Levels.tscn::PackedScene::5610613599727884840::1729266743::0::1::::<><>::res://PlayerScript.gd<>uid://btxfofmj4rehs::::res://HealthBar - Copy.tscn<>res://EnemeySpawner.gd<>res://LevelTeleporter.gd<>res://LevelManager.gd<>uid://dlv0q1cyfs5sh::::res://collision_polygons.tscn
-LevelTeleporter.gd::GDScript::-1::1729018278::0::1::::<>Node2D<>::
-NavigationRegion2D.gd::GDScript::-1::1727008835::0::1::::<>NavigationRegion2D<>::
-PlayerScript.gd::GDScript::-1::1729093790::0::1::::Player<>CharacterBody2D<>::
-pngtree-high-definition-background-of-a-monochromatic-grid-texture-image_13743265.png::CompressedTexture2D::8069410349305341006::1727626070::1727626070::1::::<><>::
+::res://::1729329018
+CharacterBody2D.gd::GDScript::-1::1727514506::0::1::::<>CharacterBody2D<>::
+CollisionPolygonsLevelBlocks.gd::GDScript::-1::1729328951::0::1::::<>StaticBody2D<>::
+collision_polygons.tscn::PackedScene::7976239131249141827::1729328951::0::1::::<><>::res://CollisionPolygonsLevelBlocks.gd
+DashButton.gd::GDScript::-1::1729328951::0::1::::<>StaticBody2D<>::
+DashWallScript.gd::GDScript::-1::1728724302::0::1::::<>StaticBody2D<>::
+Enemey.gdshader::Shader::-1::1728729686::0::1::::<><>::
+Enemey.tscn::PackedScene::650239117500507264::1728729686::0::1::::<><>::res://EnemeyPathFinder.gd
+EnemeyPathFinder.gd::GDScript::-1::1729328951::0::1::::<>CharacterBody2D<>::
+EnemeySpawner.gd::GDScript::-1::1727540475::0::1::::<>Node2D<>::
+GameManager.gd::GDScript::-1::1727514506::0::1::::<>Node<>::
+HealthBar - Copy.gd::GDScript::-1::1728124363::0::1::::<>ProgressBar<>::
+HealthBar - Copy.tscn::PackedScene::3767818268840341384::1729328951::0::1::::<><>::res://HealthBar - Copy.gd
+icon.svg::CompressedTexture2D::8010263344770721409::1727514506::1729329033::1::::<><>::
+LevelManager.gd::GDScript::-1::1729328951::0::1::::<>Node<>::
+Levels.tscn::PackedScene::5610613599727884840::1729328951::0::1::::<><>::res://PlayerScript.gd<>uid://btxfofmj4rehs::::res://HealthBar - Copy.tscn<>res://EnemeySpawner.gd<>res://LevelTeleporter.gd<>res://LevelManager.gd<>uid://dlv0q1cyfs5sh::::res://collision_polygons.tscn<>res://DashButton.gd
+LevelTeleporter.gd::GDScript::-1::1729328951::0::1::::<>Node2D<>::
+NavigationRegion2D.gd::GDScript::-1::1727514506::0::1::::<>NavigationRegion2D<>::
+PlayerScript.gd::GDScript::-1::1729328951::0::1::::Player<>CharacterBody2D<>::
+pngtree-high-definition-background-of-a-monochromatic-grid-texture-image_13743265.png::CompressedTexture2D::8069410349305341006::1728119229::1728119229::1::::<><>::
+testscript.gd::GDScript::-1::1729328951::0::1::::<>StaticBody2D<>::

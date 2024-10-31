@@ -7,10 +7,13 @@ func _ready():
 	pass
 
 
-func _process(delta):
+func _process(_delta):
 	if canplayerdashthrough == true and player.is_dashing == true:
-		activatewhat.isactivated = true
-		mesh.modulate = Color (1,1,1)
+		if not activatewhat.isactivated == true:
+			activatewhat.isactivated = true
+			mesh.modulate = Color (0,0.5,0.5)
+			print("turned ",activatewhat,"on")
+			return
 
 
 func _on_area_2d_body_entered(body):

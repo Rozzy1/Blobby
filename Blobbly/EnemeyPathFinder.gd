@@ -1,4 +1,5 @@
 extends CharacterBody2D
+#CURRENT BUG IN ENEMEY SCRIPT, THE ENEMEY SEES ME WHEN FIRST IMPORTED, FIX
 @onready var collision = $CollisionShape2D
 @onready var Sprite = $MeshInstance2D
 @onready var player = get_tree().get_first_node_in_group("player")
@@ -7,13 +8,18 @@ extends CharacterBody2D
 var gravity : int = 900
 var speed :int  = 150
 var player_class = Player
-var can_see_player : bool
+var can_see_player : bool = false
 var damage : int = 4
 var lastdirection : int
+
+func _ready():
+	can_see_player = false
+
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity * delta
-	await get_tree().physics_frame
+	
+	#EnemeyPathfinding
 	if player and can_see_player == true:
 		var direction = (player.position.x - global_position.x)
 		if direction < 0:
@@ -22,6 +28,8 @@ func _physics_process(delta: float) -> void:
 			direction = 1
 		lastdirection = direction
 		velocity.x = direction * speed
+	
+	
 	move_and_slide()
 
 
@@ -42,8 +50,10 @@ func _on_gpu_particles_2d_finished():
 
 
 func _on_enemey_los_body_entered(body):
-	can_see_player = true
+	if body == player:
+		can_see_player = true
 
 
 func _on_enemey_los_body_exited(body):
-	can_see_player = false
+	if body == player:
+		can_see_player = false

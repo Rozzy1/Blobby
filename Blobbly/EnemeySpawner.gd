@@ -28,6 +28,8 @@ func SpawnEnemies(array):
 
 
 func _on_level_teleporter_level_change(levelcount):
+	for child in self.get_children():
+		child.queue_free()
 	match levelcount:
 		1:
 			array = enemeypositions1
@@ -35,4 +37,6 @@ func _on_level_teleporter_level_change(levelcount):
 			array = enemeypositions2
 		3:
 			array = enemeypositions3
+		4:
+			array = enemeypositions4
 	SpawnEnemies(array)

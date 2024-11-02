@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cl628sehtynmm"]
+[gd_scene load_steps=31 format=3 uid="uid://cl628sehtynmm"]
 
 [ext_resource type="Script" path="res://PlayerScript.gd" id="1_xt65x"]
 [ext_resource type="PackedScene" uid="uid://btxfofmj4rehs" path="res://HealthBar - Copy.tscn" id="2_ce43v"]
@@ -7,9 +7,11 @@
 [ext_resource type="Script" path="res://LevelManager.gd" id="5_j8g8e"]
 [ext_resource type="Texture2D" uid="uid://dcgs3gl42i5r3" path="res://DashArrowtutoriel.svg" id="6_2tqhv"]
 [ext_resource type="PackedScene" uid="uid://dlv0q1cyfs5sh" path="res://collision_polygons.tscn" id="6_thv5u"]
-[ext_resource type="Script" path="res://DashButton.gd" id="7_fh7uq"]
-[ext_resource type="Script" path="res://MovingPlatform.gd" id="8_7s70f"]
+[ext_resource type="Script" path="res://DashButtonScript.gd" id="7_fh7uq"]
+[ext_resource type="Script" path="res://MovingPlatformScipt.gd" id="8_7s70f"]
+[ext_resource type="Script" path="res://DashWallScript.gd" id="8_tg3fk"]
 [ext_resource type="Texture2D" uid="uid://bsmtdl6ehu4h1" path="res://Wasd.svg" id="10_gb5w0"]
+[ext_resource type="Script" path="res://FrictionlessBodyScript.gd" id="12_hvm0v"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_p47id"]
 
@@ -50,34 +52,7 @@ size = Vector2(19.7027, 20)
 
 [sub_resource type="BoxMesh" id="BoxMesh_curc0"]
 
-[sub_resource type="GDScript" id="GDScript_uh2jl"]
-script/source = "extends StaticBody2D
-@export var collision : CollisionShape2D
-@onready var player = get_tree().get_first_node_in_group(\"player\")
-var canplayerdashthrough : bool = false
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	if canplayerdashthrough == true and player.is_dashing == true:
-		collision.set_deferred(\"disabled\",1)
-	else:
-		collision.set_deferred(\"disabled\",0)
-
-
-func _on_area_2d_body_entered(body):
-	if body == player:
-		canplayerdashthrough = true
-
-
-
-func _on_area_2d_body_exited(body):
-	if body == player:
-		canplayerdashthrough = false
-"
+[sub_resource type="BoxMesh" id="BoxMesh_thm7c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_diydr"]
 
@@ -86,13 +61,14 @@ func _on_area_2d_body_exited(body):
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3oneg"]
 size = Vector2(17.3333, 20)
 
-[sub_resource type="BoxMesh" id="BoxMesh_thm7c"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ktar8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wy1rh"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_bclus"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n5dsy"]
+size = Vector2(402.455, 40)
 
 [node name="GameScene" type="Node2D"]
 
@@ -102,14 +78,14 @@ scale = Vector2(30, 30)
 floor_snap_length = 10.0
 safe_margin = 0.15
 script = ExtResource("1_xt65x")
-PlayerSpawnPoints = PackedVector2Array(0, 0, -2408, 500, 64, 208, 0, 0)
+PlayerSpawnPoints = PackedVector2Array(0, 0, -2408, 500, 64, 208, 0, 0, 0, 0)
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Player"]
 modulate = Color(0, 0, 0, 1)
 mesh = SubResource("CapsuleMesh_p47id")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(0.7, 0.7)
+zoom = Vector2(0.65, 0.65)
 process_callback = 0
 position_smoothing_enabled = true
 
@@ -138,11 +114,11 @@ enemeypositions3 = PackedVector2Array(-1100, -480, 1440, -540.025)
 
 [node name="LevelTeleporter" type="Node2D" parent="." node_paths=PackedStringArray("teleporterarea")]
 z_index = -1
-position = Vector2(0, 864)
+position = Vector2(0, 784)
 scale = Vector2(100, 25)
 script = ExtResource("4_j4xk2")
 teleporterarea = NodePath("Area2D")
-TeleporterLevelPositions = PackedVector2Array(0, 0, 2864, 320, 3048, -1120, 0, 880, 0, 0, 0, 0)
+TeleporterLevelPositions = PackedVector2Array(0, 0, 2864, 320, 3048, -1120, 0, 830, 0, 0, 0, 0)
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="LevelTeleporter"]
 mesh = SubResource("BoxMesh_jf3f3")
@@ -200,26 +176,6 @@ position = Vector2(-0.02433, 0.161212)
 scale = Vector2(1.06488, 1.31119)
 mesh = SubResource("BoxMesh_curc0")
 
-[node name="DashWall2" type="StaticBody2D" parent="LevelManager/Level1" node_paths=PackedStringArray("collision")]
-position = Vector2(156, 490)
-scale = Vector2(3, 68)
-script = SubResource("GDScript_uh2jl")
-collision = NodePath("CollisionShape2D")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level1/DashWall2"]
-shape = SubResource("RectangleShape2D_diydr")
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="LevelManager/Level1/DashWall2"]
-self_modulate = Color(0, 0, 0.443137, 1)
-scale = Vector2(20, 20)
-mesh = SubResource("BoxMesh_m2mky")
-
-[node name="Area2D" type="Area2D" parent="LevelManager/Level1/DashWall2"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level1/DashWall2/Area2D"]
-scale = Vector2(5, 5)
-shape = SubResource("RectangleShape2D_3oneg")
-
 [node name="StaticBody2D" type="StaticBody2D" parent="LevelManager/Level1"]
 position = Vector2(-552, 911)
 scale = Vector2(4000, 700)
@@ -233,12 +189,10 @@ modulate = Color(0, 0, 0, 1)
 position = Vector2(0.002, 0)
 mesh = SubResource("BoxMesh_thm7c")
 
-[node name="DashWall" type="StaticBody2D" parent="LevelManager/Level1" node_paths=PackedStringArray("collision")]
+[node name="DashWall" type="StaticBody2D" parent="LevelManager/Level1"]
 z_index = -1
 position = Vector2(32, 496)
 scale = Vector2(3, 68)
-script = SubResource("GDScript_uh2jl")
-collision = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level1/DashWall"]
 shape = SubResource("RectangleShape2D_diydr")
@@ -253,6 +207,11 @@ mesh = SubResource("BoxMesh_m2mky")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level1/DashWall/Area2D"]
 scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_3oneg")
+
+[node name="DashWallComponent" type="Node" parent="LevelManager/Level1/DashWall" node_paths=PackedStringArray("collision", "area2d")]
+script = ExtResource("8_tg3fk")
+collision = NodePath("../CollisionShape2D")
+area2d = NodePath("../Area2D")
 
 [node name="StaticBody2D10" type="StaticBody2D" parent="LevelManager/Level1"]
 position = Vector2(448, -296)
@@ -339,12 +298,10 @@ fit_content = true
 autowrap_mode = 0
 tab_size = 10
 
-[node name="DashWall3" type="StaticBody2D" parent="LevelManager/Level1" node_paths=PackedStringArray("collision")]
+[node name="DashWall3" type="StaticBody2D" parent="LevelManager/Level1"]
 z_index = -1
 position = Vector2(-1064, 488)
 scale = Vector2(3, 68)
-script = SubResource("GDScript_uh2jl")
-collision = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level1/DashWall3"]
 shape = SubResource("RectangleShape2D_diydr")
@@ -360,6 +317,35 @@ mesh = SubResource("BoxMesh_m2mky")
 scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_3oneg")
 
+[node name="DashWallComponent" type="Node" parent="LevelManager/Level1/DashWall3" node_paths=PackedStringArray("collision", "area2d")]
+script = ExtResource("8_tg3fk")
+collision = NodePath("../CollisionShape2D")
+area2d = NodePath("../Area2D")
+
+[node name="DashWall2" type="StaticBody2D" parent="LevelManager/Level1"]
+z_index = -1
+position = Vector2(156, 490)
+scale = Vector2(3, 68)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level1/DashWall2"]
+shape = SubResource("RectangleShape2D_diydr")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="LevelManager/Level1/DashWall2"]
+self_modulate = Color(0, 0, 0.443137, 1)
+scale = Vector2(20, 20)
+mesh = SubResource("BoxMesh_m2mky")
+
+[node name="Area2D" type="Area2D" parent="LevelManager/Level1/DashWall2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level1/DashWall2/Area2D"]
+scale = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_3oneg")
+
+[node name="DashWallComponent" type="Node" parent="LevelManager/Level1/DashWall2" node_paths=PackedStringArray("collision", "area2d")]
+script = ExtResource("8_tg3fk")
+collision = NodePath("../CollisionShape2D")
+area2d = NodePath("../Area2D")
+
 [node name="Level2" type="Node2D" parent="LevelManager"]
 visible = false
 
@@ -367,7 +353,7 @@ visible = false
 position = Vector2(0, 239)
 
 [node name="Polygon2D" parent="LevelManager/Level2/1" index="0"]
-polygon = PackedVector2Array(-40, 0, 1056, 0, 1048, 688, -32, 688)
+polygon = PackedVector2Array(-1232, -7, 1056, -7, 1048, 688, -32, 688)
 
 [node name="2" parent="LevelManager/Level2" instance=ExtResource("6_thv5u")]
 position = Vector2(1048, 143)
@@ -379,13 +365,13 @@ polygon = PackedVector2Array(0, 0, 1152, 0, 1144, 768, 0, 776)
 position = Vector2(1048, 143)
 
 [node name="Polygon2D" parent="LevelManager/Level2/3" index="0"]
-polygon = PackedVector2Array(0, 0, -208, 96, 0, 96)
+polygon = PackedVector2Array(0, 0, -208, 97, 0, 96)
 
 [node name="4" parent="LevelManager/Level2" instance=ExtResource("6_thv5u")]
 position = Vector2(0, 143)
 
 [node name="Polygon2D" parent="LevelManager/Level2/4" index="0"]
-polygon = PackedVector2Array(0, 792, -1208, 792, -1192, -1096, -8, -1096)
+polygon = PackedVector2Array(0, 792, -1208, 792, -1208, -1103, -8, -1096)
 
 [node name="5" parent="LevelManager/Level2" instance=ExtResource("6_thv5u")]
 position = Vector2(2768, 135)
@@ -403,7 +389,7 @@ polygon = PackedVector2Array(-464, 88, 1160, 88, 1160, 408, -464, 408)
 position = Vector2(16, -1521)
 
 [node name="Polygon2D" parent="LevelManager/Level2/7" index="0"]
-polygon = PackedVector2Array(-1184, -279, 1872, -279, 1048, 688, -1208, 680)
+polygon = PackedVector2Array(-1208, -279, 1872, -279, 1048, 688, -1084.54, 680.438, -1208, 680)
 
 [node name="8" parent="LevelManager/Level2" instance=ExtResource("6_thv5u")]
 position = Vector2(3992, -1128)
@@ -411,12 +397,10 @@ position = Vector2(3992, -1128)
 [node name="Polygon2D" parent="LevelManager/Level2/8" index="0"]
 polygon = PackedVector2Array(-1544, 16, -784, 16, -784, -672, -144, -672, -144, 1144, -800, 1144, -800, 680, -1192, 680, -1192, 168, -1544, 168)
 
-[node name="DashButton" type="StaticBody2D" parent="LevelManager/Level2" node_paths=PackedStringArray("activatewhat")]
+[node name="DashButton" type="StaticBody2D" parent="LevelManager/Level2"]
 position = Vector2(1912, 87)
 rotation = 0.785398
 scale = Vector2(50, 50)
-script = ExtResource("7_fh7uq")
-activatewhat = NodePath("../MovingPlatform")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level2/DashButton"]
 position = Vector2(0.00899887, 0)
@@ -434,13 +418,17 @@ mesh = SubResource("BoxMesh_thm7c")
 scale = Vector2(0.2, 0.2)
 shape = SubResource("RectangleShape2D_ktar8")
 
-[node name="DashWall" type="StaticBody2D" parent="LevelManager/Level2" node_paths=PackedStringArray("collision")]
+[node name="DashButtonComponent" type="Node" parent="LevelManager/Level2/DashButton" node_paths=PackedStringArray("activatewhat", "area2dconnectingfrom", "mesh")]
+script = ExtResource("7_fh7uq")
+activatewhat = NodePath("../../Platform/MovingPlatformComponent")
+area2dconnectingfrom = NodePath("../Area2D")
+mesh = NodePath("../Polygon")
+
+[node name="DashWall" type="StaticBody2D" parent="LevelManager/Level2"]
 z_index = -1
 position = Vector2(352, -281)
 rotation = 1.5708
 scale = Vector2(3, 68)
-script = SubResource("GDScript_uh2jl")
-collision = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level2/DashWall"]
 shape = SubResource("RectangleShape2D_diydr")
@@ -457,24 +445,10 @@ position = Vector2(40, 0)
 scale = Vector2(8, 1)
 shape = SubResource("RectangleShape2D_3oneg")
 
-[node name="MovingPlatform" type="Node2D" parent="LevelManager/Level2"]
-position = Vector2(304, -161)
-script = ExtResource("8_7s70f")
-TimeBetweenPoints = 2.0
-NextPathPosition = Vector2(0, 500)
-
-[node name="Platform" type="AnimatableBody2D" parent="LevelManager/Level2/MovingPlatform"]
-scale = Vector2(700, 50)
-sync_to_physics = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level2/MovingPlatform/Platform"]
-scale = Vector2(0.05, 0.05)
-shape = SubResource("RectangleShape2D_wy1rh")
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="LevelManager/Level2/MovingPlatform/Platform"]
-modulate = Color(0, 0.384314, 0, 1)
-z_index = -1
-mesh = SubResource("BoxMesh_bclus")
+[node name="DashWallComponent" type="Node" parent="LevelManager/Level2/DashWall" node_paths=PackedStringArray("collision", "area2d")]
+script = ExtResource("8_tg3fk")
+collision = NodePath("../CollisionShape2D")
+area2d = NodePath("../Area2D")
 
 [node name="9" parent="LevelManager/Level2" instance=ExtResource("6_thv5u")]
 position = Vector2(1848, -1080)
@@ -500,13 +474,35 @@ position = Vector2(1696, 120)
 scale = Vector2(0.358942, 0.358942)
 texture = ExtResource("6_2tqhv")
 
+[node name="Platform" type="AnimatableBody2D" parent="LevelManager/Level2"]
+position = Vector2(304, -161)
+scale = Vector2(700, 50)
+sync_to_physics = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level2/Platform"]
+scale = Vector2(0.05, 0.05)
+shape = SubResource("RectangleShape2D_wy1rh")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="LevelManager/Level2/Platform"]
+modulate = Color(0, 0.384314, 0, 1)
+z_index = -1
+mesh = SubResource("BoxMesh_bclus")
+
+[node name="MovingPlatformComponent" type="Node" parent="LevelManager/Level2/Platform" node_paths=PackedStringArray("Platform")]
+script = ExtResource("8_7s70f")
+TimeBetweenPoints = 2.0
+NextPathPosition = Vector2(304, 216)
+EndingPathPosition = Vector2(304, -161)
+Platform = NodePath("..")
+
 [node name="Level3" type="Node2D" parent="LevelManager"]
+visible = false
 
 [node name="1" parent="LevelManager/Level3" instance=ExtResource("6_thv5u")]
 position = Vector2(0, 160)
 
 [node name="Polygon2D" parent="LevelManager/Level3/1" index="0"]
-polygon = PackedVector2Array(-368, 280, 368, 280, 368, 632, -0.313782, 448, -368, 632)
+polygon = PackedVector2Array(-368, 280, 368, 280, 368, 616, -0.313782, 448, -368, 616)
 
 [node name="2" parent="LevelManager/Level3" instance=ExtResource("6_thv5u")]
 position = Vector2(-1880, 0)
@@ -520,13 +516,11 @@ position = Vector2(856, 0)
 [node name="Polygon2D" parent="LevelManager/Level3/3" index="0"]
 polygon = PackedVector2Array(216, -448, 1072, -448, 1072, 448, 216, 448)
 
-[node name="DashWall" type="StaticBody2D" parent="LevelManager/Level3" node_paths=PackedStringArray("collision")]
+[node name="DashWall" type="StaticBody2D" parent="LevelManager/Level3"]
 z_index = -1
 position = Vector2(80, 416)
 rotation = 1.5708
 scale = Vector2(3, 100)
-script = SubResource("GDScript_uh2jl")
-collision = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level3/DashWall"]
 shape = SubResource("RectangleShape2D_diydr")
@@ -544,14 +538,13 @@ position = Vector2(40, 0)
 scale = Vector2(8, 1)
 shape = SubResource("RectangleShape2D_3oneg")
 
-[node name="Node2D" type="Node2D" parent="LevelManager/Level3/DashWall"]
-position = Vector2(-138.667, 0.800015)
-rotation = -1.57092
-scale = Vector2(0.01, 0.333333)
-skew = 0.000120521
+[node name="DashWallComponent" type="Node" parent="LevelManager/Level3/DashWall" node_paths=PackedStringArray("collision", "area2d")]
+script = ExtResource("8_tg3fk")
+collision = NodePath("../CollisionShape2D")
+area2d = NodePath("../Area2D")
 
 [node name="KillBrick" type="Area2D" parent="LevelManager/Level3"]
-position = Vector2(8, 1096)
+position = Vector2(8, 992)
 scale = Vector2(400, 10)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level3/KillBrick"]
@@ -603,12 +596,10 @@ position = Vector2(-664, -2112)
 [node name="Polygon2D" parent="LevelManager/Level3/10" index="0"]
 polygon = PackedVector2Array(528, 192, 792, 192, 864, 448, 456, 448)
 
-[node name="DashButton" type="StaticBody2D" parent="LevelManager/Level3" node_paths=PackedStringArray("activatewhat")]
+[node name="DashButton" type="StaticBody2D" parent="LevelManager/Level3"]
 position = Vector2(0, -1984)
 rotation = 0.785398
 scale = Vector2(50, 50)
-script = ExtResource("7_fh7uq")
-activatewhat = NodePath("../MovingPlatform")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level3/DashButton"]
 position = Vector2(0.00899887, 0)
@@ -626,6 +617,12 @@ mesh = SubResource("BoxMesh_thm7c")
 scale = Vector2(0.2, 0.2)
 shape = SubResource("RectangleShape2D_ktar8")
 
+[node name="DashButtonComponent" type="Node" parent="LevelManager/Level3/DashButton" node_paths=PackedStringArray("activatewhat", "area2dconnectingfrom", "mesh")]
+script = ExtResource("7_fh7uq")
+activatewhat = NodePath("../../Platform/MovingPlatformComponent")
+area2dconnectingfrom = NodePath("../Area2D")
+mesh = NodePath("../Polygon")
+
 [node name="11" parent="LevelManager/Level3" instance=ExtResource("6_thv5u")]
 position = Vector2(1168, -2968)
 
@@ -633,295 +630,383 @@ position = Vector2(1168, -2968)
 polygon = PackedVector2Array(-4240, 0, 1064, 0, 1072, 448, -4224, 456)
 
 [node name="12" parent="LevelManager/Level3" instance=ExtResource("6_thv5u")]
-position = Vector2(1688, 1112)
+position = Vector2(1688, 1008)
 
 [node name="Polygon2D" parent="LevelManager/Level3/12" index="0"]
 polygon = PackedVector2Array(-4240, 0, 1064, 0, 1080, 448, -4224, 456)
 
 [node name="Spikes" parent="LevelManager/Level3" instance=ExtResource("6_thv5u")]
 z_index = -1
-position = Vector2(1264, 544)
+position = Vector2(1264, 512)
+scale = Vector2(1, 1.1)
 
 [node name="Polygon2D" parent="LevelManager/Level3/Spikes" index="0"]
-position = Vector2(4072, 0)
+position = Vector2(4072, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D2" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(80, 0)
+position = Vector2(80, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D3" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(152, 0)
+position = Vector2(152, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D4" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(232, 0)
+position = Vector2(232, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D5" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(312, 0)
+position = Vector2(312, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D6" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(392, 0)
+position = Vector2(392, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D7" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(464, 0)
+position = Vector2(464, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D8" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(544, 0)
+position = Vector2(544, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D9" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(624, 8)
+position = Vector2(624, -96)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D10" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(704, 8)
+position = Vector2(704, -96)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D11" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(776, 8)
+position = Vector2(776, -96)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D12" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(856, 8)
+position = Vector2(856, -96)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D13" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(936, 8)
+position = Vector2(936, -96)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D14" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(1016, 8)
+position = Vector2(1016, -96)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D15" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(1088, 8)
+position = Vector2(1088, -96)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D16" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(1168, 8)
+position = Vector2(1168, -96)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D17" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(1240, 0)
+position = Vector2(1240, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D18" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(1320, 0)
+position = Vector2(1320, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D19" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(1392, 0)
+position = Vector2(1392, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D20" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(1472, 0)
+position = Vector2(1472, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D21" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(1552, 0)
+position = Vector2(1552, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D22" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(1632, 0)
+position = Vector2(1632, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D23" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(1704, 0)
+position = Vector2(1704, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D24" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(1784, 0)
+position = Vector2(1784, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D25" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(1864, 8)
+position = Vector2(1864, -96)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D26" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(1944, 8)
+position = Vector2(1944, -96)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D27" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(2016, 8)
+position = Vector2(2016, -96)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D28" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(2096, 8)
+position = Vector2(2096, -96)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D29" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(2176, 8)
+position = Vector2(2176, -96)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D30" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(2256, 8)
+position = Vector2(2256, -96)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D31" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(2328, 8)
+position = Vector2(2328, -96)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D32" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(2408, 8)
+position = Vector2(2408, -96)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D33" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(2504, 0)
+position = Vector2(2504, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D34" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(2584, 0)
+position = Vector2(2584, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D35" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(2656, 0)
+position = Vector2(2656, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D36" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(2736, 0)
+position = Vector2(2736, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D37" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(2816, 0)
+position = Vector2(2816, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D38" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(2896, 0)
+position = Vector2(2896, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D39" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(2968, 0)
+position = Vector2(2968, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D40" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(3048, 0)
+position = Vector2(3048, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D41" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(3128, 8)
+position = Vector2(3128, -96)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D42" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(3208, 8)
+position = Vector2(3208, -96)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D43" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(3280, 8)
+position = Vector2(3280, -96)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D44" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(3360, 8)
+position = Vector2(3360, -96)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D45" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(3440, 8)
+position = Vector2(3440, -96)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D46" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(3520, 8)
+position = Vector2(3520, -96)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D47" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(3592, 8)
+position = Vector2(3592, -96)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D48" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(3672, 8)
+position = Vector2(3672, -96)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D49" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(3744, 0)
+position = Vector2(3744, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D50" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(3824, 0)
+position = Vector2(3824, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D51" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(3896, 0)
+position = Vector2(3896, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Polygon2D52" type="Polygon2D" parent="LevelManager/Level3/Spikes"]
-position = Vector2(3976, 0)
+position = Vector2(3976, -104)
 color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
-[node name="MovingPlatform" type="Node2D" parent="LevelManager/Level3"]
-script = ExtResource("8_7s70f")
-OneShot = true
-TimeBetweenPoints = 10.0
-NextPathPosition = Vector2(80, 910)
-EndingPathPosition = Vector2(80, 910)
-
-[node name="Platform" type="AnimatableBody2D" parent="LevelManager/Level3/MovingPlatform"]
-position = Vector2(80, -1640)
+[node name="Platform" type="AnimatableBody2D" parent="LevelManager/Level3"]
+position = Vector2(82, -1640)
 scale = Vector2(2000, 50)
 sync_to_physics = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level3/MovingPlatform/Platform"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level3/Platform"]
 scale = Vector2(0.05, 0.05)
 shape = SubResource("RectangleShape2D_wy1rh")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="LevelManager/Level3/MovingPlatform/Platform"]
+[node name="MeshInstance2D" type="MeshInstance2D" parent="LevelManager/Level3/Platform"]
 modulate = Color(0, 0.384314, 0, 1)
 z_index = -1
 mesh = SubResource("BoxMesh_bclus")
+
+[node name="MovingPlatformComponent" type="Node" parent="LevelManager/Level3/Platform" node_paths=PackedStringArray("Platform")]
+script = ExtResource("8_7s70f")
+OneShot = true
+TimeBetweenPoints = 7.0
+NextPathPosition = Vector2(82, 865)
+EndingPathPosition = Vector2(82, 865)
+Platform = NodePath("..")
+
+[node name="Level4" type="Node2D" parent="LevelManager"]
+
+[node name="1" parent="LevelManager/Level4" instance=ExtResource("6_thv5u")]
+position = Vector2(208, 240)
+
+[node name="Polygon2D" parent="LevelManager/Level4/1" index="0"]
+polygon = PackedVector2Array(-800, -8, 888, -8, 888, 680, -798.364, 679.823)
+
+[node name="2" parent="LevelManager/Level4" instance=ExtResource("6_thv5u")]
+position = Vector2(2296, 240)
+
+[node name="Polygon2D" parent="LevelManager/Level4/2" index="0"]
+polygon = PackedVector2Array(-800, -1856, 504, -1864, 512, 680, -800, 678)
+
+[node name="FrictionlessBody" parent="LevelManager/Level4" instance=ExtResource("6_thv5u")]
+position = Vector2(2064, 240)
+
+[node name="Polygon2D" parent="LevelManager/Level4/FrictionlessBody" index="0"]
+z_index = -1
+color = Color(0.737255, 0.658824, 0.384314, 1)
+polygon = PackedVector2Array(-976, -8, -554.742, -8.11496, -552, 680, -984, 680)
+
+[node name="Area2D" type="Area2D" parent="LevelManager/Level4/FrictionlessBody"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level4/FrictionlessBody/Area2D"]
+position = Vector2(-768, -20)
+shape = SubResource("RectangleShape2D_n5dsy")
+
+[node name="FrictionlessBodyComponent" type="Node" parent="LevelManager/Level4/FrictionlessBody" node_paths=PackedStringArray("area2d")]
+script = ExtResource("12_hvm0v")
+area2d = NodePath("../Area2D")
+
+[node name="3" parent="LevelManager/Level4" instance=ExtResource("6_thv5u")]
+position = Vector2(208, -680)
+
+[node name="Polygon2D" parent="LevelManager/Level4/3" index="0"]
+polygon = PackedVector2Array(-800, 64, 888, 64, 888, 680, -800, 680)
+
+[node name="4" parent="LevelManager/Level4" instance=ExtResource("6_thv5u")]
+position = Vector2(608, -1680)
+
+[node name="Polygon2D" parent="LevelManager/Level4/4" index="0"]
+polygon = PackedVector2Array(-800, 64, 888, 64, 888, 680, -800, 680)
+
+[node name="FrictionlessBody2" parent="LevelManager/Level4" instance=ExtResource("6_thv5u")]
+position = Vector2(-96, -1288)
+rotation = -1.309
+
+[node name="Polygon2D" parent="LevelManager/Level4/FrictionlessBody2" index="0"]
+z_index = -1
+color = Color(0.737255, 0.658824, 0.384314, 1)
+polygon = PackedVector2Array(-976, -8, -557.077, -8.09372, -552, 680, -984, 680)
+
+[node name="Area2D" type="Area2D" parent="LevelManager/Level4/FrictionlessBody2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level4/FrictionlessBody2/Area2D"]
+position = Vector2(-596.932, 274.18)
+rotation = 1.5708
+scale = Vector2(1.4, 3)
+shape = SubResource("RectangleShape2D_n5dsy")
+
+[node name="FrictionlessBodyComponent" type="Node" parent="LevelManager/Level4/FrictionlessBody2" node_paths=PackedStringArray("area2d")]
+script = ExtResource("12_hvm0v")
+area2d = NodePath("../Area2D")
+
+[node name="FrictionlessBody3" parent="LevelManager/Level4" instance=ExtResource("6_thv5u")]
+position = Vector2(-960, -1072)
+rotation = 0.258309
+
+[node name="Polygon2D" parent="LevelManager/Level4/FrictionlessBody3" index="0"]
+z_index = -1
+color = Color(0.737255, 0.658824, 0.384314, 1)
+polygon = PackedVector2Array(-1368, 368, -908.714, 495.217, 472.274, 346.868, 511.102, 493.825, -916.2, 671.477, -1368, 672)
+
+[node name="Area2D" type="Area2D" parent="LevelManager/Level4/FrictionlessBody3"]
+position = Vector2(-40, -48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level4/FrictionlessBody3/Area2D"]
+position = Vector2(-451.496, 442.644)
+scale = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_n5dsy")
+
+[node name="FrictionlessBodyComponent" type="Node" parent="LevelManager/Level4/FrictionlessBody3" node_paths=PackedStringArray("area2d")]
+script = ExtResource("12_hvm0v")
+area2d = NodePath("../Area2D")
 
 [connection signal="timeout" from="Player/Coyotetimer" to="Player" method="_on_coyotetimer_timeout"]
 [connection signal="LevelChange" from="LevelTeleporter" to="Player" method="_on_level_teleporter_level_change"]
@@ -933,16 +1018,8 @@ mesh = SubResource("BoxMesh_bclus")
 [connection signal="body_entered" from="LevelManager/Level1/KillBrick" to="Player" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="LevelManager/Level1/DashWall2/Area2D" to="LevelManager/Level1/DashWall2" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="LevelManager/Level1/DashWall2/Area2D" to="LevelManager/Level1/DashWall2" method="_on_area_2d_body_exited"]
-[connection signal="body_entered" from="LevelManager/Level1/DashWall/Area2D" to="LevelManager/Level1/DashWall" method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="LevelManager/Level1/DashWall/Area2D" to="LevelManager/Level1/DashWall" method="_on_area_2d_body_exited"]
-[connection signal="body_entered" from="LevelManager/Level1/DashWall3/Area2D" to="LevelManager/Level1/DashWall3" method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="LevelManager/Level1/DashWall3/Area2D" to="LevelManager/Level1/DashWall3" method="_on_area_2d_body_exited"]
 [connection signal="body_entered" from="LevelManager/Level2/DashButton/Area2D" to="LevelManager/Level2/DashButton" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="LevelManager/Level2/DashButton/Area2D" to="LevelManager/Level2/DashButton" method="_on_area_2d_body_exited"]
-[connection signal="body_entered" from="LevelManager/Level2/DashWall/Area2D" to="LevelManager/Level2/DashWall" method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="LevelManager/Level2/DashWall/Area2D" to="LevelManager/Level2/DashWall" method="_on_area_2d_body_exited"]
-[connection signal="body_entered" from="LevelManager/Level3/DashWall/Area2D" to="LevelManager/Level3/DashWall" method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="LevelManager/Level3/DashWall/Area2D" to="LevelManager/Level3/DashWall" method="_on_area_2d_body_exited"]
 [connection signal="body_entered" from="LevelManager/Level3/KillBrick" to="Player" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="LevelManager/Level3/DashButton/Area2D" to="LevelManager/Level3/DashButton" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="LevelManager/Level3/DashButton/Area2D" to="LevelManager/Level3/DashButton" method="_on_area_2d_body_exited"]
@@ -971,3 +1048,10 @@ mesh = SubResource("BoxMesh_bclus")
 [editable path="LevelManager/Level3/11"]
 [editable path="LevelManager/Level3/12"]
 [editable path="LevelManager/Level3/Spikes"]
+[editable path="LevelManager/Level4/1"]
+[editable path="LevelManager/Level4/2"]
+[editable path="LevelManager/Level4/FrictionlessBody"]
+[editable path="LevelManager/Level4/3"]
+[editable path="LevelManager/Level4/4"]
+[editable path="LevelManager/Level4/FrictionlessBody2"]
+[editable path="LevelManager/Level4/FrictionlessBody3"]

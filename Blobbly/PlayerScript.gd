@@ -18,7 +18,7 @@ var friction : float = 1.2
 var dashedinaircounter : int = 1
 var canmove : bool = true
 var lastdirs : Vector2
-
+var istouchingfrictionlessbody : bool
 
 
 
@@ -27,6 +27,11 @@ func _ready():
 	pass
 
 func _physics_process(delta):
+	print(istouchingfrictionlessbody)
+	if istouchingfrictionlessbody == true:
+		friction = 1
+	else:
+		friction = 1.2
 	var leftright = Input.get_axis("left","right")
 	var updown = Input.get_axis("up","down")
 	

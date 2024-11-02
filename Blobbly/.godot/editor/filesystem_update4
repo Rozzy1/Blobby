@@ -4,5 +4,4 @@ res://HealthBar - Copy.tscn
 res://collision_polygons.tscn
 res://Levels.tscn
 res://PlayerScript.gd
-res://GameManager.gd
-res://DashWallScript.gd
+res://FrictionlessBodyScript.gd

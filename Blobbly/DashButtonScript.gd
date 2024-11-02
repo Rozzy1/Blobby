@@ -1,5 +1,7 @@
 extends Node
 @export var activatewhat : Node
+@export var activatewhat2 : Node
+@export var activatewhat3 : Node
 @export var area2dconnectingfrom : Area2D
 @export var mesh : MeshInstance2D
 @onready var player = get_tree().get_first_node_in_group("player")
@@ -12,12 +14,21 @@ func _ready():
 
 func _process(_delta):
 	if canplayerdashthrough == true and player.is_dashing == true:
+		
 		if activatewhat and not activatewhat.isactivated == true:
+			
 			activatewhat.isactivated = true
 			mesh.modulate = Color (0,0.5,0.5)
 			print("turned ",activatewhat,"on")
-			return
-		if !activatewhat:
+		if activatewhat2 and not activatewhat2.isactivated == true:
+			activatewhat2.isactivated = true
+			mesh.modulate = Color (0,0.5,0.5)
+			print("turned ",activatewhat2,"on")
+		if activatewhat3 and not activatewhat3.isactivated == true:
+			activatewhat3.isactivated = true
+			mesh.modulate = Color (0,0.5,0.5)
+			print("turned ",activatewhat3,"on")
+		if !activatewhat and !activatewhat2 and !activatewhat3:
 			print("Nothing Attached!")
 
 

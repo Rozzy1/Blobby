@@ -27,7 +27,6 @@ func _ready():
 	pass
 
 func _physics_process(delta):
-	print(istouchingfrictionlessbody)
 	if istouchingfrictionlessbody == true:
 		friction = 1
 	else:

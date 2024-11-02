@@ -1,7 +1,5 @@
-res://Enemey.tscn
+res://Levels.tscn
 res://Enemey.gdshader
+res://Enemey.tscn
 res://HealthBar - Copy.tscn
 res://collision_polygons.tscn
-res://Levels.tscn
-res://PlayerScript.gd
-res://FrictionlessBodyScript.gd

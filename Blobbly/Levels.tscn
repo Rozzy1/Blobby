@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://cl628sehtynmm"]
+[gd_scene load_steps=79 format=3 uid="uid://cl628sehtynmm"]
 
 [ext_resource type="Script" path="res://PlayerScript.gd" id="1_xt65x"]
 [ext_resource type="PackedScene" uid="uid://btxfofmj4rehs" path="res://HealthBar - Copy.tscn" id="2_ce43v"]
@@ -56,11 +56,12 @@
 [ext_resource type="Texture2D" uid="uid://cwxp253x6luyg" path="res://Pixel Prototype Player/Sprites/Spin/Spin07.png" id="35_qqik6"]
 [ext_resource type="Texture2D" uid="uid://cjkql3yyuoeo5" path="res://Pixel Prototype Player/Sprites/Spin/Spin08.png" id="36_wyy3w"]
 [ext_resource type="Texture2D" uid="uid://dnlbnb8jdwj32" path="res://BackGround.png" id="46_4fag5"]
+[ext_resource type="Script" path="res://DetectFrictionlessFloorsPlayer.gd" id="46_4p5hm"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_p47id"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_selne"]
-size = Vector2(20, 39.9999)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ujj25"]
+height = 38.0952
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ei0ly"]
 animations = [{
@@ -344,8 +345,10 @@ size = Vector2(402.455, 40)
 [node name="GameScene" type="Node2D"]
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
-position = Vector2(0, 360)
+position = Vector2(8, 136)
 scale = Vector2(30, 30)
+collision_layer = 3
+collision_mask = 3
 floor_snap_length = 10.0
 safe_margin = 0.15
 script = ExtResource("1_xt65x")
@@ -362,9 +365,9 @@ process_callback = 0
 position_smoothing_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(0, -0.466669)
+position = Vector2(0, -0.533334)
 scale = Vector2(0.05, 0.07)
-shape = SubResource("RectangleShape2D_selne")
+shape = SubResource("CapsuleShape2D_ujj25")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Player"]
@@ -384,12 +387,16 @@ scale = Vector2(0.07, 0.07)
 sprite_frames = SubResource("SpriteFrames_ei0ly")
 animation = &"jump_mid"
 
+[node name="DetectFrictionlessFloorsComponent" type="Node" parent="Player"]
+script = ExtResource("46_4p5hm")
+
 [node name="EnemeySpawner" type="Node2D" parent="."]
-position = Vector2(-1144, -1520)
+position = Vector2(3936, 584)
 script = ExtResource("4_2nt6a")
 enemeypositions1 = PackedVector2Array(80, 520)
 enemeypositions2 = PackedVector2Array(1440, -540)
 enemeypositions3 = PackedVector2Array(-1100, -480, 1440, -540.025)
+enemeypositions6 = PackedVector2Array(3456, 2264, 3936, 584)
 
 [node name="LevelTeleporter" type="Node2D" parent="." node_paths=PackedStringArray("teleporterarea")]
 z_index = -1
@@ -459,6 +466,8 @@ shape = SubResource("RectangleShape2D_mg4xg")
 position = Vector2(904, 506)
 rotation = -0.575959
 scale = Vector2(400, 150)
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level1/StaticBody2D3"]
 scale = Vector2(0.05, 0.05)
@@ -3014,7 +3023,9 @@ mesh = SubResource("BoxMesh_bclus")
 
 [node name="MovingPlatformComponent" type="Node" parent="LevelManager/Level6/Platform" node_paths=PackedStringArray("Platform")]
 script = ExtResource("8_7s70f")
-TimeBetweenPoints = 4.0
+OneShot = true
+NextPathPosition = Vector2(-568, 200)
+EndingPathPosition = Vector2(-568, 200)
 StartingPathPosition = Vector2(-568, 88)
 Platform = NodePath("..")
 
@@ -3026,6 +3037,7 @@ polygon = PackedVector2Array(-2088, -8, 2720, -24, 2727.04, 1842.66, 2728, 2096,
 
 [node name="FrictionlessBody" parent="LevelManager/Level6" instance=ExtResource("6_thv5u")]
 position = Vector2(1104, 256)
+collision_layer = 3
 
 [node name="Polygon2D" parent="LevelManager/Level6/FrictionlessBody" index="0"]
 z_index = -1
@@ -3050,11 +3062,11 @@ area2d = NodePath("../Area2D")
 position = Vector2(1312, 840)
 
 [node name="Polygon2D" parent="LevelManager/Level6/3" index="0"]
-polygon = PackedVector2Array(-1208, 1760, 2496, 1760, 2496, 1576, 3136, 1576, 3136, -208, 5112, -200, 5144, 2400, -1224, 2401)
+polygon = PackedVector2Array(-1208, 1760, 2856, 1752, 2856, 1576, 3136, 1576, 3136, -208, 5112, -200, 5144, 2400, -1224, 2401)
 
 [node name="Spikes" parent="LevelManager/Level6" instance=ExtResource("6_thv5u")]
 z_index = -2
-position = Vector2(7376, 1896)
+position = Vector2(7776, 1912)
 rotation = 3.14159
 scale = Vector2(1, 1.1)
 
@@ -3427,9 +3439,11 @@ position = Vector2(3712, 2416)
 [node name="Polygon2D" parent="LevelManager/Level6/FrictionlessBody2" index="0"]
 z_index = -1
 color = Color(0.737255, 0.658824, 0.384314, 1)
-polygon = PackedVector2Array(-976, -104, -792, -104, -792, 680, -984, 680)
+polygon = PackedVector2Array(-976, -104, -640, -104, -640, 680, -984, 680)
 
 [node name="Area2D" type="Area2D" parent="LevelManager/Level6/FrictionlessBody2"]
+position = Vector2(248, -8)
+scale = Vector2(1.2, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level6/FrictionlessBody2/Area2D"]
 position = Vector2(-880, -104)
@@ -3446,9 +3460,12 @@ position = Vector2(4328, 2408)
 [node name="Polygon2D" parent="LevelManager/Level6/FrictionlessBody3" index="0"]
 z_index = -1
 color = Color(0.737255, 0.658824, 0.384314, 1)
-polygon = PackedVector2Array(-976, -104, -792, -104, -792, 680, -984, 680)
+polygon = PackedVector2Array(-976, -104, -376, 16, -376, 680, -984, 680)
 
 [node name="Area2D" type="Area2D" parent="LevelManager/Level6/FrictionlessBody3"]
+position = Vector2(1248, 584)
+rotation = 0.261799
+scale = Vector2(2.3, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level6/FrictionlessBody3/Area2D"]
 position = Vector2(-880, -104)
@@ -3464,6 +3481,148 @@ position = Vector2(4600, 640)
 
 [node name="Polygon2D" parent="LevelManager/Level6/6" index="0"]
 polygon = PackedVector2Array(-832, 0, -368, 0, -368, 1448, -832, 1448, -832, 944, -1608, 944, -1608, 664, -832, 664)
+
+[node name="Platform2" type="AnimatableBody2D" parent="LevelManager/Level6"]
+position = Vector2(2560, 872)
+rotation = 0.767945
+scale = Vector2(500, 50)
+sync_to_physics = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level6/Platform2"]
+scale = Vector2(0.05, 0.05)
+shape = SubResource("RectangleShape2D_wy1rh")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="LevelManager/Level6/Platform2"]
+modulate = Color(0, 0.384314, 0, 1)
+z_index = -1
+mesh = SubResource("BoxMesh_bclus")
+
+[node name="MovingPlatformComponent" type="Node" parent="LevelManager/Level6/Platform2" node_paths=PackedStringArray("Platform")]
+script = ExtResource("8_7s70f")
+OneShot = true
+TimeBetweenPoints = 4.0
+NextPathPosition = Vector2(2560, 872)
+EndingPathPosition = Vector2(2560, 872)
+StartingPathPosition = Vector2(2856, 1152)
+Platform = NodePath("..")
+
+[node name="DashButton" type="StaticBody2D" parent="LevelManager/Level6"]
+position = Vector2(3576, 1208)
+rotation = 0.785398
+scale = Vector2(50, 50)
+
+[node name="Polygon" type="MeshInstance2D" parent="LevelManager/Level6/DashButton"]
+modulate = Color(0.980392, 0.431373, 0.403922, 1)
+position = Vector2(0.002, 0)
+mesh = SubResource("BoxMesh_thm7c")
+
+[node name="Area2D" type="Area2D" parent="LevelManager/Level6/DashButton"]
+scale = Vector2(1.5, 1.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level6/DashButton/Area2D"]
+scale = Vector2(0.2, 0.2)
+shape = SubResource("RectangleShape2D_ktar8")
+
+[node name="DashButtonComponent" type="Node" parent="LevelManager/Level6/DashButton" node_paths=PackedStringArray("activatewhat", "activatewhat2", "area2dconnectingfrom", "mesh")]
+script = ExtResource("7_fh7uq")
+activatewhat = NodePath("../../Platform2/MovingPlatformComponent")
+activatewhat2 = NodePath("../../Platform/MovingPlatformComponent")
+area2dconnectingfrom = NodePath("../Area2D")
+mesh = NodePath("../Polygon")
+
+[node name="DashButton2" type="StaticBody2D" parent="LevelManager/Level6"]
+position = Vector2(4336, 2296)
+rotation = 0.785398
+scale = Vector2(50, 50)
+
+[node name="Polygon" type="MeshInstance2D" parent="LevelManager/Level6/DashButton2"]
+modulate = Color(0.980392, 0.431373, 0.403922, 1)
+position = Vector2(0.002, 0)
+mesh = SubResource("BoxMesh_thm7c")
+
+[node name="Area2D" type="Area2D" parent="LevelManager/Level6/DashButton2"]
+scale = Vector2(1.5, 1.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level6/DashButton2/Area2D"]
+scale = Vector2(0.2, 0.2)
+shape = SubResource("RectangleShape2D_ktar8")
+
+[node name="DashButtonComponent" type="Node" parent="LevelManager/Level6/DashButton2" node_paths=PackedStringArray("activatewhat", "activatewhat2", "activatewhat3", "area2dconnectingfrom", "mesh")]
+script = ExtResource("7_fh7uq")
+activatewhat = NodePath("../../Platform3/MovingPlatformComponent")
+activatewhat2 = NodePath("../../Platform4/MovingPlatformComponent")
+activatewhat3 = NodePath("../../Platform5/MovingPlatformComponent")
+area2dconnectingfrom = NodePath("../Area2D")
+mesh = NodePath("../Polygon")
+
+[node name="Platform3" type="AnimatableBody2D" parent="LevelManager/Level6"]
+position = Vector2(4400, 1984)
+rotation = 1.5708
+scale = Vector2(50, 450)
+sync_to_physics = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level6/Platform3"]
+scale = Vector2(0.05, 0.05)
+shape = SubResource("RectangleShape2D_wy1rh")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="LevelManager/Level6/Platform3"]
+modulate = Color(0, 0.384314, 0, 1)
+z_index = -1
+mesh = SubResource("BoxMesh_bclus")
+
+[node name="MovingPlatformComponent" type="Node" parent="LevelManager/Level6/Platform3" node_paths=PackedStringArray("Platform")]
+script = ExtResource("8_7s70f")
+TimeBetweenPoints = 3.0
+NextPathPosition = Vector2(4000, 1984)
+EndingPathPosition = Vector2(4400, 1984)
+StartingPathPosition = Vector2(4400, 1984)
+Platform = NodePath("..")
+
+[node name="Platform4" type="AnimatableBody2D" parent="LevelManager/Level6"]
+position = Vector2(4352, 1392)
+rotation = 1.5708
+scale = Vector2(50, 450)
+sync_to_physics = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level6/Platform4"]
+scale = Vector2(0.05, 0.05)
+shape = SubResource("RectangleShape2D_wy1rh")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="LevelManager/Level6/Platform4"]
+modulate = Color(0, 0.384314, 0, 1)
+z_index = -1
+mesh = SubResource("BoxMesh_bclus")
+
+[node name="MovingPlatformComponent" type="Node" parent="LevelManager/Level6/Platform4" node_paths=PackedStringArray("Platform")]
+script = ExtResource("8_7s70f")
+TimeBetweenPoints = 5.0
+NextPathPosition = Vector2(4000, 1392)
+EndingPathPosition = Vector2(4400, 1392)
+StartingPathPosition = Vector2(4200, 1392)
+Platform = NodePath("..")
+
+[node name="Platform5" type="AnimatableBody2D" parent="LevelManager/Level6"]
+position = Vector2(4352, 680)
+rotation = 1.5708
+scale = Vector2(50, 450)
+sync_to_physics = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level6/Platform5"]
+scale = Vector2(0.05, 0.05)
+shape = SubResource("RectangleShape2D_wy1rh")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="LevelManager/Level6/Platform5"]
+modulate = Color(0, 0.384314, 0, 1)
+z_index = -1
+mesh = SubResource("BoxMesh_bclus")
+
+[node name="MovingPlatformComponent" type="Node" parent="LevelManager/Level6/Platform5" node_paths=PackedStringArray("Platform")]
+script = ExtResource("8_7s70f")
+TimeBetweenPoints = 1.8
+NextPathPosition = Vector2(4400, 200)
+EndingPathPosition = Vector2(4400, 680)
+StartingPathPosition = Vector2(4300, 680)
+Platform = NodePath("..")
 
 [connection signal="timeout" from="Player/Coyotetimer" to="Player" method="_on_coyotetimer_timeout"]
 [connection signal="LevelChange" from="LevelTeleporter" to="Player" method="_on_level_teleporter_level_change"]
@@ -3491,6 +3650,10 @@ polygon = PackedVector2Array(-832, 0, -368, 0, -368, 1448, -832, 1448, -832, 944
 [connection signal="body_entered" from="LevelManager/Level5/Spikes4/KillBrick" to="Player" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="LevelManager/Level5/FrictionlessBody2/Spikes3/KillBrick" to="Player" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="LevelManager/Level6/Spikes/KillBrick" to="Player" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="LevelManager/Level6/DashButton/Area2D" to="LevelManager/Level6/DashButton" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="LevelManager/Level6/DashButton/Area2D" to="LevelManager/Level6/DashButton" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="LevelManager/Level6/DashButton2/Area2D" to="LevelManager/Level6/DashButton2" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="LevelManager/Level6/DashButton2/Area2D" to="LevelManager/Level6/DashButton2" method="_on_area_2d_body_exited"]
 
 [editable path="LevelManager/Level2/1"]
 [editable path="LevelManager/Level2/2"]

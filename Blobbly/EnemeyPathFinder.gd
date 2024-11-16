@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var Hurtbox = $HurtHitBox
 @onready var particles = $GPUParticles2D
+@onready var raycast = $RayCast2D
 var gravity : int = 900
 var speed :int  = 150
 var player_class = Player
@@ -23,14 +24,16 @@ func _physics_process(delta: float) -> void:
 	if player and can_see_player == true:
 		var direction = (player.position.x - global_position.x)
 		if direction < 0:
+			raycast.position.x = 3.15
 			direction = -1
 		else:
 			direction = 1
+			raycast.position.x = -3.15
 		lastdirection = direction
 		velocity.x = direction * speed
 	
-	
-	move_and_slide()
+	if raycast.is_colliding():
+		move_and_slide()
 
 
 func _on_area_2d_body_entered(body):

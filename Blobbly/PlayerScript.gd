@@ -29,7 +29,6 @@ var direction
 
 func _ready():
 	pass
-
 func _physics_process(delta):
 	if istouchingfrictionlessbody == true:
 		friction = 1

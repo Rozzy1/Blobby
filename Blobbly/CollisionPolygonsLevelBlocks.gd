@@ -2,7 +2,7 @@
 extends StaticBody2D
 
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	# It's easier to create a CollisionPolygon2D hitbox on the fly that matches the Polygon2D's points.
 	# When the game starts, this code will run and add a CollisionPolygon2D child to the land.
@@ -12,6 +12,6 @@ func _ready() -> void:
 		add_child(coll)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(_delta: float) -> void:
 	pass

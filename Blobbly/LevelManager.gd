@@ -4,6 +4,8 @@ func _ready():
 	$Level2.position = Vector2(90000,90000)
 	$Level3.position = Vector2(90000,90000)
 	$Level4.position = Vector2(90000,90000)
+	$Level5.position = Vector2(90000,90000)
+	$Level6.position = Vector2(90000,90000)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
@@ -26,3 +28,11 @@ func _on_level_teleporter_level_change(LevelCount):
 			remove_child($Level3)
 			$Level4.position = Vector2(0,0)
 			$Level4.visible = true
+		5:
+			remove_child($Level4)
+			$Level5.position = Vector2(0,0)
+			$Level5.visible = true
+		6:
+			remove_child($Level5)
+			$Level6.position = Vector2(0,0)
+			$Level6.visible = true

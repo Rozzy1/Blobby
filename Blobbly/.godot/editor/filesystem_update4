@@ -1,9 +1,7 @@
-res://Enemey.tscn
-res://Enemey.gdshader
-res://HealthBar - Copy.tscn
 res://collision_polygons.tscn
+res://Enemey.gdshader
+res://Enemey.tscn
+res://HealthBar - Copy.tscn
 res://Levels.tscn
-res://DetectFrictionlessFloorsPlayer.gd
-res://PlayerScript.gd
-res://EnemeySpawner.gd
-res://EnemeyPathFinder.gd
+res://CollisionPolygonsLevelBlocks.gd
+res://LevelTeleporter.gd

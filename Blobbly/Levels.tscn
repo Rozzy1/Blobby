@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://cl628sehtynmm"]
+[gd_scene load_steps=81 format=3 uid="uid://cl628sehtynmm"]
 
 [ext_resource type="Script" path="res://PlayerScript.gd" id="1_xt65x"]
 [ext_resource type="PackedScene" uid="uid://btxfofmj4rehs" path="res://HealthBar - Copy.tscn" id="2_ce43v"]
@@ -56,7 +56,7 @@
 [ext_resource type="Texture2D" uid="uid://cwxp253x6luyg" path="res://Pixel Prototype Player/Sprites/Spin/Spin07.png" id="35_qqik6"]
 [ext_resource type="Texture2D" uid="uid://cjkql3yyuoeo5" path="res://Pixel Prototype Player/Sprites/Spin/Spin08.png" id="36_wyy3w"]
 [ext_resource type="Texture2D" uid="uid://dnlbnb8jdwj32" path="res://BackGround.png" id="46_4fag5"]
-[ext_resource type="Script" path="res://DetectFrictionlessFloorsPlayer.gd" id="46_4p5hm"]
+[ext_resource type="Texture2D" uid="uid://dkh32rvn01rig" path="res://Foozle_2DT0001_Science_Fiction_Labs_Tileset/Barrier_Control_Panel/barrier_deactivate.png" id="49_qtohd"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_p47id"]
 
@@ -309,9 +309,42 @@ tracks/2/keys = {
 "values": [Vector2(0, 3.27826e-07), Vector2(0, -6.4)]
 }
 
+[sub_resource type="Animation" id="Animation_t1y3h"]
+resource_name = "TeleporterSpriteOpen"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TeleporterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.8, 1.2, 1.4, 1.6, 1.8, 2, 4.1, 4.3, 4.5, 4.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+}
+
+[sub_resource type="Animation" id="Animation_t1bb3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TeleporterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lju53"]
 _data = {
-"TeleporterOpen": SubResource("Animation_ss1mt")
+"RESET": SubResource("Animation_t1bb3"),
+"TeleporterOpen": SubResource("Animation_ss1mt"),
+"TeleporterSpriteOpen": SubResource("Animation_t1y3h")
 }
 
 [sub_resource type="BoxMesh" id="BoxMesh_e4ygh"]
@@ -343,9 +376,10 @@ size = Vector2(17.3333, 20)
 size = Vector2(402.455, 40)
 
 [node name="GameScene" type="Node2D"]
+metadata/_edit_horizontal_guides_ = [-1907.0]
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
-position = Vector2(8, 136)
+position = Vector2(2451, 260)
 scale = Vector2(30, 30)
 collision_layer = 3
 collision_mask = 3
@@ -387,9 +421,6 @@ scale = Vector2(0.07, 0.07)
 sprite_frames = SubResource("SpriteFrames_ei0ly")
 animation = &"jump_mid"
 
-[node name="DetectFrictionlessFloorsComponent" type="Node" parent="Player"]
-script = ExtResource("46_4p5hm")
-
 [node name="EnemeySpawner" type="Node2D" parent="."]
 position = Vector2(3936, 584)
 script = ExtResource("4_2nt6a")
@@ -400,7 +431,7 @@ enemeypositions6 = PackedVector2Array(3456, 2264, 3936, 584)
 
 [node name="LevelTeleporter" type="Node2D" parent="." node_paths=PackedStringArray("teleporterarea")]
 z_index = -1
-position = Vector2(-784, 224)
+position = Vector2(2495, 273)
 scale = Vector2(100, 25)
 script = ExtResource("4_j4xk2")
 teleporterarea = NodePath("Area2D")
@@ -448,11 +479,17 @@ texture = ExtResource("46_4fag5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelTeleporter/AnimationParts/TeleporterBottom"]
 shape = SubResource("RectangleShape2D_i7rc0")
 
+[node name="TeleporterSprite" type="Sprite2D" parent="LevelTeleporter"]
+z_index = 4
+position = Vector2(0, -2.72)
+scale = Vector2(0.025, 0.1)
+texture = ExtResource("49_qtohd")
+hframes = 18
+
 [node name="LevelManager" type="Node" parent="."]
 script = ExtResource("5_j8g8e")
 
 [node name="Level1" type="Node2D" parent="LevelManager"]
-visible = false
 
 [node name="KillBrick" type="Area2D" parent="LevelManager/Level1"]
 position = Vector2(2481, -783)
@@ -656,30 +693,26 @@ visible = false
 position = Vector2(0, 239)
 
 [node name="Polygon2D" parent="LevelManager/Level2/1" index="0"]
-polygon = PackedVector2Array(-1232, -7, 1056, -7, 1048, 688, -32, 688)
+position = Vector2(23, 0)
+polygon = PackedVector2Array(-1232, 1, 801.717, 1, 1024, -65, 1048, 688, -504, 689)
 
 [node name="2" parent="LevelManager/Level2" instance=ExtResource("6_thv5u")]
-position = Vector2(1048, 143)
+position = Vector2(1048, 111)
 
 [node name="Polygon2D" parent="LevelManager/Level2/2" index="0"]
-polygon = PackedVector2Array(0, 0, 1152, 0, 1144, 768, 0, 776)
-
-[node name="3" parent="LevelManager/Level2" instance=ExtResource("6_thv5u")]
-position = Vector2(1048, 143)
-
-[node name="Polygon2D" parent="LevelManager/Level2/3" index="0"]
-polygon = PackedVector2Array(0, 0, -208, 97, 0, 96)
+polygon = PackedVector2Array(-1, 63, 1152, 64, 1152, 779, 0, 776)
 
 [node name="4" parent="LevelManager/Level2" instance=ExtResource("6_thv5u")]
-position = Vector2(0, 143)
+position = Vector2(24, 111)
 
 [node name="Polygon2D" parent="LevelManager/Level2/4" index="0"]
-polygon = PackedVector2Array(0, 792, -1208, 792, -1208, -1103, -8, -1096)
+polygon = PackedVector2Array(-3, 817, -1208, 792, -1208, -1103, -3, -1103)
 
 [node name="5" parent="LevelManager/Level2" instance=ExtResource("6_thv5u")]
-position = Vector2(2768, 135)
+position = Vector2(2773, 134)
 
 [node name="Polygon2D" parent="LevelManager/Level2/5" index="0"]
+position = Vector2(2, -23)
 polygon = PackedVector2Array(1088, 769, -576, 776, -576, -584, 1096, -583)
 
 [node name="6" parent="LevelManager/Level2" instance=ExtResource("6_thv5u")]
@@ -689,16 +722,16 @@ position = Vector2(1040, -537)
 polygon = PackedVector2Array(-464, 88, 1160, 88, 1160, 408, -464, 408)
 
 [node name="7" parent="LevelManager/Level2" instance=ExtResource("6_thv5u")]
-position = Vector2(16, -1521)
+position = Vector2(24, -1676)
 
 [node name="Polygon2D" parent="LevelManager/Level2/7" index="0"]
-polygon = PackedVector2Array(-1208, -279, 1872, -279, 1048, 688, -1084.54, 680.438, -1208, 680)
+polygon = PackedVector2Array(-1208, -279, 3199, -127, 3241, 389, 1298.91, 393.541, 1048, 688, -1208, 686)
 
 [node name="8" parent="LevelManager/Level2" instance=ExtResource("6_thv5u")]
 position = Vector2(3992, -1128)
 
 [node name="Polygon2D" parent="LevelManager/Level2/8" index="0"]
-polygon = PackedVector2Array(-1544, 16, -784, 16, -784, -672, -144, -672, -144, 1144, -800, 1144, -800, 680, -1192, 680, -1192, 168, -1544, 168)
+polygon = PackedVector2Array(-1544, 16, -784, 16, -770, -673, -144, -672, -144, 1144, -800, 1144, -800, 680, -1192, 680, -1192, 168, -1544, 168)
 
 [node name="DashButton" type="StaticBody2D" parent="LevelManager/Level2"]
 position = Vector2(1912, 87)
@@ -759,12 +792,6 @@ position = Vector2(2128, -1080)
 
 [node name="Polygon2D" parent="LevelManager/Level2/10" index="0"]
 polygon = PackedVector2Array(-488, 504, -208, 504, -208, 632, -488, 632)
-
-[node name="11" parent="LevelManager/Level2" instance=ExtResource("6_thv5u")]
-position = Vector2(1656, -1968)
-
-[node name="Polygon2D" parent="LevelManager/Level2/11" index="0"]
-polygon = PackedVector2Array(-64, 168, 1560, 168, 1560, 688, -248, 688)
 
 [node name="DashArrowtutoriel" type="Sprite2D" parent="LevelManager/Level2"]
 z_index = -12
@@ -2999,6 +3026,7 @@ position = Vector2(8648, 232)
 polygon = PackedVector2Array(-640, -8, 2480, -8, 2472, 1184, -640, 1176)
 
 [node name="Level6" type="Node2D" parent="LevelManager"]
+visible = false
 
 [node name="1" parent="LevelManager/Level6" instance=ExtResource("6_thv5u")]
 position = Vector2(0, 239)
@@ -3657,7 +3685,6 @@ Platform = NodePath("..")
 
 [editable path="LevelManager/Level2/1"]
 [editable path="LevelManager/Level2/2"]
-[editable path="LevelManager/Level2/3"]
 [editable path="LevelManager/Level2/4"]
 [editable path="LevelManager/Level2/5"]
 [editable path="LevelManager/Level2/6"]
@@ -3665,7 +3692,6 @@ Platform = NodePath("..")
 [editable path="LevelManager/Level2/8"]
 [editable path="LevelManager/Level2/9"]
 [editable path="LevelManager/Level2/10"]
-[editable path="LevelManager/Level2/11"]
 [editable path="LevelManager/Level3/1"]
 [editable path="LevelManager/Level3/2"]
 [editable path="LevelManager/Level3/3"]

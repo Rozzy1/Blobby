@@ -11,7 +11,3 @@ func _ready() -> void:
 		coll.polygon = $Polygon2D.polygon # Copies the polygon points
 		add_child(coll)
 
-
-
-func _process(_delta: float) -> void:
-	pass

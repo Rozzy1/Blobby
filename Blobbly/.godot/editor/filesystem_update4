@@ -1,7 +1,7 @@
-res://collision_polygons.tscn
-res://Enemey.gdshader
 res://Enemey.tscn
+res://Enemey.gdshader
 res://HealthBar - Copy.tscn
+res://collision_polygons.tscn
 res://Levels.tscn
-res://CollisionPolygonsLevelBlocks.gd
-res://LevelTeleporter.gd
+res://MovingPlatformScipt.gd
+res://PlayerScript.gd

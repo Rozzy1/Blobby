@@ -10,7 +10,7 @@ var gravity : int = 900
 var speed :int  = 150
 var player_class = Player
 var can_see_player : bool = false
-var damage : int = 4
+var damage : int = 5
 var lastdirection : int
 
 func _ready():

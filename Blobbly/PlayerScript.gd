@@ -65,7 +65,7 @@ func _physics_process(delta):
 	direction = Input.get_axis("left", "right")
 	if direction and is_dashing == false and canmove == true:
 		velocity.x = direction * SPEED
-		if jumping == false:
+		if is_on_floor() == true:
 			play_animation("walk")
 	else:
 		if is_dashing == false:
@@ -97,7 +97,7 @@ func _physics_process(delta):
 	if !direction and !is_dashing and !jumping and !isteleportertouched and is_on_floor():
 		play_animation("idle")
 	
-	if jumping and !isteleportertouched:
+	if !isteleportertouched:
 		if velocity.y < 0:
 			play_animation("jump_start")
 		else:

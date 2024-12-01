@@ -3,5 +3,6 @@ res://Enemey.gdshader
 res://HealthBar - Copy.tscn
 res://collision_polygons.tscn
 res://Levels.tscn
-res://MovingPlatformScipt.gd
+res://CollisionPolygonsLevelBlocks.gd
 res://PlayerScript.gd
+res://EnemeyPathFinder.gd

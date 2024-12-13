@@ -110,6 +110,7 @@ func _physics_process(delta):
 	lastfloor = is_on_floor()
 	move_and_slide()
 
+
 func subtract_health(damage_amt):#
 	print("Player got dealt: ",damage_amt)
 	Health = Health - damage_amt
@@ -124,7 +125,7 @@ func _on_coyotetimer_timeout():
 
 func respawn():
 	playerdied.emit()
-	global_position = PlayerSpawnPoints[LevelCount]
+	global_position  = PlayerSpawnPoints[LevelCount]
 	print(global_position)
 	Health = MaxHealth
 	healthbar.health = Health
@@ -172,3 +173,10 @@ func play_animation(animation):
 	elif direction > 0:
 		animationsprite.flip_h = false
 	animationsprite.play(animation)
+
+
+func apply_knockback(force,direction):
+	print(force,direction, "applied")
+	velocity.x = direction * force * 5
+	velocity.y = direction * force / 2.5
+	print(velocity)

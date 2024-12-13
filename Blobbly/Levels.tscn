@@ -394,7 +394,7 @@ process_callback = 0
 position_smoothing_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(0, -0.533334)
+position = Vector2(0, -0.4)
 scale = Vector2(0.05, 0.07)
 shape = SubResource("CapsuleShape2D_ujj25")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
@@ -414,7 +414,7 @@ autostart = true
 position = Vector2(0, -2)
 scale = Vector2(0.07, 0.07)
 sprite_frames = SubResource("SpriteFrames_ei0ly")
-animation = &"jump_mid"
+animation = &"idle"
 
 [node name="EnemeySpawner" type="Node2D" parent="."]
 position = Vector2(-904, 518)
@@ -426,11 +426,11 @@ enemeypositions6 = PackedVector2Array(3456, 2264, 3936, 584)
 
 [node name="LevelTeleporter" type="Node2D" parent="." node_paths=PackedStringArray("teleporterarea")]
 z_index = -1
-position = Vector2(899, 601)
+position = Vector2(1039, 828)
 scale = Vector2(100, 25)
 script = ExtResource("4_j4xk2")
 teleporterarea = NodePath("Area2D")
-TeleporterLevelPositions = PackedVector2Array(0, 0, 899, 601, 3048, -1120, 0, 830, -3936, -420, 8776, 216, -784, 224)
+TeleporterLevelPositions = PackedVector2Array(0, 0, 899, 601, 3048, -1120, 1030, 830, -3936, -420, 8776, 216, -784, 224)
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="LevelTeleporter"]
 mesh = SubResource("BoxMesh_jf3f3")
@@ -485,6 +485,7 @@ hframes = 18
 script = ExtResource("5_j8g8e")
 
 [node name="Level1" type="Node2D" parent="LevelManager"]
+visible = false
 
 [node name="KillBrick" type="Area2D" parent="LevelManager/Level1"]
 position = Vector2(2481, -783)
@@ -591,10 +592,10 @@ area2d = NodePath("../Area2D")
 position = Vector2(-1850, 643)
 
 [node name="Polygon2D" parent="LevelManager/Level1/1" index="0"]
-polygon = PackedVector2Array(-3581, -1504, -1251, -1485, 3194, -1491, 3098, 7, 3082.35, -538, 2211, -538, 2213, -324, 1634, -211, 1625, -784, -1261, -785, -1251.37, -24, -672.79, -24.0001, -678, -210, -418, -210, -412.379, -24.0001, 695.07, -24.0001, 987, -118, 1150, -213, 1351, -210, 1354, -113, 1451, -21, 3181, -19, 3160, 856, -3556, 858)
+polygon = PackedVector2Array(-3581, -1504, -1251, -1485, 4940, -1486, 4939, -35, 3078, -17, 3082.35, -538, 2211, -538, 2213, -324, 1634, -211, 1625, -784, -1261, -785, -1251.37, -24, -672.79, -24.0001, -678, -210, -418, -210, -412.379, -24.0001, 695.07, -24.0001, 987, -118, 1150, -213, 1351, -210, 1354, -113, 1451, -21, 4950, -20, 4946, 851, -3556, 858)
 
 [node name="Line2D" parent="LevelManager/Level1/1" index="1"]
-points = PackedVector2Array(-3581, -1504, -1251, -1485, 3194, -1491, 3098, 7, 3082.35, -538, 2211, -538, 2213, -324, 1634, -211, 1625, -784, -1261, -785, -1251.37, -24, -672.79, -24.0001, -678, -210, -418, -210, -412.379, -24.0001, 695.07, -24.0001, 987, -118, 1150, -213, 1351, -210, 1354, -113, 1451, -21, 3181, -19, 3160, 856, -3556, 858, -3581, -1504)
+points = PackedVector2Array(-3581, -1504, -1251, -1485, 4940, -1486, 4939, -35, 3078, -17, 3082.35, -538, 2211, -538, 2213, -324, 1634, -211, 1625, -784, -1261, -785, -1251.37, -24, -672.79, -24.0001, -678, -210, -418, -210, -412.379, -24.0001, 695.07, -24.0001, 987, -118, 1150, -213, 1351, -210, 1354, -113, 1451, -21, 4950, -20, 4946, 851, -3556, 858, -3581, -1504)
 
 [node name="Level2" type="Node2D" parent="LevelManager"]
 visible = false
@@ -603,65 +604,10 @@ visible = false
 position = Vector2(0, 239)
 
 [node name="Polygon2D" parent="LevelManager/Level2/1" index="0"]
-position = Vector2(23, 0)
-polygon = PackedVector2Array(-1232, 1, 801.717, 1, 1054, -68, 1048, 688, -504, 689)
+polygon = PackedVector2Array(-1205, -1221, -1224, -2171, 3844, -2173, 3820, 663, 1050, 684, 1043, -64, 2175.06, -62.7275, 2175.44, -320.612, 605, -332, 601, -704, 1667.71, -704.884, 2073, -904, 2068, -701, 2795.01, -705.818, 2795.02, -1200.03, 2450, -1201, 2449, -1351, 3213, -1354, 3210, -1529, 1303, -1528, 1048, -1233, -25, -1233, -6.63879, 1, 801.717, 1, 1043, -64, 1048, 688, -1206, 670)
 
 [node name="Line2D" parent="LevelManager/Level2/1" index="1"]
-points = PackedVector2Array(-1232, 1, 801.717, 1, 1054, -68, 1048, 688, -504, 689, -1232, 1)
-
-[node name="2" parent="LevelManager/Level2" instance=ExtResource("6_thv5u")]
-position = Vector2(1048, 111)
-
-[node name="Polygon2D" parent="LevelManager/Level2/2" index="0"]
-polygon = PackedVector2Array(-1, 63, 1152, 64, 1152, 779, -9, 808)
-
-[node name="Line2D" parent="LevelManager/Level2/2" index="1"]
-points = PackedVector2Array(-1, 63, 1152, 64, 1152, 779, -9, 808, -1, 63)
-
-[node name="4" parent="LevelManager/Level2" instance=ExtResource("6_thv5u")]
-position = Vector2(24, 111)
-
-[node name="Polygon2D" parent="LevelManager/Level2/4" index="0"]
-polygon = PackedVector2Array(-3, 817, -1208, 792, -1208, -1103, -3, -1103)
-
-[node name="Line2D" parent="LevelManager/Level2/4" index="1"]
-points = PackedVector2Array(-3, 817, -1208, 792, -1208, -1103, -3, -1103, -3, 817)
-
-[node name="5" parent="LevelManager/Level2" instance=ExtResource("6_thv5u")]
-position = Vector2(2773, 134)
-
-[node name="Polygon2D" parent="LevelManager/Level2/5" index="0"]
-polygon = PackedVector2Array(1088, 769, -576, 776, -576, -584, 1096, -583)
-
-[node name="Line2D" parent="LevelManager/Level2/5" index="1"]
-points = PackedVector2Array(1088, 769, -576, 776, -576, -584, 1096, -583, 1088, 769)
-
-[node name="6" parent="LevelManager/Level2" instance=ExtResource("6_thv5u")]
-position = Vector2(1040, -537)
-
-[node name="Polygon2D" parent="LevelManager/Level2/6" index="0"]
-polygon = PackedVector2Array(-464, 88, 1160, 88, 1160, 408, -464, 408)
-
-[node name="Line2D" parent="LevelManager/Level2/6" index="1"]
-points = PackedVector2Array(-464, 88, 1160, 88, 1160, 408, -464, 408, -464, 88)
-
-[node name="7" parent="LevelManager/Level2" instance=ExtResource("6_thv5u")]
-position = Vector2(24, -1676)
-
-[node name="Polygon2D" parent="LevelManager/Level2/7" index="0"]
-polygon = PackedVector2Array(-1208, -279, 3199, -127, 3241, 389, 1298.91, 393.541, 1048, 688, -1208, 686)
-
-[node name="Line2D" parent="LevelManager/Level2/7" index="1"]
-points = PackedVector2Array(-1208, -279, 3199, -127, 3241, 389, 1298.91, 393.541, 1048, 688, -1208, 686, -1208, -279)
-
-[node name="8" parent="LevelManager/Level2" instance=ExtResource("6_thv5u")]
-position = Vector2(3992, -1128)
-
-[node name="Polygon2D" parent="LevelManager/Level2/8" index="0"]
-polygon = PackedVector2Array(-1544, 16, -784, 16, -770, -673, -144, -672, -144, 1144, -800, 1144, -800, 680, -1192, 680, -1192, 168, -1544, 168)
-
-[node name="Line2D" parent="LevelManager/Level2/8" index="1"]
-points = PackedVector2Array(-1544, 16, -784, 16, -770, -673, -144, -672, -144, 1144, -800, 1144, -800, 680, -1192, 680, -1192, 168, -1544, 168, -1544, 16)
+points = PackedVector2Array(-1205, -1221, -1224, -2171, 3844, -2173, 3820, 663, 1050, 684, 1043, -64, 2175.06, -62.7275, 2175.44, -320.612, 605, -332, 601, -704, 1667.71, -704.884, 2073, -904, 2068, -701, 2795.01, -705.818, 2795.02, -1200.03, 2450, -1201, 2449, -1351, 3213, -1354, 3210, -1529, 1303, -1528, 1048, -1233, -25, -1233, -6.63879, 1, 801.717, 1, 1043, -64, 1048, 688, -1206, 670, -1205, -1221)
 
 [node name="DashButton" type="StaticBody2D" parent="LevelManager/Level2"]
 position = Vector2(1912, 87)
@@ -711,15 +657,6 @@ script = ExtResource("8_tg3fk")
 collision = NodePath("../CollisionShape2D")
 area2d = NodePath("../Area2D")
 
-[node name="10" parent="LevelManager/Level2" instance=ExtResource("6_thv5u")]
-position = Vector2(2128, -1080)
-
-[node name="Polygon2D" parent="LevelManager/Level2/10" index="0"]
-polygon = PackedVector2Array(-407, 264, 105, 297, -208, 632, -488, 632)
-
-[node name="Line2D" parent="LevelManager/Level2/10" index="1"]
-points = PackedVector2Array(-407, 264, 105, 297, -208, 632, -488, 632, -407, 264)
-
 [node name="DashArrowtutoriel" type="Sprite2D" parent="LevelManager/Level2"]
 z_index = -12
 position = Vector2(1696, 120)
@@ -750,15 +687,6 @@ Platform = NodePath("..")
 
 [node name="Level3" type="Node2D" parent="LevelManager"]
 visible = false
-
-[node name="1" parent="LevelManager/Level3" instance=ExtResource("6_thv5u")]
-position = Vector2(0, 160)
-
-[node name="Polygon2D" parent="LevelManager/Level3/1" index="0"]
-polygon = PackedVector2Array(-368, 280, 368, 280, 368, 584, -0.313782, 448, -368, 584)
-
-[node name="Line2D" parent="LevelManager/Level3/1" index="1"]
-points = PackedVector2Array(-368, 280, 368, 280, 368, 584, -0.313782, 448, -368, 584, -368, 280)
 
 [node name="2" parent="LevelManager/Level3" instance=ExtResource("6_thv5u")]
 position = Vector2(-1880, 0)
@@ -822,17 +750,6 @@ polygon = PackedVector2Array(216, 192, 1072, 192, 1072, 448, 216, 448)
 [node name="Line2D" parent="LevelManager/Level3/4" index="1"]
 points = PackedVector2Array(216, 192, 1072, 192, 1072, 448, 216, 448, 216, 192)
 
-[node name="5" parent="LevelManager/Level3" instance=ExtResource("6_thv5u")]
-position = Vector2(2024, -1416)
-
-[node name="Polygon2D" parent="LevelManager/Level3/5" index="0"]
-position = Vector2(-437.731, 0)
-scale = Vector2(3.10448, 1)
-polygon = PackedVector2Array(208, -1552, 744, -1552, 738.846, 3456, 210.577, 3448)
-
-[node name="Line2D" parent="LevelManager/Level3/5" index="1"]
-points = PackedVector2Array(208, -1552, 744, -1552, 738.846, 3456, 210.577, 3448, 208, -1552)
-
 [node name="6" parent="LevelManager/Level3" instance=ExtResource("6_thv5u")]
 position = Vector2(440, -2112)
 
@@ -850,16 +767,6 @@ polygon = PackedVector2Array(216, 192, 1072, 192, 1072, 448, 216, 448)
 
 [node name="Line2D" parent="LevelManager/Level3/7" index="1"]
 points = PackedVector2Array(216, 192, 1072, 192, 1072, 448, 216, 448, 216, 192)
-
-[node name="8" parent="LevelManager/Level3" instance=ExtResource("6_thv5u")]
-position = Vector2(-2752, -1416)
-
-[node name="Polygon2D" parent="LevelManager/Level3/8" index="0"]
-position = Vector2(0, 1)
-polygon = PackedVector2Array(-328, -1273, 744, -1273, 728, 3431, -328, 3431)
-
-[node name="Line2D" parent="LevelManager/Level3/8" index="1"]
-points = PackedVector2Array(-328, -1273, 744, -1273, 728, 3431, -328, 3431, -328, -1273)
 
 [node name="9" parent="LevelManager/Level3" instance=ExtResource("6_thv5u")]
 position = Vector2(-1736, -2112)
@@ -914,10 +821,10 @@ points = PackedVector2Array(-4240, 0, 1064, 0, 1072, 448, -4224, 456, -4240, 0)
 position = Vector2(1688, 1008)
 
 [node name="Polygon2D" parent="LevelManager/Level3/12" index="0"]
-polygon = PackedVector2Array(-4240, 0, 1064, 0, 1080, 448, -4224, 456)
+polygon = PackedVector2Array(-4826, -3575, -4847, -4005, 2230, -4026, 1488, 950, 571, 657, 562.368, -1707.84, 227, -1708, 221, -1980, 561.375, -1979.84, 555.722, -3528.65, -3708, -3534, -3705, -1974, -3371, -1974, -3369, -1722, -3700.6, -1722.42, -3704.65, 0, 556, -13, 558, 448, -4889, 484)
 
 [node name="Line2D" parent="LevelManager/Level3/12" index="1"]
-points = PackedVector2Array(-4240, 0, 1064, 0, 1080, 448, -4224, 456, -4240, 0)
+points = PackedVector2Array(-4826, -3575, -4847, -4005, 2230, -4026, 1488, 950, 571, 657, 562.368, -1707.84, 227, -1708, 221, -1980, 561.375, -1979.84, 555.722, -3528.65, -3708, -3534, -3705, -1974, -3371, -1974, -3369, -1722, -3700.6, -1722.42, -3704.65, 0, 556, -13, 558, 448, -4889, 484, -4826, -3575)
 
 [node name="Spikes" parent="LevelManager/Level3" instance=ExtResource("6_thv5u")]
 z_index = -1
@@ -1217,19 +1124,10 @@ visible = false
 position = Vector2(208, 240)
 
 [node name="Polygon2D" parent="LevelManager/Level4/1" index="0"]
-polygon = PackedVector2Array(-800, -8, 888, -8, 888, 680, -798.364, 679.823)
+polygon = PackedVector2Array(-4485, -657, -798.42, -657, -798, -862, 890, -861, 888, -241, -736, -242, -738, -18, 888, -8, 888, 680, -4470, 684, -4470.78, 614.162, -5338, 608, -5350, -2462, -93, -2445, -102, -1854, 2591, -1860, 2585, 689, 1292, 691, 1293.79, -1239.47, -789, -1237, -787.591, -1854.86, -3283, -1858, -3646, -1384, -4480, -1158)
 
 [node name="Line2D" parent="LevelManager/Level4/1" index="1"]
-points = PackedVector2Array(-800, -8, 888, -8, 888, 680, -798.364, 679.823, -800, -8)
-
-[node name="2" parent="LevelManager/Level4" instance=ExtResource("6_thv5u")]
-position = Vector2(2296, 240)
-
-[node name="Polygon2D" parent="LevelManager/Level4/2" index="0"]
-polygon = PackedVector2Array(-800, -1856, 504, -1864, 512, 680, -800, 678)
-
-[node name="Line2D" parent="LevelManager/Level4/2" index="1"]
-points = PackedVector2Array(-800, -1856, 504, -1864, 512, 680, -800, 678, -800, -1856)
+points = PackedVector2Array(-4485, -657, -798.42, -657, -798, -862, 890, -861, 888, -241, -736, -242, -738, -18, 888, -8, 888, 680, -4470, 684, -4470.78, 614.162, -5338, 608, -5350, -2462, -93, -2445, -102, -1854, 2591, -1860, 2585, 689, 1292, 691, 1293.79, -1239.47, -789, -1237, -787.591, -1854.86, -3283, -1858, -3646, -1384, -4480, -1158, -4485, -657)
 
 [node name="FrictionlessBody" parent="LevelManager/Level4" instance=ExtResource("6_thv5u")]
 position = Vector2(2056, 240)
@@ -1241,6 +1139,7 @@ polygon = PackedVector2Array(-976, -8, -554.742, -8.11496, -552, 680, -984, 680)
 
 [node name="Line2D" parent="LevelManager/Level4/FrictionlessBody" index="1"]
 points = PackedVector2Array(-976, -8, -554.742, -8.11496, -552, 680, -984, 680, -976, -8)
+width = 0.0
 
 [node name="Area2D" type="Area2D" parent="LevelManager/Level4/FrictionlessBody"]
 
@@ -1252,24 +1151,6 @@ shape = SubResource("RectangleShape2D_n5dsy")
 script = ExtResource("12_hvm0v")
 area2d = NodePath("../Area2D")
 
-[node name="3" parent="LevelManager/Level4" instance=ExtResource("6_thv5u")]
-position = Vector2(208, -680)
-
-[node name="Polygon2D" parent="LevelManager/Level4/3" index="0"]
-polygon = PackedVector2Array(-800, 64, 888, 64, 888, 680, -800, 680)
-
-[node name="Line2D" parent="LevelManager/Level4/3" index="1"]
-points = PackedVector2Array(-800, 64, 888, 64, 888, 680, -800, 680, -800, 64)
-
-[node name="4" parent="LevelManager/Level4" instance=ExtResource("6_thv5u")]
-position = Vector2(608, -1680)
-
-[node name="Polygon2D" parent="LevelManager/Level4/4" index="0"]
-polygon = PackedVector2Array(-1192, 64, 888, 64, 888, 680, -1192, 680)
-
-[node name="Line2D" parent="LevelManager/Level4/4" index="1"]
-points = PackedVector2Array(-1192, 64, 888, 64, 888, 680, -1192, 680, -1192, 64)
-
 [node name="FrictionlessBody3" parent="LevelManager/Level4" instance=ExtResource("6_thv5u")]
 position = Vector2(-1096, -984)
 
@@ -1280,6 +1161,7 @@ polygon = PackedVector2Array(-1944, 352, 536, 368, 541.316, 576.861, -2520, 576)
 
 [node name="Line2D" parent="LevelManager/Level4/FrictionlessBody3" index="1"]
 points = PackedVector2Array(-1944, 352, 536, 368, 541.316, 576.861, -2520, 576, -1944, 352)
+width = 0.0
 
 [node name="Area2D" type="Area2D" parent="LevelManager/Level4/FrictionlessBody3"]
 position = Vector2(96, -48)
@@ -1549,15 +1431,6 @@ scale = Vector2(0.075, 0.2)
 position = Vector2(0.304762, -6.03497e-07)
 shape = SubResource("RectangleShape2D_mg4xg")
 
-[node name="5" parent="LevelManager/Level4" instance=ExtResource("6_thv5u")]
-position = Vector2(-1472, -2272)
-
-[node name="Polygon2D" parent="LevelManager/Level4/5" index="0"]
-polygon = PackedVector2Array(-3672, 56, 1648, 64, 1648, 680, -1567.87, 680, -1923.83, 1181.09, -2744, 1400, -2744, 3088, -3656, 3128)
-
-[node name="Line2D" parent="LevelManager/Level4/5" index="1"]
-points = PackedVector2Array(-3672, 56, 1648, 64, 1648, 680, -1567.87, 680, -1923.83, 1181.09, -2744, 1400, -2744, 3088, -3656, 3128, -3672, 56)
-
 [node name="Platform2" type="AnimatableBody2D" parent="LevelManager/Level4"]
 position = Vector2(-3072, -952)
 scale = Vector2(100, 2000)
@@ -1581,15 +1454,6 @@ EndingPathPosition = Vector2(-3080, 368)
 StartingPathPosition = Vector2(-3072, -952)
 Platform = NodePath("..")
 
-[node name="6" parent="LevelManager/Level4" instance=ExtResource("6_thv5u")]
-position = Vector2(-3416, -408)
-
-[node name="Polygon2D" parent="LevelManager/Level4/6" index="0"]
-polygon = PackedVector2Array(-880, -8, 2872, -8, 2888, 1320, -808, 1312)
-
-[node name="Line2D" parent="LevelManager/Level4/6" index="1"]
-points = PackedVector2Array(-880, -8, 2872, -8, 2888, 1320, -808, 1312, -880, -8)
-
 [node name="Level5" type="Node2D" parent="LevelManager"]
 visible = false
 
@@ -1597,46 +1461,10 @@ visible = false
 position = Vector2(0, 239)
 
 [node name="Polygon2D" parent="LevelManager/Level5/1" index="0"]
-polygon = PackedVector2Array(-1232, -399, -568, -407, -568, 25, 1080, 25, 1080, 681, -1232, 688)
+polygon = PackedVector2Array(-1232, -1137, 11116, -1115, 11098, 1181, 1091, 1155, 1084, 465, 1400, 464, 1400, -14, 1868, -14, 1870, 478, 2191, 479, 2194, -16, 2640, -16, 2640, 469, 3265, 470, 3266, -21, 3705, -20, 3704, 467, 8004, 465, 8004, -15, 9096.21, -16.7578, 9090, -392, -570, -392, -568, 25, 1080, 25, 1082, 1153, -1208, 1157)
 
 [node name="Line2D" parent="LevelManager/Level5/1" index="1"]
-points = PackedVector2Array(-1232, -399, -568, -407, -568, 25, 1080, 25, 1080, 681, -1232, 688, -1232, -399)
-
-[node name="2" parent="LevelManager/Level5" instance=ExtResource("6_thv5u")]
-position = Vector2(0, 720)
-
-[node name="Polygon2D" parent="LevelManager/Level5/2" index="0"]
-polygon = PackedVector2Array(-1232, -7, 8112, -16, 8112, 688, -1232, 688)
-
-[node name="Line2D" parent="LevelManager/Level5/2" index="1"]
-points = PackedVector2Array(-1232, -7, 8112, -16, 8112, 688, -1232, 688, -1232, -7)
-
-[node name="3" parent="LevelManager/Level5" instance=ExtResource("6_thv5u")]
-position = Vector2(2056, 232)
-
-[node name="Polygon2D" parent="LevelManager/Level5/3" index="0"]
-polygon = PackedVector2Array(-656, -8, -184, -8, -184, 687, -656, 688)
-
-[node name="Line2D" parent="LevelManager/Level5/3" index="1"]
-points = PackedVector2Array(-656, -8, -184, -8, -184, 687, -656, 688, -656, -8)
-
-[node name="4" parent="LevelManager/Level5" instance=ExtResource("6_thv5u")]
-position = Vector2(2832, 230)
-
-[node name="Polygon2D" parent="LevelManager/Level5/4" index="0"]
-polygon = PackedVector2Array(-640, -8, -184, -8, -184, 687, -640, 688)
-
-[node name="Line2D" parent="LevelManager/Level5/4" index="1"]
-points = PackedVector2Array(-640, -8, -184, -8, -184, 687, -640, 688, -640, -8)
-
-[node name="5" parent="LevelManager/Level5" instance=ExtResource("6_thv5u")]
-position = Vector2(0, -840)
-
-[node name="Polygon2D" parent="LevelManager/Level5/5" index="0"]
-polygon = PackedVector2Array(-1232, -56, 11112, -40, 11120, 1208, 9088, 1216, 9088, 688, -1232, 688)
-
-[node name="Line2D" parent="LevelManager/Level5/5" index="1"]
-points = PackedVector2Array(-1232, -56, 11112, -40, 11120, 1208, 9088, 1216, 9088, 688, -1232, 688, -1232, -56)
+points = PackedVector2Array(-1232, -1137, 11116, -1115, 11098, 1181, 1091, 1155, 1084, 465, 1400, 464, 1400, -14, 1868, -14, 1870, 478, 2191, 479, 2194, -16, 2640, -16, 2640, 469, 3265, 470, 3266, -21, 3705, -20, 3704, 467, 8004, 465, 8004, -15, 9096.21, -16.7578, 9090, -392, -570, -392, -568, 25, 1080, 25, 1082, 1153, -1208, 1157, -1232, -1137)
 
 [node name="Spikes" parent="LevelManager/Level5" instance=ExtResource("6_thv5u")]
 z_index = -1
@@ -2272,15 +2100,6 @@ script = ExtResource("8_tg3fk")
 collision = NodePath("../CollisionShape2D")
 area2d = NodePath("../Area2D")
 
-[node name="6" parent="LevelManager/Level5" instance=ExtResource("6_thv5u")]
-position = Vector2(3904, 224)
-
-[node name="Polygon2D" parent="LevelManager/Level5/6" index="0"]
-polygon = PackedVector2Array(-640, -8, -184, -8, -184, 687, -640, 688)
-
-[node name="Line2D" parent="LevelManager/Level5/6" index="1"]
-points = PackedVector2Array(-640, -8, -184, -8, -184, 687, -640, 688, -640, -8)
-
 [node name="FrictionlessBody" parent="LevelManager/Level5" instance=ExtResource("6_thv5u")]
 position = Vector2(5288, 248)
 
@@ -2291,6 +2110,7 @@ polygon = PackedVector2Array(-976, -104, -792, -104, -792, 680, -984, 680)
 
 [node name="Line2D" parent="LevelManager/Level5/FrictionlessBody" index="1"]
 points = PackedVector2Array(-976, -104, -792, -104, -792, 680, -984, 680, -976, -104)
+width = 0.0
 
 [node name="Area2D" type="Area2D" parent="LevelManager/Level5/FrictionlessBody"]
 
@@ -3012,6 +2832,7 @@ polygon = PackedVector2Array(-968, 120, -256, 120, -256, 680, -984, 680)
 
 [node name="Line2D" parent="LevelManager/Level5/FrictionlessBody2" index="1"]
 points = PackedVector2Array(-968, 120, -256, 120, -256, 680, -984, 680, -968, 120)
+width = 0.0
 
 [node name="Area2D" type="Area2D" parent="LevelManager/Level5/FrictionlessBody2"]
 
@@ -3051,29 +2872,11 @@ position = Vector2(-4.62, 5.54865e-06)
 scale = Vector2(0.02, 1)
 shape = SubResource("RectangleShape2D_mg4xg")
 
-[node name="7" parent="LevelManager/Level5" instance=ExtResource("6_thv5u")]
-position = Vector2(8648, 232)
-
-[node name="Polygon2D" parent="LevelManager/Level5/7" index="0"]
-polygon = PackedVector2Array(-640, -8, 2480, -8, 2472, 1184, -640, 1176)
-
-[node name="Line2D" parent="LevelManager/Level5/7" index="1"]
-points = PackedVector2Array(-640, -8, 2480, -8, 2472, 1184, -640, 1176, -640, -8)
-
 [node name="Level6" type="Node2D" parent="LevelManager"]
 visible = false
 
-[node name="1" parent="LevelManager/Level6" instance=ExtResource("6_thv5u")]
-position = Vector2(0, 239)
-
-[node name="Polygon2D" parent="LevelManager/Level6/1" index="0"]
-polygon = PackedVector2Array(-1232, -7, 120, -7, 112, 2401, -1224, 2401)
-
-[node name="Line2D" parent="LevelManager/Level6/1" index="1"]
-points = PackedVector2Array(-1232, -7, 120, -7, 112, 2401, -1224, 2401, -1232, -7)
-
 [node name="Platform" type="AnimatableBody2D" parent="LevelManager/Level6"]
-position = Vector2(-568, 88)
+position = Vector2(-568, 403)
 rotation = 1.5708
 scale = Vector2(350, 50)
 sync_to_physics = false
@@ -3090,8 +2893,8 @@ mesh = SubResource("BoxMesh_bclus")
 [node name="MovingPlatformComponent" type="Node" parent="LevelManager/Level6/Platform" node_paths=PackedStringArray("Platform")]
 script = ExtResource("8_7s70f")
 OneShot = true
-NextPathPosition = Vector2(-568, 200)
-EndingPathPosition = Vector2(-568, 200)
+NextPathPosition = Vector2(-568, 403)
+EndingPathPosition = Vector2(-568, 403)
 StartingPathPosition = Vector2(-568, 88)
 Platform = NodePath("..")
 
@@ -3099,10 +2902,11 @@ Platform = NodePath("..")
 position = Vector2(0, -752)
 
 [node name="Polygon2D" parent="LevelManager/Level6/2" index="0"]
-polygon = PackedVector2Array(-2088, -8, 2720, -24, 2727.04, 1842.66, 2728, 2096, 2560, 2096, 2560, 1848, 1392, 1845.67, 1392, 2312, 454.987, 680, -1208, 680, -1176, 3384, -2144, 3384)
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-2088, -8, 6402, -20, 6403, 4005, 165, 4004, 163, 3363, 4163, 3359, 4167, 3174, 4475.57, 3168, 4474.54, 1145.22, 3315.07, 1145.35, 3309.14, 1152.72, 2727.16, 1874.87, 2727.3, 1910.48, 2728, 2096, 2560, 2096, 2560, 1848, 1392, 1845.67, 1392, 2312, 454.987, 680, -1208, 680, -1204.48, 977.268, 165, 974, 163, 3383, -2144, 3384)
 
 [node name="Line2D" parent="LevelManager/Level6/2" index="1"]
-points = PackedVector2Array(-2088, -8, 2720, -24, 2727.04, 1842.66, 2728, 2096, 2560, 2096, 2560, 1848, 1392, 1845.67, 1392, 2312, 454.987, 680, -1208, 680, -1176, 3384, -2144, 3384, -2088, -8)
+points = PackedVector2Array(-2088, -8, 6402, -20, 6403, 4005, 165, 4004, 163, 3363, 4163, 3359, 4167, 3174, 4475.57, 3168, 4474.54, 1145.22, 3315.07, 1145.35, 3309.14, 1152.72, 2727.16, 1874.87, 2727.3, 1910.48, 2728, 2096, 2560, 2096, 2560, 1848, 1392, 1845.67, 1392, 2312, 454.987, 680, -1208, 680, -1204.48, 977.268, 165, 974, 163, 3383, -2144, 3384, -2088, -8)
 
 [node name="FrictionlessBody" parent="LevelManager/Level6" instance=ExtResource("6_thv5u")]
 position = Vector2(1104, 256)
@@ -3111,10 +2915,11 @@ collision_layer = 3
 [node name="Polygon2D" parent="LevelManager/Level6/FrictionlessBody" index="0"]
 z_index = -1
 color = Color(0.737255, 0.658824, 0.384314, 1)
-polygon = PackedVector2Array(-984, -24, 576, 2352, -1000, 2352)
+polygon = PackedVector2Array(-998, -34, -930, -33, 576, 2352, -1000, 2352)
 
 [node name="Line2D" parent="LevelManager/Level6/FrictionlessBody" index="1"]
-points = PackedVector2Array(-984, -24, 576, 2352, -1000, 2352, -984, -24)
+points = PackedVector2Array(-998, -34, -930, -33, 576, 2352, -1000, 2352, -998, -34)
+width = 0.0
 
 [node name="Area2D" type="Area2D" parent="LevelManager/Level6/FrictionlessBody"]
 position = Vector2(-208, 984)
@@ -3129,15 +2934,6 @@ shape = SubResource("RectangleShape2D_n5dsy")
 [node name="FrictionlessBodyComponent" type="Node" parent="LevelManager/Level6/FrictionlessBody" node_paths=PackedStringArray("area2d")]
 script = ExtResource("12_hvm0v")
 area2d = NodePath("../Area2D")
-
-[node name="3" parent="LevelManager/Level6" instance=ExtResource("6_thv5u")]
-position = Vector2(1312, 840)
-
-[node name="Polygon2D" parent="LevelManager/Level6/3" index="0"]
-polygon = PackedVector2Array(-1208, 1760, 2856, 1752, 2856, 1576, 3136, 1576, 3136, -208, 5112, -200, 5144, 2400, -1224, 2401)
-
-[node name="Line2D" parent="LevelManager/Level6/3" index="1"]
-points = PackedVector2Array(-1208, 1760, 2856, 1752, 2856, 1576, 3136, 1576, 3136, -208, 5112, -200, 5144, 2400, -1224, 2401, -1208, 1760)
 
 [node name="Spikes" parent="LevelManager/Level6" instance=ExtResource("6_thv5u")]
 z_index = -2
@@ -3476,10 +3272,10 @@ shape = SubResource("RectangleShape2D_mg4xg")
 position = Vector2(1312, 840)
 
 [node name="Polygon2D" parent="LevelManager/Level6/4" index="0"]
-polygon = PackedVector2Array(664, 1360, 1040, 1360, 1040, 1208, 832, 1208, 832, 1176, 1040, 1176, 1040, 704, 1424, 704, 1424, 1760, 664, 1760)
+polygon = PackedVector2Array(664, 1360, 1040, 1360, 820, 1359, 820, 1244, 1033, 1244, 1040, 704, 1424, 704, 1423, 1833, 664, 1833)
 
 [node name="Line2D" parent="LevelManager/Level6/4" index="1"]
-points = PackedVector2Array(664, 1360, 1040, 1360, 1040, 1208, 832, 1208, 832, 1176, 1040, 1176, 1040, 704, 1424, 704, 1424, 1760, 664, 1760, 664, 1360)
+points = PackedVector2Array(664, 1360, 1040, 1360, 820, 1359, 820, 1244, 1033, 1244, 1040, 704, 1424, 704, 1423, 1833, 664, 1833, 664, 1360)
 
 [node name="DashWall" type="StaticBody2D" parent="LevelManager/Level6"]
 z_index = -1
@@ -3508,25 +3304,17 @@ script = ExtResource("8_tg3fk")
 collision = NodePath("../CollisionShape2D")
 area2d = NodePath("../Area2D")
 
-[node name="5" parent="LevelManager/Level6" instance=ExtResource("6_thv5u")]
-position = Vector2(3944, -1304)
-
-[node name="Polygon2D" parent="LevelManager/Level6/5" index="0"]
-polygon = PackedVector2Array(-1232, -7, 104, -8, 2464, 1976, 504, 1968, 504, 1696, -632, 1696, -1224, 2401)
-
-[node name="Line2D" parent="LevelManager/Level6/5" index="1"]
-points = PackedVector2Array(-1232, -7, 104, -8, 2464, 1976, 504, 1968, 504, 1696, -632, 1696, -1224, 2401, -1232, -7)
-
 [node name="FrictionlessBody2" parent="LevelManager/Level6" instance=ExtResource("6_thv5u")]
 position = Vector2(3712, 2416)
 
 [node name="Polygon2D" parent="LevelManager/Level6/FrictionlessBody2" index="0"]
 z_index = -1
 color = Color(0.737255, 0.658824, 0.384314, 1)
-polygon = PackedVector2Array(-976, -104, -640, -104, -640, 680, -984, 680)
+polygon = PackedVector2Array(-976, -104, -640, -104, -641, 238, -972, 239)
 
 [node name="Line2D" parent="LevelManager/Level6/FrictionlessBody2" index="1"]
-points = PackedVector2Array(-976, -104, -640, -104, -640, 680, -984, 680, -976, -104)
+points = PackedVector2Array(-976, -104, -640, -104, -641, 238, -972, 239, -976, -104)
+width = 0.0
 
 [node name="Area2D" type="Area2D" parent="LevelManager/Level6/FrictionlessBody2"]
 position = Vector2(248, -8)
@@ -3547,10 +3335,11 @@ position = Vector2(4328, 2408)
 [node name="Polygon2D" parent="LevelManager/Level6/FrictionlessBody3" index="0"]
 z_index = -1
 color = Color(0.737255, 0.658824, 0.384314, 1)
-polygon = PackedVector2Array(-976, -104, -376, 16, -376, 680, -984, 680)
+polygon = PackedVector2Array(-976, -104, -376, 16, -377, 249, -976, 249)
 
 [node name="Line2D" parent="LevelManager/Level6/FrictionlessBody3" index="1"]
-points = PackedVector2Array(-976, -104, -376, 16, -376, 680, -984, 680, -976, -104)
+points = PackedVector2Array(-976, -104, -376, 16, -377, 249, -976, 249, -976, -104)
+width = 0.0
 
 [node name="Area2D" type="Area2D" parent="LevelManager/Level6/FrictionlessBody3"]
 position = Vector2(1248, 584)
@@ -3558,7 +3347,7 @@ rotation = 0.261799
 scale = Vector2(2.3, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level6/FrictionlessBody3/Area2D"]
-position = Vector2(-880, -104)
+position = Vector2(-879.565, -127.764)
 scale = Vector2(0.7, 2)
 shape = SubResource("RectangleShape2D_n5dsy")
 
@@ -3616,10 +3405,11 @@ scale = Vector2(1.5, 1.5)
 scale = Vector2(0.2, 0.2)
 shape = SubResource("RectangleShape2D_ktar8")
 
-[node name="DashButtonComponent" type="Node" parent="LevelManager/Level6/DashButton" node_paths=PackedStringArray("activatewhat", "activatewhat2", "area2dconnectingfrom", "mesh")]
+[node name="DashButtonComponent" type="Node" parent="LevelManager/Level6/DashButton" node_paths=PackedStringArray("activatewhat", "activatewhat2", "activatewhat3", "area2dconnectingfrom", "mesh")]
 script = ExtResource("7_fh7uq")
 activatewhat = NodePath("../../Platform2/MovingPlatformComponent")
 activatewhat2 = NodePath("../../Platform/MovingPlatformComponent")
+activatewhat3 = NodePath("../../Platform6/MovingPlatformComponent")
 area2dconnectingfrom = NodePath("../Area2D")
 mesh = NodePath("../Polygon")
 
@@ -3717,6 +3507,29 @@ EndingPathPosition = Vector2(4400, 680)
 StartingPathPosition = Vector2(4300, 680)
 Platform = NodePath("..")
 
+[node name="Platform6" type="AnimatableBody2D" parent="LevelManager/Level6"]
+position = Vector2(892, 2498)
+rotation = 1.5708
+scale = Vector2(100, 1600)
+sync_to_physics = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Level6/Platform6"]
+scale = Vector2(0.05, 0.05)
+shape = SubResource("RectangleShape2D_wy1rh")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="LevelManager/Level6/Platform6"]
+modulate = Color(0, 0.384314, 0, 1)
+z_index = -1
+mesh = SubResource("BoxMesh_bclus")
+
+[node name="MovingPlatformComponent" type="Node" parent="LevelManager/Level6/Platform6" node_paths=PackedStringArray("Platform")]
+script = ExtResource("8_7s70f")
+TimeBetweenPoints = 6.0
+NextPathPosition = Vector2(949, 290)
+EndingPathPosition = Vector2(949, 2500)
+StartingPathPosition = Vector2(949, 2500)
+Platform = NodePath("..")
+
 [node name="Background" type="Polygon2D" parent="."]
 z_index = -4096
 texture_repeat = 2
@@ -3757,56 +3570,32 @@ metadata/_edit_lock_ = true
 
 [editable path="LevelManager/Level1/1"]
 [editable path="LevelManager/Level2/1"]
-[editable path="LevelManager/Level2/2"]
-[editable path="LevelManager/Level2/4"]
-[editable path="LevelManager/Level2/5"]
-[editable path="LevelManager/Level2/6"]
-[editable path="LevelManager/Level2/7"]
-[editable path="LevelManager/Level2/8"]
-[editable path="LevelManager/Level2/10"]
-[editable path="LevelManager/Level3/1"]
 [editable path="LevelManager/Level3/2"]
 [editable path="LevelManager/Level3/3"]
 [editable path="LevelManager/Level3/4"]
-[editable path="LevelManager/Level3/5"]
 [editable path="LevelManager/Level3/6"]
 [editable path="LevelManager/Level3/7"]
-[editable path="LevelManager/Level3/8"]
 [editable path="LevelManager/Level3/9"]
 [editable path="LevelManager/Level3/10"]
 [editable path="LevelManager/Level3/11"]
 [editable path="LevelManager/Level3/12"]
 [editable path="LevelManager/Level3/Spikes"]
 [editable path="LevelManager/Level4/1"]
-[editable path="LevelManager/Level4/2"]
 [editable path="LevelManager/Level4/FrictionlessBody"]
-[editable path="LevelManager/Level4/3"]
-[editable path="LevelManager/Level4/4"]
 [editable path="LevelManager/Level4/FrictionlessBody3"]
 [editable path="LevelManager/Level4/Platform/Spikes"]
-[editable path="LevelManager/Level4/5"]
-[editable path="LevelManager/Level4/6"]
 [editable path="LevelManager/Level5/1"]
-[editable path="LevelManager/Level5/2"]
-[editable path="LevelManager/Level5/3"]
-[editable path="LevelManager/Level5/4"]
-[editable path="LevelManager/Level5/5"]
 [editable path="LevelManager/Level5/Spikes"]
 [editable path="LevelManager/Level5/Spikes2"]
-[editable path="LevelManager/Level5/6"]
 [editable path="LevelManager/Level5/FrictionlessBody"]
 [editable path="LevelManager/Level5/Spikes3"]
 [editable path="LevelManager/Level5/Spikes4"]
 [editable path="LevelManager/Level5/FrictionlessBody2"]
 [editable path="LevelManager/Level5/FrictionlessBody2/Spikes3"]
-[editable path="LevelManager/Level5/7"]
-[editable path="LevelManager/Level6/1"]
 [editable path="LevelManager/Level6/2"]
 [editable path="LevelManager/Level6/FrictionlessBody"]
-[editable path="LevelManager/Level6/3"]
 [editable path="LevelManager/Level6/Spikes"]
 [editable path="LevelManager/Level6/4"]
-[editable path="LevelManager/Level6/5"]
 [editable path="LevelManager/Level6/FrictionlessBody2"]
 [editable path="LevelManager/Level6/FrictionlessBody3"]
 [editable path="LevelManager/Level6/6"]

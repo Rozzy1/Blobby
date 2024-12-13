@@ -1,8 +1,2 @@
-res://Enemey.tscn
-res://Enemey.gdshader
-res://HealthBar - Copy.tscn
-res://collision_polygons.tscn
 res://Levels.tscn
-res://CollisionPolygonsLevelBlocks.gd
-res://PlayerScript.gd
-res://EnemeyPathFinder.gd
+res://Enemey.gdshader

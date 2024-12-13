@@ -9,6 +9,7 @@ script = ExtResource("1_131x4")
 [node name="Polygon2D" type="Polygon2D" parent="."]
 texture_repeat = 2
 color = Color(0, 0, 0, 1)
+antialiased = true
 texture_scale = Vector2(0.5, 0.5)
 
 [node name="Line2D" type="Line2D" parent="."]
@@ -16,5 +17,5 @@ texture_repeat = 2
 width = 128.0
 texture = ExtResource("3_oba63")
 texture_mode = 1
-sharp_limit = 4.0
+sharp_limit = 8.0
 antialiased = true

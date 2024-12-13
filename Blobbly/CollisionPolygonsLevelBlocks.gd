@@ -12,7 +12,7 @@ func _ready() -> void:
 		add_child(coll)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# To allow the outline to update whenever we update the polygon in the editor, this code is here.
 	# It'll assign the polygon's points to the outline so it can mimic the shape of the polygon.
 	if Engine.is_editor_hint():

@@ -46,6 +46,7 @@ func _on_area_2d_body_entered(body):
 			player.subtract_health(-5)
 		else:
 			player.subtract_health(damage)
+			player.apply_knockback(1000,lastdirection)
 
 
 func _on_gpu_particles_2d_finished():

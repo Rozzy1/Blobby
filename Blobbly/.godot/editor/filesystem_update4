@@ -4,4 +4,4 @@ res://HealthBar - Copy.tscn
 res://collision_polygons.tscn
 res://Levels.tscn
 res://GameManager.gd
-res://InputModel.gd
+res://PlayerScript.gd

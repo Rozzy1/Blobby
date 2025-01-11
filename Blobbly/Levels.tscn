@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://cl628sehtynmm"]
+[gd_scene load_steps=81 format=3 uid="uid://cl628sehtynmm"]
 
 [ext_resource type="Script" path="res://PlayerScript.gd" id="1_xt65x"]
 [ext_resource type="PackedScene" uid="uid://btxfofmj4rehs" path="res://HealthBar - Copy.tscn" id="2_ce43v"]
@@ -56,6 +56,8 @@
 [ext_resource type="Texture2D" uid="uid://cwxp253x6luyg" path="res://Pixel Prototype Player/Sprites/Spin/Spin07.png" id="35_qqik6"]
 [ext_resource type="Texture2D" uid="uid://cjkql3yyuoeo5" path="res://Pixel Prototype Player/Sprites/Spin/Spin08.png" id="36_wyy3w"]
 [ext_resource type="Texture2D" uid="uid://dnlbnb8jdwj32" path="res://BackGround.png" id="46_4fag5"]
+[ext_resource type="AudioStream" uid="uid://dj7kw6oxaqlra" path="res://HALFTONE SFX Pack LITE/Gameplay/3. Movement/Bounce_4.wav" id="46_lw8lo"]
+[ext_resource type="AudioStream" uid="uid://doq13arb1pty6" path="res://HALFTONE SFX Pack LITE/Gameplay/4. Impact/Hit_2.wav" id="47_uja6b"]
 [ext_resource type="Texture2D" uid="uid://dkh32rvn01rig" path="res://Foozle_2DT0001_Science_Fiction_Labs_Tileset/Barrier_Control_Panel/barrier_deactivate.png" id="49_qtohd"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_p47id"]
@@ -392,6 +394,12 @@ mesh = SubResource("CapsuleMesh_p47id")
 zoom = Vector2(0.65, 0.65)
 process_callback = 0
 position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.1
+drag_top_margin = 0.1
+drag_right_margin = 0.1
+drag_bottom_margin = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(0, -0.4)
@@ -415,6 +423,14 @@ position = Vector2(0, -2)
 scale = Vector2(0.07, 0.07)
 sprite_frames = SubResource("SpriteFrames_ei0ly")
 animation = &"idle"
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("46_lw8lo")
+volume_db = -10.0
+autoplay = true
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("47_uja6b")
 
 [node name="EnemeySpawner" type="Node2D" parent="."]
 position = Vector2(-904, 518)

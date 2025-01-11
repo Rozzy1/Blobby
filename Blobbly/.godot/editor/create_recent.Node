@@ -1,8 +1,9 @@
+AudioStreamPlayer2D
+Node
 Polygon2D
 Line2D
 Sprite2D
 RayCast2D
-Node
 Node2D
 MeshInstance2D
 AnimatedSprite2D
@@ -11,5 +12,3 @@ Area2D
 RichTextLabel
 AnimationPlayer
 AnimatableBody2D
-Path2D
-StaticBody2D

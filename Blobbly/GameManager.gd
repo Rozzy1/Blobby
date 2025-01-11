@@ -2,7 +2,8 @@ extends Node
 var Player1 = Player.new()
 var testarray : Array[InputModel]
 func _process(_delta: float) -> void:
-	Write_Inputs()
+#	Write_Inputs()
+	pass
 	
 	
 	

@@ -60,6 +60,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("up") and (is_on_floor() or cancoyote == true) and canmove == true:
 		velocity.y = JUMP_VELOCITY
 		jumping = true
+		play_sound_effect("Jump")
 	
 	#InputDirections and simple movement
 	direction = Input.get_axis("left", "right")
@@ -119,6 +120,7 @@ func subtract_health(damage_amt):#
 	healthbar.health = Health
 	if Health < 1:
 		respawn()
+	play_sound_effect("Hit")
 
 func _on_coyotetimer_timeout():
 	cancoyote = false
@@ -160,7 +162,6 @@ func _on_level_teleporter_teleporter_touched(teleporterposition):
 	canmove = true
 	print("ahh")
 	
-	
 
 func play_animation(animation):
 	if animation == "walk":
@@ -180,3 +181,12 @@ func apply_knockback(force,direction):
 	velocity.x = direction * force * 5
 	velocity.y = direction * force / 2.5
 	print(velocity)
+
+func play_sound_effect(soundeffect):
+	match soundeffect:
+		"Jump":
+			$Jump.play()
+			$Jump.pitch_scale = randf_range(0.9,1.1)
+		"Hit":
+			$Hit.play()
+			$Hit.pitch_scale = randf_range(0.9,1.1)

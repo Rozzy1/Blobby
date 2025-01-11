@@ -7,6 +7,8 @@ var LevelCount : int = 1
 @export var TeleporterLevelPositions : PackedVector2Array
 @onready var teleportersprite = $TeleporterSprite
 @onready var animationplayer = $AnimationParts/AnimationPlayer
+@onready var leveltransitionsfx = $leveltransitionsfx
+@onready var levelcompletedsfx = $transitionedcompleted
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	LevelChange.emit(LevelCount)
@@ -24,11 +26,13 @@ func _process(_delta):
 
 
 func _on_area_2d_body_entered(body):
-	if body == player and !player.is_dashing == true:
+	if body == player and !player.is_dashing == true and player.velocity.y == 0:
 		if not LevelCount < 1:
 			TeleporterTouched.emit(position + Vector2(0,-40))
 			animationplayer.play("TeleporterSpriteOpen")
-			await get_tree().create_timer(1.2).timeout
+			leveltransitionsfx.play()
+			await get_tree().create_timer(1.39).timeout
+			levelcompletedsfx.play()
 			LevelCount = LevelCount + 1
 			LevelChange.emit(LevelCount)
 		pass

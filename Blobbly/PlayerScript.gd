@@ -3,6 +3,8 @@ extends CharacterBody2D
 @onready var healthbar = $CanvasLayer/HealthBar
 @onready var coyotetimer = $Coyotetimer
 @onready var animationsprite = $AnimatedSprite2D
+@onready var deathparticles = $DeathParticles
+@onready var camera = $Camera2D
 @export var PlayerSpawnPoints : PackedVector2Array
 signal playerdied
 
@@ -111,14 +113,18 @@ func _physics_process(delta):
 	lastfloor = is_on_floor()
 	move_and_slide()
 
-
-func subtract_health(damage_amt):#
+func subtract_health(damage_amt):
+	camera.add_trauma(damage_amt / 10 + 0.2)
 	print("Player got dealt: ",damage_amt)
 	Health = Health - damage_amt
 	if Health > MaxHealth:
 		Health = MaxHealth
 	healthbar.health = Health
 	if Health < 1:
+		animationsprite.visible = false
+		deathparticles.emitting = true
+		play_sound_effect("Die")
+		await get_tree().create_timer(1).timeout
 		respawn()
 	play_sound_effect("Hit")
 
@@ -126,6 +132,8 @@ func _on_coyotetimer_timeout():
 	cancoyote = false
 
 func respawn():
+	animationsprite.visible = true
+	deathparticles.emitting = false
 	playerdied.emit()
 	global_position  = PlayerSpawnPoints[LevelCount]
 	print(global_position)
@@ -139,7 +147,7 @@ func respawn():
 
 func _on_area_2d_body_entered(body):
 	if body == get_tree().get_first_node_in_group("player"):
-		respawn()
+		subtract_health(99)
 
 
 func _on_level_teleporter_level_change(levelcount):
@@ -190,3 +198,5 @@ func play_sound_effect(soundeffect):
 		"Hit":
 			$Hit.play()
 			$Hit.pitch_scale = randf_range(0.9,1.1)
+		"Die":
+			$Die.play()

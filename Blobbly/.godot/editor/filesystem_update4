@@ -3,5 +3,7 @@ res://Enemey.gdshader
 res://HealthBar - Copy.tscn
 res://collision_polygons.tscn
 res://Levels.tscn
-res://GameManager.gd
+res://LevelTeleporter.gd
 res://PlayerScript.gd
+res://PlayerCamera.gd
+res://InputModel.gd

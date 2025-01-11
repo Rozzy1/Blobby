@@ -13,7 +13,7 @@ max_value = 12.0
 _data = [Vector2(0, 12), 0.0, 0.0, 0, 0, Vector2(0.5, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_ma8m6"]
+[sub_resource type="CurveTexture" id="CurveTexture_h24vv"]
 curve = SubResource("Curve_2biy8")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wyve4"]
@@ -21,7 +21,7 @@ spread = 180.0
 initial_velocity_min = 24.0
 initial_velocity_max = 30.0
 gravity = Vector3(0, 98, 0)
-scale_curve = SubResource("CurveTexture_ma8m6")
+scale_curve = SubResource("CurveTexture_h24vv")
 color = Color(1, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3rabq"]

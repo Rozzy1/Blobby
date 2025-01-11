@@ -1,6 +1,7 @@
-[gd_scene load_steps=81 format=3 uid="uid://cl628sehtynmm"]
+[gd_scene load_steps=88 format=3 uid="uid://cl628sehtynmm"]
 
 [ext_resource type="Script" path="res://PlayerScript.gd" id="1_xt65x"]
+[ext_resource type="Script" path="res://PlayerCamera.gd" id="2_85mex"]
 [ext_resource type="PackedScene" uid="uid://btxfofmj4rehs" path="res://HealthBar - Copy.tscn" id="2_ce43v"]
 [ext_resource type="Texture2D" uid="uid://7lhuefba2od0" path="res://Pixel Prototype Player/Sprites/Run/Run01.png" id="3_46ara"]
 [ext_resource type="Texture2D" uid="uid://dv2nogao70gg" path="res://Pixel Prototype Player/Sprites/Walk/Walk01.png" id="3_hy2v6"]
@@ -58,7 +59,10 @@
 [ext_resource type="Texture2D" uid="uid://dnlbnb8jdwj32" path="res://BackGround.png" id="46_4fag5"]
 [ext_resource type="AudioStream" uid="uid://dj7kw6oxaqlra" path="res://HALFTONE SFX Pack LITE/Gameplay/3. Movement/Bounce_4.wav" id="46_lw8lo"]
 [ext_resource type="AudioStream" uid="uid://doq13arb1pty6" path="res://HALFTONE SFX Pack LITE/Gameplay/4. Impact/Hit_2.wav" id="47_uja6b"]
+[ext_resource type="AudioStream" uid="uid://c6t3if6t3g16t" path="res://HALFTONE SFX Pack LITE/Gameplay/2. Loose/Loose_1.wav" id="48_ij71t"]
 [ext_resource type="Texture2D" uid="uid://dkh32rvn01rig" path="res://Foozle_2DT0001_Science_Fiction_Labs_Tileset/Barrier_Control_Panel/barrier_deactivate.png" id="49_qtohd"]
+[ext_resource type="AudioStream" uid="uid://cg82vqyvisejb" path="res://HALFTONE SFX Pack LITE/UI/4. Transitions/Transition_3.wav" id="52_87v3c"]
+[ext_resource type="AudioStream" uid="uid://cuc7scx3y3pfi" path="res://HALFTONE SFX Pack LITE/Gameplay/1. Win/Win_3.wav" id="53_bwtii"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_p47id"]
 
@@ -264,7 +268,21 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="BoxMesh" id="BoxMesh_jf3f3"]
+[sub_resource type="Curve" id="Curve_4pqhx"]
+max_value = 12.0
+_data = [Vector2(0, 12), 0.0, 0.0, 0, 0, Vector2(0.5, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ma8m6"]
+curve = SubResource("Curve_4pqhx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wheea"]
+spread = 180.0
+initial_velocity_min = 24.0
+initial_velocity_max = 30.0
+gravity = Vector3(0, 98, 0)
+scale_curve = SubResource("CurveTexture_ma8m6")
+color = Color(1, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gom1k"]
 
@@ -349,6 +367,8 @@ _data = {
 "TeleporterSpriteOpen": SubResource("Animation_t1y3h")
 }
 
+[sub_resource type="BoxMesh" id="BoxMesh_jf3f3"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_e4ygh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mg4xg"]
@@ -400,6 +420,7 @@ drag_left_margin = 0.1
 drag_top_margin = 0.1
 drag_right_margin = 0.1
 drag_bottom_margin = 0.1
+script = ExtResource("2_85mex")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(0, -0.4)
@@ -432,13 +453,25 @@ autoplay = true
 [node name="Hit" type="AudioStreamPlayer2D" parent="Player"]
 stream = ExtResource("47_uja6b")
 
+[node name="Die" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("48_ij71t")
+volume_db = 10.0
+
+[node name="DeathParticles" type="GPUParticles2D" parent="Player"]
+emitting = false
+amount = 60
+process_material = SubResource("ParticleProcessMaterial_wheea")
+speed_scale = 0.85
+explosiveness = 1.0
+randomness = 1.0
+
 [node name="EnemeySpawner" type="Node2D" parent="."]
-position = Vector2(-904, 518)
+position = Vector2(3225, 1250)
 script = ExtResource("4_2nt6a")
 enemeypositions1 = PackedVector2Array(80, 520, -900, 503, 90, 520)
 enemeypositions2 = PackedVector2Array(1440, -540)
 enemeypositions3 = PackedVector2Array(-1100, -480, 1440, -540.025)
-enemeypositions6 = PackedVector2Array(3456, 2264, 3936, 584)
+enemeypositions6 = PackedVector2Array(3456, 2264, 3225, 1250)
 
 [node name="LevelTeleporter" type="Node2D" parent="." node_paths=PackedStringArray("teleporterarea")]
 z_index = -1
@@ -447,9 +480,6 @@ scale = Vector2(100, 25)
 script = ExtResource("4_j4xk2")
 teleporterarea = NodePath("Area2D")
 TeleporterLevelPositions = PackedVector2Array(0, 0, 899, 601, 3048, -1120, 1030, 830, -3936, -420, 8776, 216, -784, 224)
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="LevelTeleporter"]
-mesh = SubResource("BoxMesh_jf3f3")
 
 [node name="Area2D" type="Area2D" parent="LevelTeleporter"]
 
@@ -496,6 +526,13 @@ position = Vector2(0, -2.72)
 scale = Vector2(0.025, 0.1)
 texture = ExtResource("49_qtohd")
 hframes = 18
+
+[node name="leveltransitionsfx" type="AudioStreamPlayer2D" parent="LevelTeleporter"]
+stream = ExtResource("52_87v3c")
+
+[node name="transitionedcompleted" type="AudioStreamPlayer2D" parent="LevelTeleporter"]
+stream = ExtResource("53_bwtii")
+volume_db = 20.0
 
 [node name="LevelManager" type="Node" parent="."]
 script = ExtResource("5_j8g8e")

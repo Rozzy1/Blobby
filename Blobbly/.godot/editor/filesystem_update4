@@ -3,7 +3,7 @@ res://Enemey.gdshader
 res://HealthBar - Copy.tscn
 res://collision_polygons.tscn
 res://Levels.tscn
-res://LevelTeleporter.gd
 res://PlayerScript.gd
-res://PlayerCamera.gd
-res://InputModel.gd
+res://pause_menu.gdshader
+res://PauseMenu.gd
+res://pause_menu.tscn

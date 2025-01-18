@@ -32,12 +32,12 @@ func _on_area_2d_body_entered(body):
 			animationplayer.play("TeleporterSpriteOpen")
 			leveltransitionsfx.play()
 			await get_tree().create_timer(1.39).timeout
-			levelcompletedsfx.play()
 			LevelCount = LevelCount + 1
 			LevelChange.emit(LevelCount)
 		pass
 
 
 func _on_level_change(currentlevel):
+	levelcompletedsfx.play()
 	global_position = TeleporterLevelPositions[currentlevel]
 	print("Level is now:",LevelCount)

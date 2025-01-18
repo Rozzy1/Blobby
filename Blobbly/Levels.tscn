@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://cl628sehtynmm"]
+[gd_scene load_steps=99 format=3 uid="uid://cl628sehtynmm"]
 
 [ext_resource type="Script" path="res://PlayerScript.gd" id="1_xt65x"]
 [ext_resource type="Script" path="res://PlayerCamera.gd" id="2_85mex"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bxsjvatxtcxla" path="res://Pixel Prototype Player/Sprites/Run/Run02.png" id="4_3bgxn"]
 [ext_resource type="Script" path="res://LevelTeleporter.gd" id="4_j4xk2"]
 [ext_resource type="Texture2D" uid="uid://2flfxbue1xhf" path="res://Pixel Prototype Player/Sprites/Walk/Walk02.png" id="4_u203q"]
+[ext_resource type="PackedScene" uid="uid://bnxbxrh7d0tr2" path="res://pause_menu.tscn" id="4_vk3d8"]
 [ext_resource type="Texture2D" uid="uid://ceklgh5qem7p5" path="res://Pixel Prototype Player/Sprites/Walk/Walk03.png" id="5_4nqh6"]
 [ext_resource type="Texture2D" uid="uid://dldtkdhrd1uvo" path="res://Pixel Prototype Player/Sprites/Run/Run03.png" id="5_btdmk"]
 [ext_resource type="Script" path="res://LevelManager.gd" id="5_j8g8e"]
@@ -48,10 +49,19 @@
 [ext_resource type="Texture2D" uid="uid://dj47spxfncgaj" path="res://Pixel Prototype Player/Sprites/JumpFall/JumpFall01.png" id="20_6sj3k"]
 [ext_resource type="Texture2D" uid="uid://bnnvjx3cklpod" path="res://Pixel Prototype Player/Sprites/Jump/Jump01.png" id="20_47vac"]
 [ext_resource type="Texture2D" uid="uid://dk4fo1n0o0usf" path="res://Pixel Prototype Player/Sprites/JumpMid/JumpMid01.png" id="21_whl4e"]
+[ext_resource type="Texture2D" uid="uid://b5vb4e6e5mfwa" path="res://Pixel Prototype Player/Sprites/Die/Die09.png" id="24_wr2y7"]
+[ext_resource type="Texture2D" uid="uid://cwnfepvut4e1f" path="res://Pixel Prototype Player/Sprites/Die/Die08.png" id="25_njsim"]
+[ext_resource type="Texture2D" uid="uid://dh55nba2iwms2" path="res://Pixel Prototype Player/Sprites/Die/Die07.png" id="26_oj6wv"]
+[ext_resource type="Texture2D" uid="uid://c8bj2e57cvhpm" path="res://Pixel Prototype Player/Sprites/Die/Die06.png" id="27_0jyr1"]
+[ext_resource type="Texture2D" uid="uid://btignvuwf6lno" path="res://Pixel Prototype Player/Sprites/Die/Die05.png" id="28_law2a"]
 [ext_resource type="Texture2D" uid="uid://hlcyr5fvql6h" path="res://Pixel Prototype Player/Sprites/Spin/Spin01.png" id="29_atk3k"]
+[ext_resource type="Texture2D" uid="uid://b1xrr2hls5a13" path="res://Pixel Prototype Player/Sprites/Die/Die04.png" id="29_csw2i"]
 [ext_resource type="Texture2D" uid="uid://bdvc12h6pa74v" path="res://Pixel Prototype Player/Sprites/Spin/Spin02.png" id="30_cf3an"]
+[ext_resource type="Texture2D" uid="uid://bsrih2cjy2eh1" path="res://Pixel Prototype Player/Sprites/Die/Die03.png" id="30_vujdi"]
 [ext_resource type="Texture2D" uid="uid://bnxlnsy687fn6" path="res://Pixel Prototype Player/Sprites/Spin/Spin03.png" id="31_d104q"]
+[ext_resource type="Texture2D" uid="uid://bhhcmaiwmwoxt" path="res://Pixel Prototype Player/Sprites/Die/Die02.png" id="31_o4n5v"]
 [ext_resource type="Texture2D" uid="uid://dwchs7yec3jp8" path="res://Pixel Prototype Player/Sprites/Spin/Spin04.png" id="32_v7phc"]
+[ext_resource type="Texture2D" uid="uid://cgywhn15j7mk2" path="res://Pixel Prototype Player/Sprites/Die/Die01.png" id="32_xtcjw"]
 [ext_resource type="Texture2D" uid="uid://doy3jdusdf2il" path="res://Pixel Prototype Player/Sprites/Spin/Spin05.png" id="33_h3ye8"]
 [ext_resource type="Texture2D" uid="uid://vnfko13rkf1" path="res://Pixel Prototype Player/Sprites/Spin/Spin06.png" id="34_fjm81"]
 [ext_resource type="Texture2D" uid="uid://cwxp253x6luyg" path="res://Pixel Prototype Player/Sprites/Spin/Spin07.png" id="35_qqik6"]
@@ -63,6 +73,7 @@
 [ext_resource type="Texture2D" uid="uid://dkh32rvn01rig" path="res://Foozle_2DT0001_Science_Fiction_Labs_Tileset/Barrier_Control_Panel/barrier_deactivate.png" id="49_qtohd"]
 [ext_resource type="AudioStream" uid="uid://cg82vqyvisejb" path="res://HALFTONE SFX Pack LITE/UI/4. Transitions/Transition_3.wav" id="52_87v3c"]
 [ext_resource type="AudioStream" uid="uid://cuc7scx3y3pfi" path="res://HALFTONE SFX Pack LITE/Gameplay/1. Win/Win_3.wav" id="53_bwtii"]
+[ext_resource type="AudioStream" uid="uid://dyjlylplk4vwr" path="res://HALFTONE SFX Pack LITE/UI/1. Buttons/Button_24.wav" id="62_3ncxj"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_p47id"]
 
@@ -185,6 +196,38 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("24_wr2y7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_njsim")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_oj6wv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_0jyr1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_law2a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_csw2i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_vujdi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_o4n5v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_xtcjw")
+}],
+"loop": true,
+"name": &"respawn",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("3_46ara")
 }, {
 "duration": 1.0,
@@ -282,7 +325,6 @@ initial_velocity_min = 24.0
 initial_velocity_max = 30.0
 gravity = Vector3(0, 98, 0)
 scale_curve = SubResource("CurveTexture_ma8m6")
-color = Color(1, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gom1k"]
 
@@ -396,7 +438,7 @@ size = Vector2(402.455, 40)
 metadata/_edit_horizontal_guides_ = [-1907.0]
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
-position = Vector2(2451, 260)
+position = Vector2(3327, 788)
 scale = Vector2(30, 30)
 collision_layer = 3
 collision_mask = 3
@@ -433,6 +475,8 @@ debug_color = Color(0, 0.6, 0.701961, 0.419608)
 [node name="HealthBar" parent="Player/CanvasLayer" instance=ExtResource("2_ce43v")]
 metadata/_edit_use_anchors_ = true
 
+[node name="PauseMenu" parent="Player/CanvasLayer" instance=ExtResource("4_vk3d8")]
+
 [node name="Coyotetimer" type="Timer" parent="Player"]
 process_callback = 0
 wait_time = 0.15
@@ -443,7 +487,9 @@ autostart = true
 position = Vector2(0, -2)
 scale = Vector2(0.07, 0.07)
 sprite_frames = SubResource("SpriteFrames_ei0ly")
-animation = &"idle"
+animation = &"respawn"
+frame = 3
+frame_progress = 0.9588
 
 [node name="Jump" type="AudioStreamPlayer2D" parent="Player"]
 stream = ExtResource("46_lw8lo")
@@ -452,6 +498,7 @@ autoplay = true
 
 [node name="Hit" type="AudioStreamPlayer2D" parent="Player"]
 stream = ExtResource("47_uja6b")
+volume_db = -8.0
 
 [node name="Die" type="AudioStreamPlayer2D" parent="Player"]
 stream = ExtResource("48_ij71t")
@@ -459,8 +506,9 @@ volume_db = 10.0
 
 [node name="DeathParticles" type="GPUParticles2D" parent="Player"]
 emitting = false
-amount = 60
+amount = 50
 process_material = SubResource("ParticleProcessMaterial_wheea")
+lifetime = 2.0
 speed_scale = 0.85
 explosiveness = 1.0
 randomness = 1.0
@@ -530,9 +578,8 @@ hframes = 18
 [node name="leveltransitionsfx" type="AudioStreamPlayer2D" parent="LevelTeleporter"]
 stream = ExtResource("52_87v3c")
 
-[node name="transitionedcompleted" type="AudioStreamPlayer2D" parent="LevelTeleporter"]
+[node name="transitionedcompleted" type="AudioStreamPlayer" parent="LevelTeleporter"]
 stream = ExtResource("53_bwtii")
-volume_db = 20.0
 
 [node name="LevelManager" type="Node" parent="."]
 script = ExtResource("5_j8g8e")
@@ -678,11 +725,16 @@ mesh = SubResource("BoxMesh_thm7c")
 scale = Vector2(0.2, 0.2)
 shape = SubResource("RectangleShape2D_ktar8")
 
-[node name="DashButtonComponent" type="Node" parent="LevelManager/Level2/DashButton" node_paths=PackedStringArray("activatewhat", "area2dconnectingfrom", "mesh")]
+[node name="DashButtonComponent" type="Node" parent="LevelManager/Level2/DashButton" node_paths=PackedStringArray("audiosfx", "activatewhat", "area2dconnectingfrom", "mesh")]
 script = ExtResource("7_fh7uq")
+audiosfx = NodePath("../AudioStreamPlayer2D")
 activatewhat = NodePath("../../Platform/MovingPlatformComponent")
 area2dconnectingfrom = NodePath("../Area2D")
 mesh = NodePath("../Polygon")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="LevelManager/Level2/DashButton"]
+stream = ExtResource("62_3ncxj")
+volume_db = 5.0
 
 [node name="DashWall" type="StaticBody2D" parent="LevelManager/Level2"]
 z_index = -1
@@ -855,11 +907,16 @@ mesh = SubResource("BoxMesh_thm7c")
 scale = Vector2(0.2, 0.2)
 shape = SubResource("RectangleShape2D_ktar8")
 
-[node name="DashButtonComponent" type="Node" parent="LevelManager/Level3/DashButton" node_paths=PackedStringArray("activatewhat", "area2dconnectingfrom", "mesh")]
+[node name="DashButtonComponent" type="Node" parent="LevelManager/Level3/DashButton" node_paths=PackedStringArray("audiosfx", "activatewhat", "area2dconnectingfrom", "mesh")]
 script = ExtResource("7_fh7uq")
+audiosfx = NodePath("../AudioStreamPlayer2D")
 activatewhat = NodePath("../../Platform/MovingPlatformComponent")
 area2dconnectingfrom = NodePath("../Area2D")
 mesh = NodePath("../Polygon")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="LevelManager/Level3/DashButton"]
+stream = ExtResource("62_3ncxj")
+volume_db = 5.0
 
 [node name="11" parent="LevelManager/Level3" instance=ExtResource("6_thv5u")]
 position = Vector2(1168, -2968)
@@ -1244,12 +1301,20 @@ mesh = SubResource("BoxMesh_thm7c")
 scale = Vector2(0.2, 0.2)
 shape = SubResource("RectangleShape2D_ktar8")
 
-[node name="DashButtonComponent" type="Node" parent="LevelManager/Level4/DashButton" node_paths=PackedStringArray("activatewhat", "activatewhat2", "area2dconnectingfrom", "mesh")]
+[node name="DashButtonComponent" type="Node" parent="LevelManager/Level4/DashButton" node_paths=PackedStringArray("audiosfx", "activatewhat", "activatewhat2", "area2dconnectingfrom", "mesh")]
 script = ExtResource("7_fh7uq")
+audiosfx = NodePath("../AudioStreamPlayer2D")
 activatewhat = NodePath("../../Platform/MovingPlatformComponent")
 activatewhat2 = NodePath("../../Platform2/MovingPlatformComponent")
 area2dconnectingfrom = NodePath("../Area2D")
 mesh = NodePath("../Polygon")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="LevelManager/Level4/DashButton"]
+position = Vector2(41.8607, -21.496)
+rotation = -0.785398
+scale = Vector2(0.02, 0.02)
+stream = ExtResource("62_3ncxj")
+volume_db = 5.0
 
 [node name="Platform" type="AnimatableBody2D" parent="LevelManager/Level4"]
 z_index = -1
@@ -2193,13 +2258,18 @@ scale = Vector2(1.5, 1.5)
 scale = Vector2(0.2, 0.2)
 shape = SubResource("RectangleShape2D_ktar8")
 
-[node name="DashButtonComponent" type="Node" parent="LevelManager/Level5/DashButton" node_paths=PackedStringArray("activatewhat", "activatewhat2", "activatewhat3", "area2dconnectingfrom", "mesh")]
+[node name="DashButtonComponent" type="Node" parent="LevelManager/Level5/DashButton" node_paths=PackedStringArray("audiosfx", "activatewhat", "activatewhat2", "activatewhat3", "area2dconnectingfrom", "mesh")]
 script = ExtResource("7_fh7uq")
+audiosfx = NodePath("../AudioStreamPlayer2D")
 activatewhat = NodePath("../../Platform/MovingPlatformComponent")
 activatewhat2 = NodePath("../../Platform2/MovingPlatformComponent")
 activatewhat3 = NodePath("../../Platform3/MovingPlatformComponent")
 area2dconnectingfrom = NodePath("../Area2D")
 mesh = NodePath("../Polygon")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="LevelManager/Level5/DashButton"]
+stream = ExtResource("62_3ncxj")
+volume_db = 5.0
 
 [node name="Spikes3" parent="LevelManager/Level5" instance=ExtResource("6_thv5u")]
 z_index = -1
@@ -3457,13 +3527,18 @@ scale = Vector2(1.5, 1.5)
 scale = Vector2(0.2, 0.2)
 shape = SubResource("RectangleShape2D_ktar8")
 
-[node name="DashButtonComponent" type="Node" parent="LevelManager/Level6/DashButton" node_paths=PackedStringArray("activatewhat", "activatewhat2", "activatewhat3", "area2dconnectingfrom", "mesh")]
+[node name="DashButtonComponent" type="Node" parent="LevelManager/Level6/DashButton" node_paths=PackedStringArray("audiosfx", "activatewhat", "activatewhat2", "activatewhat3", "area2dconnectingfrom", "mesh")]
 script = ExtResource("7_fh7uq")
+audiosfx = NodePath("../AudioStreamPlayer2D")
 activatewhat = NodePath("../../Platform2/MovingPlatformComponent")
 activatewhat2 = NodePath("../../Platform/MovingPlatformComponent")
 activatewhat3 = NodePath("../../Platform6/MovingPlatformComponent")
 area2dconnectingfrom = NodePath("../Area2D")
 mesh = NodePath("../Polygon")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="LevelManager/Level6/DashButton"]
+stream = ExtResource("62_3ncxj")
+volume_db = 5.0
 
 [node name="DashButton2" type="StaticBody2D" parent="LevelManager/Level6"]
 position = Vector2(4336, 2296)
@@ -3482,13 +3557,18 @@ scale = Vector2(1.5, 1.5)
 scale = Vector2(0.2, 0.2)
 shape = SubResource("RectangleShape2D_ktar8")
 
-[node name="DashButtonComponent" type="Node" parent="LevelManager/Level6/DashButton2" node_paths=PackedStringArray("activatewhat", "activatewhat2", "activatewhat3", "area2dconnectingfrom", "mesh")]
+[node name="DashButtonComponent" type="Node" parent="LevelManager/Level6/DashButton2" node_paths=PackedStringArray("audiosfx", "activatewhat", "activatewhat2", "activatewhat3", "area2dconnectingfrom", "mesh")]
 script = ExtResource("7_fh7uq")
+audiosfx = NodePath("../AudioStreamPlayer2D")
 activatewhat = NodePath("../../Platform3/MovingPlatformComponent")
 activatewhat2 = NodePath("../../Platform4/MovingPlatformComponent")
 activatewhat3 = NodePath("../../Platform5/MovingPlatformComponent")
 area2dconnectingfrom = NodePath("../Area2D")
 mesh = NodePath("../Polygon")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="LevelManager/Level6/DashButton2"]
+stream = ExtResource("62_3ncxj")
+volume_db = 5.0
 
 [node name="Platform3" type="AnimatableBody2D" parent="LevelManager/Level6"]
 position = Vector2(4400, 1984)

@@ -19,6 +19,7 @@ var MaxHealth : int = Health
 var cancoyote : bool
 var lastfloor : bool
 var jumping : bool
+var isrespawning : bool
 var friction : float = 1.2
 var dashedinaircounter : int = 1
 var canmove : bool = true
@@ -80,6 +81,8 @@ func _physics_process(delta):
 		if directions and canmove == true:
 			play_animation("dash")
 			if not is_on_floor():
+				if dashedinaircounter > 1:
+					play_sound_effect("Hit")
 				subtract_health(dashedinaircounter)
 				dashedinaircounter = dashedinaircounter + 1
 			else:
@@ -97,10 +100,10 @@ func _physics_process(delta):
 			await get_tree().create_timer(0.25).timeout
 			is_dashing = false
 	
-	if !direction and !is_dashing and !jumping and !isteleportertouched and is_on_floor():
+	if !isrespawning and !direction and !is_dashing and !jumping and !isteleportertouched and is_on_floor():
 		play_animation("idle")
 	
-	if !isteleportertouched:
+	if !isteleportertouched and !isrespawning:
 		if velocity.y < 0:
 			play_animation("jump_start")
 		else:
@@ -114,24 +117,27 @@ func _physics_process(delta):
 	move_and_slide()
 
 func subtract_health(damage_amt):
-	camera.add_trauma(damage_amt / 10 + 0.2)
+	camera.add_trauma(0.2)
 	print("Player got dealt: ",damage_amt)
 	Health = Health - damage_amt
 	if Health > MaxHealth:
 		Health = MaxHealth
 	healthbar.health = Health
 	if Health < 1:
+		camera.add_trauma(0.5)
 		animationsprite.visible = false
 		deathparticles.emitting = true
 		play_sound_effect("Die")
-		await get_tree().create_timer(1).timeout
+		await get_tree().create_timer(1.39).timeout
 		respawn()
-	play_sound_effect("Hit")
 
 func _on_coyotetimer_timeout():
 	cancoyote = false
 
 func respawn():
+	isrespawning = true
+	direction = 1
+	canmove = false
 	animationsprite.visible = true
 	deathparticles.emitting = false
 	playerdied.emit()
@@ -142,6 +148,10 @@ func respawn():
 	dashedinaircounter = 1
 	velocity = Vector2(0,0)
 	cancoyote = false
+	play_animation("respawn")
+	await get_tree().create_timer(1.75).timeout
+	canmove = true
+	isrespawning = false
 
 
 

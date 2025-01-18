@@ -39,12 +39,14 @@ func _physics_process(delta: float) -> void:
 func _on_area_2d_body_entered(body):
 	if body == player:
 		if player.is_dashing == true:
+			$DeathSfx.play()
 			collision.set_deferred("disabled",1)
 			Hurtbox.set_deferred("monitoring",false)
 			Sprite.visible = false
 			particles.emitting = true
-			player.subtract_health(-5)
+			player.subtract_health(-6)
 		else:
+			$HitPlayer.play()
 			player.subtract_health(damage)
 			player.apply_knockback(1000,lastdirection)
 

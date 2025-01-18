@@ -1,4 +1,5 @@
 extends Node
+@export var audiosfx : AudioStreamPlayer2D
 @export var activatewhat : Node
 @export var activatewhat2 : Node
 @export var activatewhat3 : Node
@@ -18,20 +19,23 @@ func _process(_delta):
 	if canplayerdashthrough == true and player.is_dashing == true:
 		
 		if activatewhat and switchedon == false:
-			
+			audiosfx.play()
 			activatewhat.isactivated = true
 			mesh.modulate = Color (0,0.5,0.5)
-			print("turned ",activatewhat,"on")
+			print("turned ",activatewhat," on")
+		
 		if activatewhat2 and switchedon == false:
-			
+			audiosfx.play()
 			activatewhat2.isactivated = true
 			mesh.modulate = Color (0,0.5,0.5)
-			print("turned ",activatewhat2,"on")
+			print("turned ",activatewhat2," on")
+		
 		if activatewhat3 and switchedon == false:
-			
+			audiosfx.play()
 			activatewhat3.isactivated = true
 			mesh.modulate = Color (0,0.5,0.5)
-			print("turned ",activatewhat3,"on")
+			print("turned ",activatewhat3," on")
+		
 		if !activatewhat and !activatewhat2 and !activatewhat3:
 			print("Nothing Attached!")
 		switchedon = true

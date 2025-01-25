@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dh6b0b82kqjpu"
+path="res://.godot/imported/Loose_13.wav-1874096ed0cc1dd701de8bd1b1ab6af3.sample"
+
+[deps]
+
+source_file="res://Foozle_2DT0001_Science_Fiction_Labs_Tileset/HALFTONE SFX Pack LITE/Gameplay/2. Loose/Loose_13.wav"
+dest_files=["res://.godot/imported/Loose_13.wav-1874096ed0cc1dd701de8bd1b1ab6af3.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

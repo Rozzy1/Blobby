@@ -9,7 +9,7 @@ extends Node
 var canplayerdashthrough : bool = false
 var switchedon : bool = false
 func _ready():
-	player.playerdied.connect(reset)
+	GameManager.PlayerDied.connect(reset)
 	if area2dconnectingfrom:
 		area2dconnectingfrom.body_entered.connect(area_2d_body_entered)
 		area2dconnectingfrom.body_exited.connect(area_2d_body_exited)

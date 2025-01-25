@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://ji8lw2wgl8f1"]
 
 [ext_resource type="Script" path="res://EnemeyPathFinder.gd" id="1_g1qwe"]
-[ext_resource type="AudioStream" uid="uid://doq13arb1pty6" path="res://HALFTONE SFX Pack LITE/Gameplay/4. Impact/Hit_2.wav" id="2_qpxvq"]
-[ext_resource type="AudioStream" uid="uid://c180yt8tmybys" path="res://HALFTONE SFX Pack LITE/Gameplay/4. Impact/Blast_7.wav" id="3_add63"]
+[ext_resource type="AudioStream" uid="uid://doq13arb1pty6" path="res://Foozle_2DT0001_Science_Fiction_Labs_Tileset/HALFTONE SFX Pack LITE/Gameplay/4. Impact/Hit_2.wav" id="2_u5lf8"]
+[ext_resource type="AudioStream" uid="uid://c180yt8tmybys" path="res://Foozle_2DT0001_Science_Fiction_Labs_Tileset/HALFTONE SFX Pack LITE/Gameplay/4. Impact/Blast_7.wav" id="3_231pi"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_nlhg7"]
 
@@ -70,11 +70,11 @@ scale = Vector2(0.177973, 1)
 target_position = Vector2(0, 10)
 
 [node name="HitPlayer" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_qpxvq")
+stream = ExtResource("2_u5lf8")
 volume_db = 5.0
 
 [node name="DeathSfx" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_add63")
+stream = ExtResource("3_231pi")
 
 [connection signal="area_entered" from="HurtHitBox" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="HurtHitBox" to="." method="_on_area_2d_body_entered"]

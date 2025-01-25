@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cg82vqyvisejb"
+path="res://.godot/imported/Transition_3.wav-d53ba063ee0c78eaf6d1e7a6c63ac7f9.sample"
+
+[deps]
+
+source_file="res://Foozle_2DT0001_Science_Fiction_Labs_Tileset/HALFTONE SFX Pack LITE/UI/4. Transitions/Transition_3.wav"
+dest_files=["res://.godot/imported/Transition_3.wav-d53ba063ee0c78eaf6d1e7a6c63ac7f9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

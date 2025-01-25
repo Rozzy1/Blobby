@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cupm7yaqlyssy"
+path="res://.godot/imported/Bounce_1.wav-3598830239e11a8cfeb7b8b50fc35d82.sample"
+
+[deps]
+
+source_file="res://Foozle_2DT0001_Science_Fiction_Labs_Tileset/HALFTONE SFX Pack LITE/Gameplay/3. Movement/Bounce_1.wav"
+dest_files=["res://.godot/imported/Bounce_1.wav-3598830239e11a8cfeb7b8b50fc35d82.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

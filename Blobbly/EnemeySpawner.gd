@@ -9,9 +9,9 @@ extends Node2D
 var currentarrayposition : int = 0
 var array : PackedVector2Array
 var LevelCount : int
-#BUG -MEMORY LEAK(?), because i need to remove enemeys each level skip, ill resolve it later- BUG
 func _ready():
-	player.playerdied.connect(reloadenemies)
+	GameManager.PlayerDied.connect(reloadenemies)
+	GameManager.LevelChange.connect(_on_level_teleporter_level_change)
 
 
 func _process(_delta):

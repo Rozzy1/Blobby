@@ -31,7 +31,12 @@ var updown
 var direction
 
 func _ready():
-	pass
+	GameManager.LevelChange.connect(_on_level_teleporter_level_change)
+	GameManager.TeleporterTouched.connect(_on_level_teleporter_teleporter_touched)
+	GameManager.PlayerSteppedOnSpikes.connect(landed_on_spikes)
+	
+
+
 func _physics_process(delta):
 	if istouchingfrictionlessbody == true:
 		friction = 1
@@ -124,6 +129,7 @@ func subtract_health(damage_amt):
 		Health = MaxHealth
 	healthbar.health = Health
 	if Health < 1:
+		canmove = false
 		camera.add_trauma(0.5)
 		animationsprite.visible = false
 		deathparticles.emitting = true
@@ -135,12 +141,12 @@ func _on_coyotetimer_timeout():
 	cancoyote = false
 
 func respawn():
+	canmove = false
 	isrespawning = true
 	direction = 1
-	canmove = false
 	animationsprite.visible = true
 	deathparticles.emitting = false
-	playerdied.emit()
+	GameManager.PlayerDied.emit()
 	global_position  = PlayerSpawnPoints[LevelCount]
 	print(global_position)
 	Health = MaxHealth
@@ -155,9 +161,8 @@ func respawn():
 
 
 
-func _on_area_2d_body_entered(body):
-	if body == get_tree().get_first_node_in_group("player"):
-		subtract_health(99)
+func landed_on_spikes():
+	subtract_health(99)
 
 
 func _on_level_teleporter_level_change(levelcount):

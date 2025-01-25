@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://musn2w70yepi"
+path="res://.godot/imported/Jump_19.wav-608dee74560dc6ae36f597e0b9aea4e8.sample"
+
+[deps]
+
+source_file="res://Foozle_2DT0001_Science_Fiction_Labs_Tileset/HALFTONE SFX Pack LITE/Gameplay/3. Movement/Jump_19.wav"
+dest_files=["res://.godot/imported/Jump_19.wav-608dee74560dc6ae36f597e0b9aea4e8.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

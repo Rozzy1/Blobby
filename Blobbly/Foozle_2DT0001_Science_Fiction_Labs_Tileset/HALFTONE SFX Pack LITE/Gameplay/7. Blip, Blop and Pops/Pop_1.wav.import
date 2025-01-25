@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://nd1mtwsg8yph"
+path="res://.godot/imported/Pop_1.wav-1cbd0f6234987f67a76115eeba7dc05d.sample"
+
+[deps]
+
+source_file="res://Foozle_2DT0001_Science_Fiction_Labs_Tileset/HALFTONE SFX Pack LITE/Gameplay/7. Blip, Blop and Pops/Pop_1.wav"
+dest_files=["res://.godot/imported/Pop_1.wav-1cbd0f6234987f67a76115eeba7dc05d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

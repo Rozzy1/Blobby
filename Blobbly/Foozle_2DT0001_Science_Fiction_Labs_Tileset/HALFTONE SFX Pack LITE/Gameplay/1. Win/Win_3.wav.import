@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cuc7scx3y3pfi"
+path="res://.godot/imported/Win_3.wav-8441d96796ed140572d07919ec0b7938.sample"
+
+[deps]
+
+source_file="res://Foozle_2DT0001_Science_Fiction_Labs_Tileset/HALFTONE SFX Pack LITE/Gameplay/1. Win/Win_3.wav"
+dest_files=["res://.godot/imported/Win_3.wav-8441d96796ed140572d07919ec0b7938.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

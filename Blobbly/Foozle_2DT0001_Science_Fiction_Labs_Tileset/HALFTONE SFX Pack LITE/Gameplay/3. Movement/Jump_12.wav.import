@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b4ywg0qig24s7"
+path="res://.godot/imported/Jump_12.wav-8b6969484af6133b81a0f28cc06c1042.sample"
+
+[deps]
+
+source_file="res://Foozle_2DT0001_Science_Fiction_Labs_Tileset/HALFTONE SFX Pack LITE/Gameplay/3. Movement/Jump_12.wav"
+dest_files=["res://.godot/imported/Jump_12.wav-8b6969484af6133b81a0f28cc06c1042.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

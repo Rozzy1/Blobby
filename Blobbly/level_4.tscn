@@ -1,0 +1,362 @@
+[gd_scene load_steps=13 format=3 uid="uid://cpyd07vx21ri"]
+
+[ext_resource type="PackedScene" uid="uid://dlv0q1cyfs5sh" path="res://collision_polygons.tscn" id="1_anw8r"]
+[ext_resource type="Script" path="res://FrictionlessBodyScript.gd" id="2_dmjnh"]
+[ext_resource type="Script" path="res://DashButtonScript.gd" id="3_e4oyf"]
+[ext_resource type="AudioStream" uid="uid://dyjlylplk4vwr" path="res://Foozle_2DT0001_Science_Fiction_Labs_Tileset/HALFTONE SFX Pack LITE/UI/1. Buttons/Button_24.wav" id="4_kv8um"]
+[ext_resource type="Script" path="res://MovingPlatformScipt.gd" id="5_kcyue"]
+[ext_resource type="Script" path="res://KillBrick.gd" id="6_2n24e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_naxdv"]
+size = Vector2(402.455, 40)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qnm7e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jy64b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jn01r"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_smj75"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pdvhr"]
+size = Vector2(13.06, 20)
+
+[node name="Level4" type="Node2D" groups=["level"]]
+
+[node name="1" parent="." instance=ExtResource("1_anw8r")]
+position = Vector2(208, 240)
+
+[node name="Polygon2D" parent="1" index="0"]
+polygon = PackedVector2Array(-4485, -657, -3311, -656, -3264, -1388, -3083, -1360, -3064, -656, -798.42, -657, -798, -862, 890, -861, 888, -241, -736, -242, -738, -18, 888, -8, 888, 680, -4470, 684, -4470.78, 614.162, -5338, 608, -5350, -2462, -93, -2445, -102, -1854, 2591, -1860, 2585, 689, 1292, 691, 1293.79, -1239.47, -789, -1237, -787.591, -1854.86, -3283, -1858, -3646, -1384, -4480, -1158)
+
+[node name="Line2D" parent="1" index="1"]
+points = PackedVector2Array(-4485, -657, -3311, -656, -3264, -1388, -3083, -1360, -3064, -656, -798.42, -657, -798, -862, 890, -861, 888, -241, -736, -242, -738, -18, 888, -8, 888, 680, -4470, 684, -4470.78, 614.162, -5338, 608, -5350, -2462, -93, -2445, -102, -1854, 2591, -1860, 2585, 689, 1292, 691, 1293.79, -1239.47, -789, -1237, -787.591, -1854.86, -3283, -1858, -3646, -1384, -4480, -1158, -4485, -657)
+
+[node name="FrictionlessBody" parent="." instance=ExtResource("1_anw8r")]
+position = Vector2(2056, 240)
+
+[node name="Polygon2D" parent="FrictionlessBody" index="0"]
+z_index = -1
+color = Color(0.737255, 0.658824, 0.384314, 1)
+polygon = PackedVector2Array(-976, -8, -554.742, -8.11496, -552, 680, -984, 680)
+
+[node name="Line2D" parent="FrictionlessBody" index="1"]
+points = PackedVector2Array(-976, -8, -554.742, -8.11496, -552, 680, -984, 680, -976, -8)
+width = 0.0
+
+[node name="Area2D" type="Area2D" parent="FrictionlessBody"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FrictionlessBody/Area2D"]
+position = Vector2(-768, -20)
+shape = SubResource("RectangleShape2D_naxdv")
+
+[node name="FrictionlessBodyComponent" type="Node" parent="FrictionlessBody" node_paths=PackedStringArray("area2d")]
+script = ExtResource("2_dmjnh")
+area2d = NodePath("../Area2D")
+
+[node name="DashButton" type="StaticBody2D" parent="."]
+position = Vector2(-2240, -720)
+rotation = 0.785398
+scale = Vector2(50, 50)
+
+[node name="Polygon" type="MeshInstance2D" parent="DashButton"]
+modulate = Color(0.980392, 0.431373, 0.403922, 1)
+position = Vector2(0.002, 0)
+mesh = SubResource("BoxMesh_qnm7e")
+
+[node name="Area2D" type="Area2D" parent="DashButton"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DashButton/Area2D"]
+scale = Vector2(0.2, 0.2)
+shape = SubResource("RectangleShape2D_jy64b")
+
+[node name="DashButtonComponent" type="Node" parent="DashButton" node_paths=PackedStringArray("audiosfx", "activatewhat", "area2dconnectingfrom", "mesh")]
+script = ExtResource("3_e4oyf")
+audiosfx = NodePath("../AudioStreamPlayer2D")
+activatewhat = NodePath("../../Platform/MovingPlatformComponent")
+area2dconnectingfrom = NodePath("../Area2D")
+mesh = NodePath("../Polygon")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="DashButton"]
+position = Vector2(41.8607, -21.496)
+rotation = -0.785398
+scale = Vector2(0.02, 0.02)
+stream = ExtResource("4_kv8um")
+volume_db = 5.0
+
+[node name="Platform" type="AnimatableBody2D" parent="."]
+z_index = -1
+position = Vector2(-2440, -1624)
+scale = Vector2(2450, 50)
+sync_to_physics = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+scale = Vector2(0.05, 0.05)
+shape = SubResource("RectangleShape2D_jn01r")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform"]
+modulate = Color(0, 0.384314, 0, 1)
+z_index = -1
+mesh = SubResource("BoxMesh_smj75")
+
+[node name="MovingPlatformComponent" type="Node" parent="Platform" node_paths=PackedStringArray("Platform")]
+script = ExtResource("5_kcyue")
+OneShot = true
+TimeBetweenPoints = 6.5
+NextPathPosition = Vector2(-2440, 0)
+EndingPathPosition = Vector2(-2440, 0)
+StartingPathPosition = Vector2(-2440, -1624)
+Platform = NodePath("..")
+
+[node name="Spikes" parent="Platform" instance=ExtResource("1_anw8r")]
+z_index = -1
+position = Vector2(-1.82204, 15.04)
+scale = Vector2(0.000408163, 0.022)
+
+[node name="Polygon2D" parent="Platform/Spikes" index="0"]
+visible = false
+position = Vector2(4088, -87.2727)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Line2D" parent="Platform/Spikes" index="1"]
+points = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568, -3224, 400)
+
+[node name="Polygon2D2" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(80, -104)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D3" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(152, -104)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D4" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(232, -104)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D5" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(312, -104)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D6" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(392, -104)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D7" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(464, -104)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D8" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(544, -104)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D9" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(624, -96)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D10" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(704, -96)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D11" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(776, -96)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D12" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(856, -96)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D13" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(936, -96)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D14" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(1016, -96)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D15" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(1088, -96)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D16" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(1168, -96)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D17" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(1240, -104)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D18" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(1320, -104)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D19" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(1392, -104)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D20" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(1472, -104)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D21" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(1552, -104)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D22" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(1632, -104)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D23" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(1704, -104)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D24" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(1784, -104)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D25" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(1864, -96)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D26" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(1944, -96)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D27" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(2016, -96)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D28" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(2096, -96)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D29" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(2176, -96)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D30" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(2256, -96)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D31" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(2328, -96)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="Polygon2D32" type="Polygon2D" parent="Platform/Spikes"]
+position = Vector2(2408, -96)
+rotation = 3.14159
+color = Color(0.576471, 0, 0, 1)
+polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
+
+[node name="KillBrick" type="Area2D" parent="Platform"]
+position = Vector2(-0.0228572, 2.08)
+scale = Vector2(0.075, 0.2)
+script = ExtResource("6_2n24e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform/KillBrick"]
+position = Vector2(0.304762, -6.03497e-07)
+shape = SubResource("RectangleShape2D_pdvhr")
+
+[node name="2" parent="." instance=ExtResource("1_anw8r")]
+position = Vector2(208, 240)
+
+[node name="Polygon2D" parent="2" index="0"]
+polygon = PackedVector2Array(-4485, -657, -798.42, -657, -798, -862, 890, -861, 888, -241, -736, -242, -738, -18, 888, -8, 888, 680, -4470, 684, -4470.78, 614.162, -5338, 608, -5350, -2462, -93, -2445, -102, -1854, 2591, -1860, 2585, 689, 1292, 691, 1293.79, -1239.47, -789, -1237, -787.591, -1854.86, -3283, -1858, -3646, -1384, -4480, -1158)
+
+[node name="Line2D" parent="2" index="1"]
+points = PackedVector2Array(-4485, -657, -798.42, -657, -798, -862, 890, -861, 888, -241, -736, -242, -738, -18, 888, -8, 888, 680, -4470, 684, -4470.78, 614.162, -5338, 608, -5350, -2462, -93, -2445, -102, -1854, 2591, -1860, 2585, 689, 1292, 691, 1293.79, -1239.47, -789, -1237, -787.591, -1854.86, -3283, -1858, -3646, -1384, -4480, -1158, -4485, -657)
+
+[node name="FrictionlessBody4" parent="." instance=ExtResource("1_anw8r")]
+position = Vector2(-1096, -984)
+
+[node name="Polygon2D" parent="FrictionlessBody4" index="0"]
+z_index = -1
+color = Color(0.737255, 0.658824, 0.384314, 1)
+polygon = PackedVector2Array(-1944, 352, 536, 368, 541.316, 576.861, -2520, 576)
+
+[node name="Line2D" parent="FrictionlessBody4" index="1"]
+points = PackedVector2Array(-1944, 352, 536, 368, 541.316, 576.861, -2520, 576, -1944, 352)
+width = 0.0
+
+[node name="Area2D" type="Area2D" parent="FrictionlessBody4"]
+position = Vector2(96, -48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FrictionlessBody4/Area2D"]
+position = Vector2(-1072, 472)
+scale = Vector2(7.5, 9)
+shape = SubResource("RectangleShape2D_naxdv")
+
+[node name="FrictionlessBodyComponent" type="Node" parent="FrictionlessBody4" node_paths=PackedStringArray("area2d")]
+script = ExtResource("2_dmjnh")
+area2d = NodePath("../Area2D")
+
+[connection signal="body_entered" from="DashButton/Area2D" to="DashButton" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="DashButton/Area2D" to="DashButton" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="Platform/KillBrick" to="Platform/KillBrick" method="_on_body_entered"]
+
+[editable path="1"]
+[editable path="FrictionlessBody"]
+[editable path="Platform/Spikes"]
+[editable path="2"]
+[editable path="FrictionlessBody4"]

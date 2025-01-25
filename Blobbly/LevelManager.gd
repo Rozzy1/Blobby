@@ -12,6 +12,7 @@ func _process(_delta):
 
 
 func _on_level_teleporter_level_change(LevelCount):
+	pass
 	match LevelCount:
 		1:
 			$Level1.visible = true

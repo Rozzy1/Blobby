@@ -11,7 +11,7 @@ var currentarrayposition : int
 var hasplayerdied : bool = false
 var tween
 func _ready():
-	player.playerdied.connect(reset)
+	GameManager.PlayerDied.connect(reset)
 
 func _process(_delta):
 	if isactivated == true or hasplayerdied == true:

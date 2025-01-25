@@ -1,9 +1,19 @@
 res://Enemey.tscn
-res://Enemey.gdshader
+res://pause_menu.gdshader
 res://HealthBar - Copy.tscn
 res://collision_polygons.tscn
 res://Levels.tscn
-res://PlayerScript.gd
-res://pause_menu.gdshader
-res://PauseMenu.gd
 res://pause_menu.tscn
+res://level_1.tscn
+res://level_2.tscn
+res://level_3.tscn
+res://level_4.tscn
+res://level_5.tscn
+res://level_6.tscn
+res://GameManager.gd
+res://KillBrick.gd
+res://PlayerScript.gd
+res://MovingPlatformScipt.gd
+res://LevelTeleporter.gd
+res://EnemeySpawner.gd
+res://DashButtonScript.gd

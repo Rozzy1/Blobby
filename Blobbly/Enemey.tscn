@@ -65,9 +65,9 @@ scale = Vector2(3, 2)
 shape = SubResource("RectangleShape2D_3rabq")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(-1.13333, 0)
-scale = Vector2(0.177973, 1)
-target_position = Vector2(0, 10)
+position = Vector2(-0.933333, 0)
+scale = Vector2(0.05, 0.5)
+target_position = Vector2(0, 7)
 
 [node name="HitPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_u5lf8")

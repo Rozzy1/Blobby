@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b8q6o8ov7u8uk"]
+[gd_scene load_steps=15 format=3 uid="uid://b8q6o8ov7u8uk"]
 
 [ext_resource type="PackedScene" uid="uid://dlv0q1cyfs5sh" path="res://collision_polygons.tscn" id="1_8ormx"]
 [ext_resource type="Script" path="res://DashButtonScript.gd" id="2_mblmo"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://DashWallScript.gd" id="4_sfhu2"]
 [ext_resource type="Texture2D" uid="uid://dcgs3gl42i5r3" path="res://DashArrowtutoriel.svg" id="5_fspa7"]
 [ext_resource type="Script" path="res://MovingPlatformScipt.gd" id="6_kxlc5"]
+[ext_resource type="Script" path="res://EnemeySpawnerComponent.gd" id="7_e1sbe"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_st4do"]
 
@@ -58,7 +59,7 @@ mesh = NodePath("../Polygon")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="DashButton"]
 stream = ExtResource("3_1xkev")
-volume_db = 5.0
+attenuation = 0.00837323
 
 [node name="DashWall" type="StaticBody2D" parent="."]
 z_index = -1
@@ -113,6 +114,11 @@ NextPathPosition = Vector2(304, 216)
 EndingPathPosition = Vector2(304, -161)
 StartingPathPosition = Vector2(304, -161)
 Platform = NodePath("..")
+
+[node name="EnemeySpawnerComponent" type="Node2D" parent="."]
+position = Vector2(1312, -520)
+script = ExtResource("7_e1sbe")
+enemeypositions = PackedVector2Array(1312, -520)
 
 [connection signal="body_entered" from="DashButton/Area2D" to="DashButton" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="DashButton/Area2D" to="DashButton" method="_on_area_2d_body_exited"]

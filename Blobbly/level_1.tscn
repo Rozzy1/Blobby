@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bxuxhr4mcqalg"]
+[gd_scene load_steps=10 format=3 uid="uid://bxuxhr4mcqalg"]
 
 [ext_resource type="Script" path="res://DashWallScript.gd" id="1_2hc6p"]
 [ext_resource type="Texture2D" uid="uid://bsmtdl6ehu4h1" path="res://Wasd.svg" id="2_71jma"]
 [ext_resource type="Texture2D" uid="uid://dcgs3gl42i5r3" path="res://DashArrowtutoriel.svg" id="3_3fbbu"]
 [ext_resource type="PackedScene" uid="uid://dlv0q1cyfs5sh" path="res://collision_polygons.tscn" id="4_bbvgc"]
+[ext_resource type="Script" path="res://EnemeySpawnerComponent.gd" id="5_a7bvm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aw01j"]
 size = Vector2(13.06, 20)
@@ -126,6 +127,11 @@ polygon = PackedVector2Array(-3581, -1504, -1251, -1485, 4940, -1486, 4939, -35,
 
 [node name="Line2D" parent="1" index="1"]
 points = PackedVector2Array(-3581, -1504, -1251, -1485, 4940, -1486, 4939, -35, 3078, -17, 3082.35, -538, 2211, -538, 2213, -324, 1634, -211, 1625, -784, -1261, -785, -1251.37, -24, -672.79, -24.0001, -678, -210, -418, -210, -412.379, -24.0001, 695.07, -24.0001, 987, -118, 1150, -213, 1351, -210, 1354, -113, 1451, -21, 4950, -20, 4946, 851, -3556, 858, -3581, -1504)
+
+[node name="EnemeySpawnerComponent" type="Node2D" parent="."]
+position = Vector2(104, 520)
+script = ExtResource("5_a7bvm")
+enemeypositions = PackedVector2Array(-656, 368, 80, 520, 90, 520)
 
 [connection signal="body_entered" from="DashWall2/Area2D" to="DashWall2" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="DashWall2/Area2D" to="DashWall2" method="_on_area_2d_body_exited"]

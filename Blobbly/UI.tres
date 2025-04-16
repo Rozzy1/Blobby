@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cjtaj5c2lon6y"]
+
+[ext_resource type="FontFile" uid="uid://cecttxji6ldkl" path="res://KiwiSoda.ttf" id="1_ly2cb"]
+
+[resource]
+/fonts/font = ExtResource("1_ly2cb")

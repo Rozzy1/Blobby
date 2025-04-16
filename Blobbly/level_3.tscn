@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://4k4s0n55lnr4"]
+[gd_scene load_steps=16 format=3 uid="uid://4k4s0n55lnr4"]
 
 [ext_resource type="PackedScene" uid="uid://dlv0q1cyfs5sh" path="res://collision_polygons.tscn" id="1_uminh"]
 [ext_resource type="Script" path="res://DashWallScript.gd" id="2_eiesl"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://KillBrick.gd" id="3_4pg8s"]
 [ext_resource type="AudioStream" uid="uid://dyjlylplk4vwr" path="res://Foozle_2DT0001_Science_Fiction_Labs_Tileset/HALFTONE SFX Pack LITE/UI/1. Buttons/Button_24.wav" id="4_x7udr"]
 [ext_resource type="Script" path="res://MovingPlatformScipt.gd" id="5_oks0t"]
+[ext_resource type="Script" path="res://EnemeySpawnerComponent.gd" id="7_epbya"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_br0d2"]
 
@@ -73,7 +74,7 @@ collision = NodePath("../CollisionShape2D")
 area2d = NodePath("../Area2D")
 
 [node name="KillBrick" type="Area2D" parent="."]
-position = Vector2(8, 992)
+position = Vector2(-532, 941)
 scale = Vector2(400, 10)
 script = ExtResource("3_4pg8s")
 
@@ -151,7 +152,7 @@ mesh = NodePath("../Polygon")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="DashButton"]
 stream = ExtResource("4_x7udr")
-volume_db = 5.0
+attenuation = 0.00124469
 
 [node name="11" parent="." instance=ExtResource("1_uminh")]
 position = Vector2(1168, -2968)
@@ -461,6 +462,11 @@ NextPathPosition = Vector2(82, 865)
 EndingPathPosition = Vector2(82, 865)
 StartingPathPosition = Vector2(82, -1640)
 Platform = NodePath("..")
+
+[node name="EnemeySpawnerComponent" type="Node2D" parent="."]
+position = Vector2(2320, -4120)
+script = ExtResource("7_epbya")
+enemeypositions = PackedVector2Array(1232, -528, -968, -528, -768, -1984, 760, -1984)
 
 [connection signal="body_entered" from="KillBrick" to="KillBrick" method="_on_body_entered"]
 [connection signal="body_entered" from="DashButton/Area2D" to="DashButton" method="_on_area_2d_body_entered"]

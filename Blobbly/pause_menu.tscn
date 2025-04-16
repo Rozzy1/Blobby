@@ -1,11 +1,29 @@
-[gd_scene load_steps=7 format=3 uid="uid://bnxbxrh7d0tr2"]
+[gd_scene load_steps=12 format=3 uid="uid://bnxbxrh7d0tr2"]
 
 [ext_resource type="Script" path="res://PauseMenu.gd" id="1_l5s47"]
 [ext_resource type="Shader" path="res://pause_menu.gdshader" id="2_g3hfx"]
+[ext_resource type="FontFile" uid="uid://cecttxji6ldkl" path="res://KiwiSoda.ttf" id="3_l1j64"]
+[ext_resource type="Script" path="res://OptionsMenu.gd" id="3_ydor1"]
+[ext_resource type="Theme" uid="uid://cjtaj5c2lon6y" path="res://UI.tres" id="4_urrp1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yln4r"]
 shader = ExtResource("2_g3hfx")
 shader_parameter/lod = 0.0
+
+[sub_resource type="FontFile" id="FontFile_x5vr8"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+
+[sub_resource type="Theme" id="Theme_2im7r"]
+default_font = SubResource("FontFile_x5vr8")
+Button/fonts/font = ExtResource("3_l1j64")
 
 [sub_resource type="Animation" id="Animation_bja5e"]
 length = 0.001
@@ -87,30 +105,76 @@ modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_right = 1150.0
 offset_bottom = 650.0
+theme = SubResource("Theme_2im7r")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="MainPauseMenu" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Resume" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="Resume" type="Button" parent="PanelContainer/MainPauseMenu"]
 modulate = Color(0, 1, 1, 1)
 layout_mode = 2
+theme = ExtResource("4_urrp1")
 text = "Resume"
 
-[node name="Options" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="Options" type="Button" parent="PanelContainer/MainPauseMenu"]
 modulate = Color(0, 1, 1, 1)
 layout_mode = 2
 text = "Options"
 
-[node name="Quit" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="Quit" type="Button" parent="PanelContainer/MainPauseMenu"]
 modulate = Color(0, 1, 1, 1)
 layout_mode = 2
 text = "Quit"
+
+[node name="OptionsMenu" type="Control" parent="PanelContainer"]
+layout_mode = 2
+script = ExtResource("3_ydor1")
+
+[node name="Volume" type="HSlider" parent="PanelContainer/OptionsMenu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -235.0
+offset_top = 88.0
+offset_right = 565.0
+offset_bottom = 120.0
+grow_horizontal = 2
+scale = Vector2(1, 1.2)
+size_flags_stretch_ratio = 0.0
+min_value = -50.0
+max_value = 10.0
+
+[node name="DisplayFPS" type="CheckButton" parent="PanelContainer/OptionsMenu"]
+layout_mode = 1
+offset_left = 1032.0
+offset_top = 155.0
+offset_right = 1076.0
+offset_bottom = 179.0
+scale = Vector2(2, 2)
+
+[node name="VSync" type="CheckButton" parent="PanelContainer/OptionsMenu"]
+offset_left = 1032.0
+offset_top = 237.0
+offset_right = 1076.0
+offset_bottom = 261.0
+scale = Vector2(2, 2)
+
+[node name="Label" type="Label" parent="PanelContainer/OptionsMenu"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 75.0
+offset_right = 317.0
+offset_bottom = 143.0
+text = "Volume"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_fpeim")
 }
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="PanelContainer/MainPauseMenu/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PanelContainer/MainPauseMenu/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="PanelContainer/MainPauseMenu/Quit" to="." method="_on_quit_pressed"]
+[connection signal="value_changed" from="PanelContainer/OptionsMenu/Volume" to="PanelContainer/OptionsMenu" method="_on_volume_value_changed"]

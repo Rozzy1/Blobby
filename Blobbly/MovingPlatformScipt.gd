@@ -6,18 +6,24 @@ extends Node
 @export var EndingPathPosition : Vector2
 @export var StartingPathPosition : Vector2
 @export var Platform : AnimatableBody2D
+@export var StartOnReady : bool
 var isactivated : bool = false
 var currentarrayposition : int
 var hasplayerdied : bool = false
 var tween
 func _ready():
+	if StartOnReady == true:
+		isactivated = true
+	Platform.global_position = StartingPathPosition
 	GameManager.PlayerDied.connect(reset)
 
 func _process(_delta):
 	if isactivated == true or hasplayerdied == true:
+		isactivated = true
 		if Platform:
 			MovePlatform()
 			isactivated = false
+		
 
 
 func MovePlatform():
@@ -41,4 +47,8 @@ func MovePlatform():
 		return
 
 func reset():
+	if StartOnReady == true:
+		hasplayerdied = false
+		return
 	hasplayerdied = true
+

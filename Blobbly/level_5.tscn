@@ -1440,6 +1440,7 @@ color = Color(0.576471, 0, 0, 1)
 polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 
 [node name="Line2D" parent="FrictionlessBody2/Spikes3" index="1"]
+visible = false
 points = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568, -3224, 400)
 
 [node name="Polygon2D2" type="Polygon2D" parent="FrictionlessBody2/Spikes3"]

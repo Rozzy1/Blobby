@@ -7,7 +7,8 @@ var level3 : PackedScene = preload("res://level_3.tscn")
 var level4 : PackedScene = preload("res://level_4.tscn")
 var level5 : PackedScene = preload("res://level_5.tscn")
 var level6 : PackedScene = preload("res://level_6.tscn")
-var levelarray : Array = [level1,level2,level3,level4,level5,level6]
+var level7 : PackedScene = preload("res://level_7.tscn")
+var levelarray : Array = [level1,level2,level3,level4,level5,level6,level7]
 
 signal PlayerDied
 signal PlayerSteppedOnSpikes

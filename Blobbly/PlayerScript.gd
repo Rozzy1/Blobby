@@ -88,22 +88,22 @@ func _physics_process(delta):
 			if not is_on_floor():
 				if dashedinaircounter > 1:
 					play_sound_effect("Hit")
-				subtract_health(dashedinaircounter)
 				dashedinaircounter = dashedinaircounter + 1
 			else:
 				dashedinaircounter = 1
-				subtract_health(dashedinaircounter)
 			for i in 10:
 				velocity += (dashspeed * directions) * 2
 				play_animation("dash_loop")
 				await get_tree().create_timer(0.01).timeout
 				is_dashing = true
 			for y in 10:
-				velocity.y = velocity.y / friction 
+				velocity.y = velocity.y / friction
 				velocity.x = velocity.x / friction
 			play_animation("dash_end")
 			await get_tree().create_timer(0.25).timeout
 			is_dashing = false
+			subtract_health(dashedinaircounter)
+			camera.add_trauma(0.1)
 	
 	if !isrespawning and !direction and !is_dashing and !jumping and !isteleportertouched and is_on_floor():
 		play_animation("idle")
@@ -122,7 +122,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func subtract_health(damage_amt):
-	camera.add_trauma(0.2)
+	camera.add_trauma(damage_amt/10)
 	print("Player got dealt: ",damage_amt)
 	Health = Health - damage_amt
 	if Health > MaxHealth:

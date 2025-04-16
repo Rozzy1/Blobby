@@ -1,11 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://bc5ehfoip2pin"]
+[gd_scene load_steps=18 format=3 uid="uid://bc5ehfoip2pin"]
 
 [ext_resource type="Script" path="res://MovingPlatformScipt.gd" id="1_v1k7c"]
 [ext_resource type="PackedScene" uid="uid://dlv0q1cyfs5sh" path="res://collision_polygons.tscn" id="2_8jixp"]
 [ext_resource type="Script" path="res://FrictionlessBodyScript.gd" id="3_anjd3"]
+[ext_resource type="Script" path="res://KillBrick.gd" id="4_bdr63"]
 [ext_resource type="Script" path="res://DashWallScript.gd" id="4_ev31r"]
 [ext_resource type="Script" path="res://DashButtonScript.gd" id="5_40awn"]
 [ext_resource type="AudioStream" uid="uid://dyjlylplk4vwr" path="res://Foozle_2DT0001_Science_Fiction_Labs_Tileset/HALFTONE SFX Pack LITE/UI/1. Buttons/Button_24.wav" id="6_ansf1"]
+[ext_resource type="Script" path="res://EnemeySpawnerComponent.gd" id="8_qk81t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bocvt"]
 
@@ -31,7 +33,7 @@ size = Vector2(17.3333, 20)
 [node name="Level6" type="Node2D" groups=["level"]]
 
 [node name="Platform" type="AnimatableBody2D" parent="."]
-position = Vector2(-568, 403)
+position = Vector2(-579, 86)
 rotation = 1.5708
 scale = Vector2(350, 50)
 sync_to_physics = false
@@ -48,9 +50,9 @@ mesh = SubResource("BoxMesh_e4xu2")
 [node name="MovingPlatformComponent" type="Node" parent="Platform" node_paths=PackedStringArray("Platform")]
 script = ExtResource("1_v1k7c")
 OneShot = true
-NextPathPosition = Vector2(-568, 403)
-EndingPathPosition = Vector2(-568, 403)
-StartingPathPosition = Vector2(-568, 88)
+NextPathPosition = Vector2(-579, 390)
+EndingPathPosition = Vector2(-579, 390)
+StartingPathPosition = Vector2(-579, 88)
 Platform = NodePath("..")
 
 [node name="2" parent="." instance=ExtResource("2_8jixp")]
@@ -418,6 +420,7 @@ polygon = PackedVector2Array(-3224, 400, -3184, 568, -3264, 568)
 [node name="KillBrick" type="Area2D" parent="Spikes"]
 position = Vector2(5464, -618.182)
 scale = Vector2(300, 10)
+script = ExtResource("4_bdr63")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/KillBrick"]
 position = Vector2(-0.293333, -1.08704e-05)
@@ -480,8 +483,9 @@ position = Vector2(-880, -104)
 scale = Vector2(0.7, 2)
 shape = SubResource("RectangleShape2D_tx1fr")
 
-[node name="FrictionlessBodyComponent" type="Node" parent="FrictionlessBody2"]
+[node name="FrictionlessBodyComponent" type="Node" parent="FrictionlessBody2" node_paths=PackedStringArray("area2d")]
 script = ExtResource("3_anjd3")
+area2d = NodePath("../Area2D")
 
 [node name="FrictionlessBody3" parent="." instance=ExtResource("2_8jixp")]
 position = Vector2(4328, 2408)
@@ -507,7 +511,7 @@ shape = SubResource("RectangleShape2D_tx1fr")
 
 [node name="FrictionlessBodyComponent" type="Node" parent="FrictionlessBody3" node_paths=PackedStringArray("area2d")]
 script = ExtResource("3_anjd3")
-area2d = NodePath("../../FrictionlessBody2/Area2D")
+area2d = NodePath("../Area2D")
 
 [node name="6" parent="." instance=ExtResource("2_8jixp")]
 position = Vector2(4600, 640)
@@ -519,7 +523,7 @@ polygon = PackedVector2Array(-832, 0, -368, 0, -368, 1448, -832, 1448, -832, 944
 points = PackedVector2Array(-832, 0, -368, 0, -368, 1448, -832, 1448, -832, 944, -1608, 944, -1608, 664, -832, 664, -832, 0)
 
 [node name="Platform2" type="AnimatableBody2D" parent="."]
-position = Vector2(2560, 872)
+position = Vector2(2899, 1176)
 rotation = 0.767945
 scale = Vector2(500, 50)
 sync_to_physics = false
@@ -537,9 +541,9 @@ mesh = SubResource("BoxMesh_e4xu2")
 script = ExtResource("1_v1k7c")
 OneShot = true
 TimeBetweenPoints = 4.0
-NextPathPosition = Vector2(2560, 872)
-EndingPathPosition = Vector2(2560, 872)
-StartingPathPosition = Vector2(2856, 1152)
+NextPathPosition = Vector2(2700, 882)
+EndingPathPosition = Vector2(2700, 882)
+StartingPathPosition = Vector2(2883, 1161)
 Platform = NodePath("..")
 
 [node name="DashButton" type="StaticBody2D" parent="."]
@@ -559,10 +563,12 @@ scale = Vector2(1.5, 1.5)
 scale = Vector2(0.2, 0.2)
 shape = SubResource("RectangleShape2D_4ctgk")
 
-[node name="DashButtonComponent" type="Node" parent="DashButton" node_paths=PackedStringArray("audiosfx", "activatewhat", "area2dconnectingfrom", "mesh")]
+[node name="DashButtonComponent" type="Node" parent="DashButton" node_paths=PackedStringArray("audiosfx", "activatewhat", "activatewhat2", "activatewhat3", "area2dconnectingfrom", "mesh")]
 script = ExtResource("5_40awn")
 audiosfx = NodePath("../AudioStreamPlayer2D")
-activatewhat = NodePath("../../Platform6/MovingPlatformComponent")
+activatewhat = NodePath("../../Platform/MovingPlatformComponent")
+activatewhat2 = NodePath("../../Platform6/MovingPlatformComponent")
+activatewhat3 = NodePath("../../Platform2/MovingPlatformComponent")
 area2dconnectingfrom = NodePath("../Area2D")
 mesh = NodePath("../Polygon")
 
@@ -692,6 +698,12 @@ EndingPathPosition = Vector2(949, 2500)
 StartingPathPosition = Vector2(949, 2500)
 Platform = NodePath("..")
 
+[node name="EnemeySpawnerComponent" type="Node2D" parent="."]
+position = Vector2(3227, 1210)
+script = ExtResource("8_qk81t")
+enemeypositions = PackedVector2Array(3480, 2250, 3220, 1210)
+
+[connection signal="body_entered" from="Spikes/KillBrick" to="Spikes/KillBrick" method="_on_body_entered"]
 [connection signal="body_entered" from="DashButton/Area2D" to="DashButton" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="DashButton/Area2D" to="DashButton" method="_on_area_2d_body_exited"]
 [connection signal="body_entered" from="DashButton2/Area2D" to="DashButton2" method="_on_area_2d_body_entered"]

@@ -14,11 +14,14 @@ func quit():
 	get_tree().quit()
 
 func options():
-	pass
+	$PanelContainer/OptionsMenu.visible = true
+	$PanelContainer/MainPauseMenu.visible = false
 
 func on_esc_pressed():
 	if Input.is_action_just_pressed("esc") and get_tree().paused == false:
 		pause()
+		$PanelContainer/OptionsMenu.visible = false
+		$PanelContainer/MainPauseMenu.visible = true
 	elif Input.is_action_just_pressed("esc") and get_tree().paused == true:
 		resume()
 
@@ -32,3 +35,7 @@ func _on_resume_pressed():
 
 func _on_quit_pressed():
 	quit()
+
+
+func _on_options_pressed():
+	options()

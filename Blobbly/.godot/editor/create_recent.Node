@@ -1,3 +1,5 @@
+CanvasLayer
+Button
 Label
 CheckButton
 HSlider
@@ -7,9 +9,7 @@ Node2D
 Node
 ColorRect
 AnimationPlayer
-Button
 PanelContainer
 AudioStreamPlayer2D
 AudioStreamPlayer
 Polygon2D
-Line2D

@@ -1,10 +1,9 @@
-res://OptionsMenu.gd
-res://pause_menu.tscn
-res://pause_menu.gdshader
 res://Enemey.tscn
+res://pause_menu.gdshader
 res://HealthBar - Copy.tscn
 res://collision_polygons.tscn
 res://main_scene.tscn
+res://pause_menu.tscn
 res://level_1.tscn
 res://level_2.tscn
 res://level_3.tscn
@@ -12,4 +11,6 @@ res://level_4.tscn
 res://level_5.tscn
 res://level_6.tscn
 res://level_7.tscn
-res://default_bus_layout.tres
+res://PlayerScript.gd
+res://StartButton.gd
+res://title_screen.tscn

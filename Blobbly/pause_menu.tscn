@@ -145,6 +145,7 @@ scale = Vector2(1, 1.2)
 size_flags_stretch_ratio = 0.0
 min_value = -50.0
 max_value = 10.0
+value = -5.0
 
 [node name="DisplayFPS" type="CheckButton" parent="PanelContainer/OptionsMenu"]
 layout_mode = 1
@@ -155,6 +156,7 @@ offset_bottom = 179.0
 scale = Vector2(2, 2)
 
 [node name="VSync" type="CheckButton" parent="PanelContainer/OptionsMenu"]
+layout_mode = 0
 offset_left = 1032.0
 offset_top = 237.0
 offset_right = 1076.0

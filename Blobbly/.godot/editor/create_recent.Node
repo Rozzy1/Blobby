@@ -1,3 +1,5 @@
+HBoxContainer
+PanelContainer
 Label
 CheckButton
 HSlider
@@ -8,8 +10,5 @@ Node
 ColorRect
 AnimationPlayer
 Button
-PanelContainer
 AudioStreamPlayer2D
 AudioStreamPlayer
-Polygon2D
-Line2D

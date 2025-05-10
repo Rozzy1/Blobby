@@ -89,8 +89,10 @@ func _physics_process(delta):
 				if dashedinaircounter > 1:
 					play_sound_effect("Hit")
 				dashedinaircounter = dashedinaircounter + 1
+				subtract_health(dashedinaircounter)
 			else:
 				dashedinaircounter = 1
+				subtract_health(dashedinaircounter)
 			for i in 10:
 				velocity += (dashspeed * directions) * 2
 				play_animation("dash_loop")
@@ -102,7 +104,6 @@ func _physics_process(delta):
 			play_animation("dash_end")
 			await get_tree().create_timer(0.25).timeout
 			is_dashing = false
-			subtract_health(dashedinaircounter)
 			camera.add_trauma(0.1)
 	
 	if !isrespawning and !direction and !is_dashing and !jumping and !isteleportertouched and is_on_floor():

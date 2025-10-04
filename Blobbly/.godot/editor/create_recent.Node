@@ -1,3 +1,4 @@
+Sprite2D
 CanvasLayer
 Button
 Label
@@ -12,4 +13,3 @@ AnimationPlayer
 PanelContainer
 AudioStreamPlayer2D
 AudioStreamPlayer
-Polygon2D

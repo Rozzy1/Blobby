@@ -442,7 +442,6 @@ frame_progress = 0.9588
 [node name="Jump" type="AudioStreamPlayer2D" parent="Player"]
 stream = ExtResource("58_1dg4t")
 volume_db = -10.0
-autoplay = true
 
 [node name="Hit" type="AudioStreamPlayer2D" parent="Player"]
 stream = ExtResource("59_six0l")

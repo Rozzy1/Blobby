@@ -11,6 +11,4 @@ res://level_4.tscn
 res://level_5.tscn
 res://level_6.tscn
 res://level_7.tscn
-res://PlayerScript.gd
-res://StartButton.gd
 res://title_screen.tscn

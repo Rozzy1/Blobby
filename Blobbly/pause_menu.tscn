@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bnxbxrh7d0tr2"]
+[gd_scene load_steps=13 format=3 uid="uid://bnxbxrh7d0tr2"]
 
 [ext_resource type="Script" path="res://PauseMenu.gd" id="1_l5s47"]
 [ext_resource type="Shader" path="res://pause_menu.gdshader" id="2_g3hfx"]
 [ext_resource type="FontFile" uid="uid://cecttxji6ldkl" path="res://KiwiSoda.ttf" id="3_l1j64"]
 [ext_resource type="Script" path="res://OptionsMenu.gd" id="3_ydor1"]
 [ext_resource type="Theme" uid="uid://cjtaj5c2lon6y" path="res://UI.tres" id="4_urrp1"]
+[ext_resource type="Texture2D" uid="uid://2qgqyob0sciq" path="res://VolumeButtonIcon.png" id="6_xu67b"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yln4r"]
 shader = ExtResource("2_g3hfx")
@@ -112,19 +113,18 @@ layout_mode = 2
 alignment = 1
 
 [node name="Resume" type="Button" parent="PanelContainer/MainPauseMenu"]
-modulate = Color(0, 1, 1, 1)
 layout_mode = 2
 theme = ExtResource("4_urrp1")
 text = "Resume"
 
 [node name="Options" type="Button" parent="PanelContainer/MainPauseMenu"]
-modulate = Color(0, 1, 1, 1)
 layout_mode = 2
+theme = ExtResource("4_urrp1")
 text = "Options"
 
 [node name="Quit" type="Button" parent="PanelContainer/MainPauseMenu"]
-modulate = Color(0, 1, 1, 1)
 layout_mode = 2
+theme = ExtResource("4_urrp1")
 text = "Quit"
 
 [node name="OptionsMenu" type="Control" parent="PanelContainer"]
@@ -143,9 +143,24 @@ offset_bottom = 120.0
 grow_horizontal = 2
 scale = Vector2(1, 1.2)
 size_flags_stretch_ratio = 0.0
+theme = ExtResource("4_urrp1")
 min_value = -50.0
 max_value = 10.0
 value = -5.0
+
+[node name="VolumeIcon" type="Sprite2D" parent="PanelContainer/OptionsMenu/Volume"]
+position = Vector2(-51, 16.6667)
+scale = Vector2(2, 1.8)
+texture = ExtResource("6_xu67b")
+
+[node name="VolumeLabel" type="Label" parent="PanelContainer/OptionsMenu/Volume"]
+layout_mode = 0
+offset_left = -259.0
+offset_top = -6.66667
+offset_right = -5.0
+offset_bottom = 42.3333
+theme = ExtResource("4_urrp1")
+text = "Volume"
 
 [node name="DisplayFPS" type="CheckButton" parent="PanelContainer/OptionsMenu"]
 layout_mode = 1
@@ -162,14 +177,6 @@ offset_top = 237.0
 offset_right = 1076.0
 offset_bottom = 261.0
 scale = Vector2(2, 2)
-
-[node name="Label" type="Label" parent="PanelContainer/OptionsMenu"]
-layout_mode = 0
-offset_left = 63.0
-offset_top = 75.0
-offset_right = 317.0
-offset_bottom = 143.0
-text = "Volume"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

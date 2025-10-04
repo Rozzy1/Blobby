@@ -4,7 +4,6 @@ res://HealthBar - Copy.tscn
 res://collision_polygons.tscn
 res://main_scene.tscn
 res://pause_menu.tscn
-res://level_0.tscn
 res://level_1.tscn
 res://level_2.tscn
 res://level_3.tscn
@@ -12,6 +11,6 @@ res://level_4.tscn
 res://level_5.tscn
 res://level_6.tscn
 res://level_7.tscn
-res://UI.tres
-res://PauseMenu.gd
-res://OptionsMenu.gd
+res://PlayerScript.gd
+res://StartButton.gd
+res://title_screen.tscn

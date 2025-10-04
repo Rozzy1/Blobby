@@ -111,7 +111,7 @@ func _physics_process(delta):
 				velocity.y = velocity.y / friction
 				velocity.x = velocity.x / friction
 			play_animation("dash_end")
-			await get_tree().create_timer(0.25).timeout
+			await get_tree().create_timer(0.35).timeout
 			is_dashing = false
 			camera.add_trauma(0.1)
 	
@@ -140,11 +140,11 @@ func subtract_health(damage_amt):
 	healthbar.health = Health
 	if Health < 1:
 		canmove = false
-		camera.add_trauma(0.5)
+		camera.add_trauma(0.25)
 		animationsprite.visible = false
 		deathparticles.emitting = true
 		play_sound_effect("Die")
-		await get_tree().create_timer(1.39).timeout
+		await get_tree().create_timer(2.5).timeout
 		respawn()
 
 func _on_coyotetimer_timeout():

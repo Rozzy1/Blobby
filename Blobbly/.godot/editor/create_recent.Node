@@ -1,9 +1,6 @@
-AudioStreamPlayer2D
+CanvasLayer
 Button
-Sprite2D
 Label
-HBoxContainer
-PanelContainer
 CheckButton
 HSlider
 VBoxContainer
@@ -12,3 +9,7 @@ Node2D
 Node
 ColorRect
 AnimationPlayer
+PanelContainer
+AudioStreamPlayer2D
+AudioStreamPlayer
+Polygon2D

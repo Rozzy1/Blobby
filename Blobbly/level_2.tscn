@@ -96,7 +96,6 @@ texture = ExtResource("5_fspa7")
 [node name="Platform" type="AnimatableBody2D" parent="."]
 position = Vector2(304, -161)
 scale = Vector2(700, 50)
-sync_to_physics = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
 scale = Vector2(0.05, 0.05)

@@ -1342,7 +1342,6 @@ shape = SubResource("RectangleShape2D_d532c")
 [node name="Platform" type="AnimatableBody2D" parent="."]
 position = Vector2(5104, 256)
 scale = Vector2(900, 50)
-sync_to_physics = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
 scale = Vector2(0.05, 0.05)
@@ -1364,7 +1363,6 @@ Platform = NodePath("..")
 [node name="Platform2" type="AnimatableBody2D" parent="."]
 position = Vector2(6000, 239)
 scale = Vector2(900, 50)
-sync_to_physics = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
 scale = Vector2(0.05, 0.05)
@@ -1386,7 +1384,6 @@ Platform = NodePath("..")
 [node name="Platform3" type="AnimatableBody2D" parent="."]
 position = Vector2(6800, 490)
 scale = Vector2(700, 50)
-sync_to_physics = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3"]
 scale = Vector2(0.05, 0.05)

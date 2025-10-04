@@ -1,6 +1,9 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cjtaj5c2lon6y"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://cjtaj5c2lon6y"]
 
 [ext_resource type="FontFile" uid="uid://cecttxji6ldkl" path="res://KiwiSoda.ttf" id="1_ly2cb"]
+[ext_resource type="FontFile" uid="uid://c45fnbmtggrnj" path="res://ARCADECLASSIC.TTF" id="2_ugran"]
 
 [resource]
+default_font = ExtResource("2_ugran")
+default_font_size = 48
 /fonts/font = ExtResource("1_ly2cb")

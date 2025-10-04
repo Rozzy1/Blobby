@@ -17,10 +17,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
-	if Input.is_action_just_pressed("debugforwardlevel"):
-		LevelCount = LevelCount + 1
-		GameManager.LevelChange.emit(LevelCount)
-		await get_tree().create_timer(1.39).timeout
+#	if Input.is_action_just_pressed("debugforwardlevel"):
+#		LevelCount = LevelCount + 1
+#		GameManager.LevelChange.emit(LevelCount)
+#		await get_tree().create_timer(1.39).timeout
 
 
 

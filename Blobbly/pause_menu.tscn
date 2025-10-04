@@ -1,29 +1,21 @@
-[gd_scene load_steps=13 format=3 uid="uid://bnxbxrh7d0tr2"]
+[gd_scene load_steps=15 format=3 uid="uid://bnxbxrh7d0tr2"]
 
 [ext_resource type="Script" path="res://PauseMenu.gd" id="1_l5s47"]
 [ext_resource type="Shader" path="res://pause_menu.gdshader" id="2_g3hfx"]
 [ext_resource type="FontFile" uid="uid://cecttxji6ldkl" path="res://KiwiSoda.ttf" id="3_l1j64"]
 [ext_resource type="Script" path="res://OptionsMenu.gd" id="3_ydor1"]
 [ext_resource type="Script" path="res://PanelContainer.gd" id="4_8mf2y"]
+[ext_resource type="FontFile" uid="uid://c45fnbmtggrnj" path="res://ARCADECLASSIC.TTF" id="4_he50x"]
 [ext_resource type="Theme" uid="uid://cjtaj5c2lon6y" path="res://UI.tres" id="4_urrp1"]
+[ext_resource type="Texture2D" uid="uid://2qgqyob0sciq" path="res://VolumeButtonIcon.png" id="8_g62qm"]
+[ext_resource type="AudioStream" uid="uid://br6tiebvwem6y" path="res://SplatSFX.mp3" id="9_spknb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yln4r"]
 shader = ExtResource("2_g3hfx")
 shader_parameter/lod = 0.0
 
-[sub_resource type="FontFile" id="FontFile_x5vr8"]
-subpixel_positioning = 0
-msdf_pixel_range = 14
-msdf_size = 128
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
-
 [sub_resource type="Theme" id="Theme_2im7r"]
-default_font = SubResource("FontFile_x5vr8")
+default_font = ExtResource("4_he50x")
 Button/fonts/font = ExtResource("3_l1j64")
 
 [sub_resource type="Animation" id="Animation_bja5e"]
@@ -119,23 +111,23 @@ theme = SubResource("Theme_2im7r")
 script = ExtResource("4_8mf2y")
 
 [node name="MainPauseMenu" type="VBoxContainer" parent="PanelContainer"]
+visible = false
 layout_mode = 2
 alignment = 1
 
 [node name="Resume" type="Button" parent="PanelContainer/MainPauseMenu"]
-modulate = Color(0, 1, 1, 1)
 layout_mode = 2
 theme = ExtResource("4_urrp1")
 text = "Resume"
 
 [node name="Options" type="Button" parent="PanelContainer/MainPauseMenu"]
-modulate = Color(0, 1, 1, 1)
 layout_mode = 2
+theme = ExtResource("4_urrp1")
 text = "Options"
 
 [node name="Quit" type="Button" parent="PanelContainer/MainPauseMenu"]
-modulate = Color(0, 1, 1, 1)
 layout_mode = 2
+theme = ExtResource("4_urrp1")
 text = "Quit"
 
 [node name="OptionsMenu" type="Control" parent="PanelContainer"]
@@ -147,15 +139,30 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -235.0
+offset_left = -235.5
 offset_top = 88.0
-offset_right = 565.0
+offset_right = 564.5
 offset_bottom = 120.0
 grow_horizontal = 2
 scale = Vector2(1, 1.2)
 size_flags_stretch_ratio = 0.0
+theme = ExtResource("4_urrp1")
 min_value = -50.0
 max_value = 10.0
+
+[node name="VolumeIcon" type="Sprite2D" parent="PanelContainer/OptionsMenu/Volume"]
+position = Vector2(-48, 17.5)
+scale = Vector2(2, 1.8)
+texture = ExtResource("8_g62qm")
+
+[node name="VolumeLabel" type="Label" parent="PanelContainer/OptionsMenu/Volume"]
+layout_mode = 0
+offset_left = -242.0
+offset_top = -5.0
+offset_right = 12.0
+offset_bottom = 44.0
+theme = ExtResource("4_urrp1")
+text = "Volume"
 
 [node name="DisplayFPS" type="CheckButton" parent="PanelContainer/OptionsMenu"]
 layout_mode = 1
@@ -168,26 +175,34 @@ offset_right = -41.0
 offset_bottom = 179.0
 grow_horizontal = 0
 scale = Vector2(2, 2)
+theme = ExtResource("4_urrp1")
 
 [node name="VSync" type="CheckButton" parent="PanelContainer/OptionsMenu"]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
+anchors_preset = 15
 anchor_right = 1.0
-offset_left = -85.0
+anchor_bottom = 1.0
+offset_left = 1070.0
 offset_top = 237.0
 offset_right = -41.0
-offset_bottom = 261.0
-grow_horizontal = 0
+offset_bottom = -381.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(2, 2)
+theme = ExtResource("4_urrp1")
 
-[node name="Label" type="Label" parent="PanelContainer/OptionsMenu"]
+[node name="TestSoundButton" type="Button" parent="PanelContainer/OptionsMenu"]
 layout_mode = 0
-offset_left = 63.0
-offset_top = 75.0
-offset_right = 317.0
-offset_bottom = 143.0
-text = "Volume"
+offset_left = 819.0
+offset_top = 20.0
+offset_right = 974.0
+offset_bottom = 72.0
+theme = ExtResource("4_urrp1")
+text = "TEST SOUND"
+
+[node name="SplatTest" type="AudioStreamPlayer2D" parent="PanelContainer/OptionsMenu/TestSoundButton"]
+stream = ExtResource("9_spknb")
+volume_db = 24.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -198,3 +213,4 @@ libraries = {
 [connection signal="pressed" from="PanelContainer/MainPauseMenu/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="PanelContainer/MainPauseMenu/Quit" to="." method="_on_quit_pressed"]
 [connection signal="value_changed" from="PanelContainer/OptionsMenu/Volume" to="PanelContainer/OptionsMenu" method="_on_volume_value_changed"]
+[connection signal="pressed" from="PanelContainer/OptionsMenu/TestSoundButton" to="PanelContainer/OptionsMenu" method="_on_button_pressed"]

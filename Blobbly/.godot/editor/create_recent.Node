@@ -1,6 +1,9 @@
+AudioStreamPlayer2D
+Button
+Sprite2D
+Label
 HBoxContainer
 PanelContainer
-Label
 CheckButton
 HSlider
 VBoxContainer
@@ -9,6 +12,3 @@ Node2D
 Node
 ColorRect
 AnimationPlayer
-Button
-AudioStreamPlayer2D
-AudioStreamPlayer

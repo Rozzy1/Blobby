@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://cl628sehtynmm"]
+[gd_scene load_steps=80 format=3 uid="uid://cl628sehtynmm"]
 
 [ext_resource type="Script" path="res://GameManager.gd" id="1_rj3dd"]
 [ext_resource type="Script" path="res://PlayerScript.gd" id="2_0hl8t"]
@@ -344,34 +344,10 @@ resource_name = "TeleporterOpen"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimationParts/Glass:scale")
+tracks/0/path = NodePath("AnimationParts/TeleporterTop:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0.8, 1), Vector2(0.8, 5.5)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimationParts/Glass:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, -0.32), Vector2(0, -3.2)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimationParts/TeleporterTop:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
@@ -400,8 +376,6 @@ _data = {
 "TeleporterOpen": SubResource("Animation_ss1mt"),
 "TeleporterSpriteOpen": SubResource("Animation_t1y3h")
 }
-
-[sub_resource type="BoxMesh" id="BoxMesh_jf3f3"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_e4ygh"]
 
@@ -493,7 +467,7 @@ position = Vector2(1039, 828)
 scale = Vector2(100, 25)
 script = ExtResource("62_wlird")
 teleporterarea = NodePath("Area2D")
-TeleporterLevelPositions = PackedVector2Array(0, 0, 899, 601, 3048, -1120, 1030, 830, -3936, -420, 8776, 216, -784, 224, 900, 900)
+TeleporterLevelPositions = PackedVector2Array(1000, 1000, 899, 615, 3048, -1120, 1030, 830, -3936, -420, 8776, 216, -784, 224, 900, 900)
 
 [node name="Area2D" type="Area2D" parent="LevelTeleporter"]
 
@@ -518,13 +492,6 @@ root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_lju53")
 }
-
-[node name="Glass" type="MeshInstance2D" parent="LevelTeleporter/AnimationParts"]
-modulate = Color(0.137255, 0.32549, 0.384314, 0.376471)
-z_index = 2
-position = Vector2(0, -0.32)
-scale = Vector2(0.8, 1)
-mesh = SubResource("BoxMesh_jf3f3")
 
 [node name="TeleporterBottom" type="MeshInstance2D" parent="LevelTeleporter/AnimationParts"]
 scale = Vector2(0.05, 0.05)

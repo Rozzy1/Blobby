@@ -38,6 +38,12 @@ func _ready():
 
 
 func _physics_process(delta):
+	if Input.is_action_just_pressed("debugforwardlevel"):
+		GameManager.LevelChange.emit(0)
+		LevelCount = -1
+		await get_tree().create_timer(1.39).timeout
+
+
 	if istouchingfrictionlessbody == true:
 		friction = 1
 	else:
@@ -51,9 +57,12 @@ func _physics_process(delta):
 		lastdirs = Vector2(leftright,updown)
 	
 	if not is_on_floor():
+		gravity = 1200
 		velocity.y += gravity * delta
-		if velocity.y < 0:
-			gravity = 1200
+	if Input.is_action_just_released("up") and !velocity.y > 0:
+		velocity.y = 0
+	if velocity.y < 0:
+		gravity = 1600
 	else:
 		jumping = false
 		dashedinaircounter = 1
@@ -200,10 +209,10 @@ func play_animation(animation):
 	animationsprite.play(animation)
 
 
-func apply_knockback(force,direction):
-	print(force,direction, "applied")
-	velocity.x = direction * force * 5
-	velocity.y = direction * force / 2.5
+func apply_knockback(force,playerdirection):
+	print(force,playerdirection, "applied")
+	velocity.x = playerdirection * force * 5
+	velocity.y = playerdirection * force / 2.5
 	print(velocity)
 
 func play_sound_effect(soundeffect):

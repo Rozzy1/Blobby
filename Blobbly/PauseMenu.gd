@@ -1,6 +1,7 @@
 extends Control
 func _ready():
 	$AnimationPlayer.play("RESET")
+	$PanelContainer/OptionsMenu/Volume.value = 50
 
 func pause():
 	get_tree().paused = true

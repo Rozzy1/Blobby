@@ -1,14 +1,8 @@
 extends Node
 var Player1 = Player.new()
 var testarray : Array[InputModel]
-var level1 : PackedScene = preload("res://level_1.tscn")
-var level2 : PackedScene = preload("res://level_2.tscn")
-var level3 : PackedScene = preload("res://level_3.tscn")
-var level4 : PackedScene = preload("res://level_4.tscn")
-var level5 : PackedScene = preload("res://level_5.tscn")
-var level6 : PackedScene = preload("res://level_6.tscn")
-var level7 : PackedScene = preload("res://level_7.tscn")
-var levelarray : Array = [level1,level2,level3,level4,level5,level6,level7]
+var amtlevels : int = 8
+var levelarray : Array[PackedScene] = []
 
 signal PlayerDied
 signal PlayerSteppedOnSpikes
@@ -16,6 +10,9 @@ signal LevelChange
 signal TeleporterTouched
 
 func _ready():
+	levelarray.clear()
+	for i in amtlevels:
+		levelarray.append(load("res://level_" + str(i) +".tscn"))
 	LevelChange.connect(level_change)
 	
 
@@ -55,7 +52,7 @@ func level_change(levelcount):
 	var currentlevel
 	print(levelarray)
 	remove_child(get_tree().get_first_node_in_group("level"))
-	currentlevel = levelarray[levelcount-1].instantiate()
+	currentlevel = levelarray[levelcount].instantiate()
 	print(currentlevel)
 	add_child.call_deferred(currentlevel)
 	currentlevel.visible = true

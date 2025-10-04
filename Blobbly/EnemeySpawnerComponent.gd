@@ -14,13 +14,13 @@ func _ready():
 func _process(_delta):
 	pass
 
-func SpawnEnemies(array):
+func SpawnEnemies(enemeyarray):
 	print("spawned enemies")
 	currentarrayposition = 0
-	for i in array.size():
+	for i in enemeyarray.size():
 		var enemey = enemeyscene.instantiate()
 		add_child(enemey)
-		enemey.global_position = array[currentarrayposition]
+		enemey.global_position = enemeyarray[currentarrayposition]
 		enemey.can_see_player = false
 		currentarrayposition = currentarrayposition + 1
 	

@@ -1,15 +1,14 @@
+Label
+CheckButton      - Matches the "switch" keyword.
 Sprite2D
+OptionButton
+MenuButton      - Matches the "dropdown" keyword.
+TileMapLayer
+TileMap
+Timer
 CanvasLayer
 Button
-Label
 CheckButton
 HSlider
 VBoxContainer
 Control
-Node2D
-Node
-ColorRect
-AnimationPlayer
-PanelContainer
-AudioStreamPlayer2D
-AudioStreamPlayer

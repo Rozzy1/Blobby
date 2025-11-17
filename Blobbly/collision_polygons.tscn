@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dlv0q1cyfs5sh"]
 
-[ext_resource type="Script" path="res://CollisionPolygonsLevelBlocks.gd" id="1_131x4"]
+[ext_resource type="Script" uid="uid://cfvmccllb51c3" path="res://CollisionPolygonsLevelBlocks.gd" id="1_131x4"]
 [ext_resource type="Texture2D" uid="uid://bugyy32xotxtp" path="res://pixil-frame-0.png" id="2_xd44a"]
 
 [node name="1" type="StaticBody2D"]
@@ -14,8 +14,9 @@ texture_scale = Vector2(0.5, 0.5)
 
 [node name="Line2D" type="Line2D" parent="."]
 texture_repeat = 2
+closed = true
 width = 128.0
 texture = ExtResource("2_xd44a")
 texture_mode = 1
-sharp_limit = 8.0
+round_precision = 32
 antialiased = true

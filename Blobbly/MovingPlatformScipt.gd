@@ -51,4 +51,3 @@ func reset():
 		hasplayerdied = false
 		return
 	hasplayerdied = true
-

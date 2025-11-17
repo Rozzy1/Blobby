@@ -1,11 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://bnxbxrh7d0tr2"]
+[gd_scene load_steps=14 format=3 uid="uid://bnxbxrh7d0tr2"]
 
-[ext_resource type="Script" path="res://PauseMenu.gd" id="1_l5s47"]
-[ext_resource type="Shader" path="res://pause_menu.gdshader" id="2_g3hfx"]
+[ext_resource type="Script" uid="uid://cgbpulqc2dbnp" path="res://PauseMenu.gd" id="1_l5s47"]
+[ext_resource type="Shader" uid="uid://dolyyn0nth2jv" path="res://pause_menu.gdshader" id="2_g3hfx"]
 [ext_resource type="FontFile" uid="uid://cecttxji6ldkl" path="res://KiwiSoda.ttf" id="3_l1j64"]
-[ext_resource type="Script" path="res://OptionsMenu.gd" id="3_ydor1"]
+[ext_resource type="Script" uid="uid://ufkjm8x5ynyn" path="res://OptionsMenu.gd" id="3_ydor1"]
 [ext_resource type="Theme" uid="uid://cjtaj5c2lon6y" path="res://UI.tres" id="4_urrp1"]
 [ext_resource type="Texture2D" uid="uid://2qgqyob0sciq" path="res://VolumeButtonIcon.png" id="6_xu67b"]
+[ext_resource type="Texture2D" uid="uid://dv4o4w10kgagr" path="res://Resolution.png" id="7_mxa3g"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yln4r"]
 shader = ExtResource("2_g3hfx")
@@ -81,8 +82,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fpeim"]
 _data = {
-"RESET": SubResource("Animation_bja5e"),
-"pause_blur": SubResource("Animation_6vi0u")
+&"RESET": SubResource("Animation_bja5e"),
+&"pause_blur": SubResource("Animation_6vi0u")
 }
 
 [node name="PauseMenu" type="Control"]
@@ -109,6 +110,7 @@ offset_bottom = 650.0
 theme = SubResource("Theme_2im7r")
 
 [node name="MainPauseMenu" type="VBoxContainer" parent="PanelContainer"]
+visible = false
 layout_mode = 2
 alignment = 1
 
@@ -146,7 +148,9 @@ size_flags_stretch_ratio = 0.0
 theme = ExtResource("4_urrp1")
 min_value = -50.0
 max_value = 10.0
-value = -5.0
+tick_count = 10
+ticks_on_borders = true
+ticks_position = 1
 
 [node name="VolumeIcon" type="Sprite2D" parent="PanelContainer/OptionsMenu/Volume"]
 position = Vector2(-51, 16.6667)
@@ -160,6 +164,7 @@ offset_top = -6.66667
 offset_right = -5.0
 offset_bottom = 42.3333
 theme = ExtResource("4_urrp1")
+theme_override_font_sizes/font_size = 48
 text = "Volume"
 
 [node name="DisplayFPS" type="CheckButton" parent="PanelContainer/OptionsMenu"]
@@ -170,7 +175,17 @@ offset_right = 1076.0
 offset_bottom = 179.0
 scale = Vector2(2, 2)
 
+[node name="DisplayFPSLabel" type="Label" parent="PanelContainer/OptionsMenu/DisplayFPS"]
+layout_mode = 0
+offset_left = -475.5
+offset_right = -205.5
+offset_bottom = 49.0
+theme = ExtResource("4_urrp1")
+theme_override_font_sizes/font_size = 28
+text = "DISPLAY FPS"
+
 [node name="VSync" type="CheckButton" parent="PanelContainer/OptionsMenu"]
+z_index = 2
 layout_mode = 0
 offset_left = 1032.0
 offset_top = 237.0
@@ -178,12 +193,87 @@ offset_right = 1076.0
 offset_bottom = 261.0
 scale = Vector2(2, 2)
 
+[node name="DisplayFPSLabel" type="Label" parent="PanelContainer/OptionsMenu/VSync"]
+layout_mode = 0
+offset_left = -475.5
+offset_top = -10.0
+offset_right = -205.5
+offset_bottom = 39.0
+theme = ExtResource("4_urrp1")
+theme_override_font_sizes/font_size = 28
+text = "V-sync  enabled"
+
+[node name="FPSTIMER" type="Timer" parent="PanelContainer/OptionsMenu"]
+autostart = true
+ignore_time_scale = true
+
+[node name="ResolutionDropdown" type="OptionButton" parent="PanelContainer/OptionsMenu"]
+layout_mode = 0
+offset_left = 869.0
+offset_top = 292.0
+offset_right = 1139.0
+offset_bottom = 349.0
+theme = ExtResource("4_urrp1")
+item_count = 3
+popup/item_0/text = "1920X1080"
+popup/item_0/id = 0
+popup/item_1/text = "1280X720"
+popup/item_1/id = 2
+popup/item_2/text = "1152X648"
+popup/item_2/id = 3
+
+[node name="Label" type="Label" parent="PanelContainer/OptionsMenu/ResolutionDropdown"]
+layout_mode = 0
+offset_left = -785.0
+offset_top = 1.0
+offset_right = -442.0
+offset_bottom = 62.0
+theme = ExtResource("4_urrp1")
+theme_override_font_sizes/font_size = 60
+text = "resolution"
+
+[node name="ResSprite" type="Sprite2D" parent="PanelContainer/OptionsMenu/ResolutionDropdown"]
+position = Vector2(-407, 28)
+rotation = 1.5707964
+scale = Vector2(3, 2.7)
+texture = ExtResource("7_mxa3g")
+
+[node name="Fullscreen" type="CheckButton" parent="PanelContainer/OptionsMenu"]
+layout_mode = 0
+offset_left = 1032.0
+offset_top = 371.0
+offset_right = 1076.0
+offset_bottom = 395.0
+scale = Vector2(2, 2)
+
+[node name="FullscreenLabel" type="Label" parent="PanelContainer/OptionsMenu/Fullscreen"]
+layout_mode = 0
+offset_left = -475.0
+offset_right = -435.0
+offset_bottom = 49.0
+theme = ExtResource("4_urrp1")
+theme_override_font_sizes/font_size = 28
+text = "Fullscreen"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_fpeim")
+&"": SubResource("AnimationLibrary_fpeim")
 }
+
+[node name="fpslabel" type="Label" parent="."]
+visible = false
+top_level = true
+layout_mode = 0
+offset_right = 127.0
+offset_bottom = 65.0
+theme = ExtResource("4_urrp1")
+text = "FPS:"
 
 [connection signal="pressed" from="PanelContainer/MainPauseMenu/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="PanelContainer/MainPauseMenu/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="PanelContainer/MainPauseMenu/Quit" to="." method="_on_quit_pressed"]
 [connection signal="value_changed" from="PanelContainer/OptionsMenu/Volume" to="PanelContainer/OptionsMenu" method="_on_volume_value_changed"]
+[connection signal="toggled" from="PanelContainer/OptionsMenu/DisplayFPS" to="PanelContainer/OptionsMenu" method="_on_display_fps_toggled"]
+[connection signal="toggled" from="PanelContainer/OptionsMenu/VSync" to="PanelContainer/OptionsMenu" method="_on_v_sync_toggled"]
+[connection signal="item_selected" from="PanelContainer/OptionsMenu/ResolutionDropdown" to="PanelContainer/OptionsMenu" method="_on_resolution_dropdown_item_selected"]
+[connection signal="toggled" from="PanelContainer/OptionsMenu/Fullscreen" to="PanelContainer/OptionsMenu" method="_on_fullscreen_toggled"]

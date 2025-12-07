@@ -1,9 +1,8 @@
 extends Node
-var Player1 = Player.new()
 var testarray : Array[InputModel]
 var amtlevels : int = 8
 var levelarray : Array[PackedScene] = []
-
+var Player1 = Player.new()
 signal PlayerDied
 signal PlayerSteppedOnSpikes
 signal LevelChange
@@ -30,10 +29,9 @@ func _process(_delta: float) -> void:
 	
 	
 
-func Read_Inputs():
-	for i in testarray.size():
-		var testinputs = testarray[i]
-		Player1.leftright = testinputs.left - testinputs.right
+#func Read_Inputs():
+##		var testinputs = testarray[i]
+#		Player1.leftright = testinputs.left - testinputs.right
 	
 
 

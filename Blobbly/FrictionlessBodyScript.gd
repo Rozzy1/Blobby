@@ -15,10 +15,10 @@ func _process(_delta):
 
 func area2d_entered(body):
 	if body == player:
-		player.istouchingfrictionlessbody = true
+		player.frictionless_count += 1
 
 
 func area2d_exited(body):
 	if body == player:
-		player.istouchingfrictionlessbody = false
+		player.frictionless_count -= 1
 	

@@ -1,13 +1,13 @@
 [gd_scene load_steps=18 format=3 uid="uid://bc5ehfoip2pin"]
 
-[ext_resource type="Script" path="res://MovingPlatformScipt.gd" id="1_v1k7c"]
+[ext_resource type="Script" uid="uid://bnx2ap3lioyd" path="res://MovingPlatformScipt.gd" id="1_v1k7c"]
 [ext_resource type="PackedScene" uid="uid://dlv0q1cyfs5sh" path="res://collision_polygons.tscn" id="2_8jixp"]
-[ext_resource type="Script" path="res://FrictionlessBodyScript.gd" id="3_anjd3"]
-[ext_resource type="Script" path="res://KillBrick.gd" id="4_bdr63"]
-[ext_resource type="Script" path="res://DashWallScript.gd" id="4_ev31r"]
-[ext_resource type="Script" path="res://DashButtonScript.gd" id="5_40awn"]
+[ext_resource type="Script" uid="uid://bkw7lbap4mp44" path="res://FrictionlessBodyScript.gd" id="3_anjd3"]
+[ext_resource type="Script" uid="uid://c1ywa40ru6db" path="res://KillBrick.gd" id="4_bdr63"]
+[ext_resource type="Script" uid="uid://dgqwfqijxia2g" path="res://DashWallScript.gd" id="4_ev31r"]
+[ext_resource type="Script" uid="uid://7ibi1rqvfd88" path="res://DashButtonScript.gd" id="5_40awn"]
 [ext_resource type="AudioStream" uid="uid://dyjlylplk4vwr" path="res://Foozle_2DT0001_Science_Fiction_Labs_Tileset/HALFTONE SFX Pack LITE/UI/1. Buttons/Button_24.wav" id="6_ansf1"]
-[ext_resource type="Script" path="res://EnemeySpawnerComponent.gd" id="8_qk81t"]
+[ext_resource type="Script" uid="uid://4vttfs74vmgv" path="res://EnemeySpawnerComponent.gd" id="8_qk81t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bocvt"]
 
@@ -693,7 +693,7 @@ StartingPathPosition = Vector2(949, 2500)
 Platform = NodePath("..")
 
 [node name="EnemeySpawnerComponent" type="Node2D" parent="."]
-position = Vector2(3227, 1210)
+position = Vector2(-393, 135)
 script = ExtResource("8_qk81t")
 enemeypositions = PackedVector2Array(3480, 2250, 3220, 1210)
 

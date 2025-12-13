@@ -150,7 +150,6 @@ min_value = -50.0
 max_value = 10.0
 tick_count = 10
 ticks_on_borders = true
-ticks_position = 1
 
 [node name="VolumeIcon" type="Sprite2D" parent="PanelContainer/OptionsMenu/Volume"]
 position = Vector2(-51, 16.6667)
@@ -234,7 +233,7 @@ text = "resolution"
 
 [node name="ResSprite" type="Sprite2D" parent="PanelContainer/OptionsMenu/ResolutionDropdown"]
 position = Vector2(-407, 28)
-rotation = 1.5707964
+rotation = 1.5708
 scale = Vector2(3, 2.7)
 texture = ExtResource("7_mxa3g")
 

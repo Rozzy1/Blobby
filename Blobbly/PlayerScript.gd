@@ -25,6 +25,8 @@ const JUMP_VEL        = -700.0
 const GRAVITY_FALL    = 1200
 const GRAVITY_RISE    = 1600
 const DASH_SPEED      = 300
+const MIN_SLOPE_ANGLE = 30
+const MAX_SLOPE_ANGLE = 90
 
 # -------------------------------------------------------------------
 # State Variables
@@ -52,6 +54,8 @@ var teleporter_locked  = false
 var horizontal_input := 0.0
 var vertical_input   := 0.0
 var direction        := 0.0
+var ray_length = 2.0
+var up_vector = Vector3.UP
 
 var last_animation : String
 
@@ -66,7 +70,7 @@ func _ready():
 func _physics_process(delta):
 	_handle_debug()
 # ------------------------------------------------------------
-# FRICTION SYSTEM (smooth, counter-based)
+# FRICTION SYSTEM
 # ------------------------------------------------------------
 	TARGET_FRICTION = 1 if frictionless_count > 0 else 1.2
 	friction = lerp(friction, TARGET_FRICTION, delta * 10)
@@ -106,7 +110,7 @@ func _physics_process(delta):
 		gravity = GRAVITY_RISE
 
 # ------------------------------------------------------------
-# COYOTE TIME LOGIC (the real fix)
+# COYOTE TIME LOGIC 
 # ------------------------------------------------------------
 	if on_floor_now:
 	# touching ground kills coyote + prevents double jump
@@ -117,7 +121,9 @@ func _physics_process(delta):
 		if last_on_floor and not jumping:
 			coyote_available = true
 			coyote_timer.start()
-
+	
+	
+	
 # ------------------------------------------------------------
 # JUMP
 # ------------------------------------------------------------
@@ -163,13 +169,15 @@ func _physics_process(delta):
 	if not teleporter_locked and not is_respawning:
 		if velocity.y < 0:
 			_play_anim("jump_start")
-		elif velocity.y > 0:
+		elif velocity.y > 150:
 			_play_anim("jump_mid")
-		if velocity.y > 300:
+		if velocity.y > 400:
 			_play_anim("jump_fall")
 
 	last_on_floor = is_on_floor()
+	calculate_max_slope_angle(velocity.x)
 	move_and_slide()
+	align_to_ground()
 
 
 # -------------------------------------------------------------------
@@ -185,7 +193,8 @@ func _should_idle() -> bool:
 		and is_on_floor()
 	)
 
-
+func _on_coyotetimer_timeout() -> void:
+	coyote_available = false
 func _perform_dash():
 	if is_dashing or not can_move:
 		return
@@ -340,3 +349,28 @@ func _handle_debug():
 		GameManager.LevelChange.emit(0)
 		level_count = -1
 		await get_tree().create_timer(1.39).timeout
+
+func align_to_ground() -> void:
+	var space_state = get_world_2d().direct_space_state
+	var from = global_position
+	var to = from + Vector2.DOWN * 75.0
+	
+	var query = PhysicsRayQueryParameters2D.create(from, to)
+	var result = space_state.intersect_ray(query)
+	if result:
+		print(result)
+		var ground_normal: Vector2 = result.normal
+		
+		# Calculate the angle of the ground
+		var angle = ground_normal.angle() + deg_to_rad(90)
+		
+		# Rotate the player to match the ground
+		rotation = lerp_angle(rotation, angle, 0.5)
+	else:
+		rotation = lerp_angle(rotation, 0, 0.2)
+
+func calculate_max_slope_angle(speed: float) -> float:
+	var v = max(speed, 0.0)
+	var scale = 0.5 # adjust to control growth rate
+	var angle = MIN_SLOPE_ANGLE + log(1.0 + v) * scale
+	return clamp(angle, MIN_SLOPE_ANGLE, MAX_SLOPE_ANGLE)

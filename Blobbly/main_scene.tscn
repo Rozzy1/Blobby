@@ -402,13 +402,12 @@ script = ExtResource("1_rj3dd")
 metadata/_edit_horizontal_guides_ = [-1907.0, -597.0]
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
-position = Vector2(311, 1388.0001)
+position = Vector2(311, 1388)
 scale = Vector2(30, 30)
 collision_layer = 3
 collision_mask = 3
 slide_on_ceiling = false
-floor_stop_on_slope = false
-floor_snap_length = 32.0
+floor_snap_length = 100.0
 safe_margin = 1.0
 script = ExtResource("2_0hl8t")
 player_spawn_points = PackedVector2Array(-2883, 520, 59, 174, 55, 322, -200, 50, 0, 150, -393.485, 135, -1212, 257)
@@ -445,7 +444,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Coyotetimer" type="Timer" parent="Player"]
 process_callback = 0
-wait_time = 0.075
+wait_time = 0.001
 one_shot = true
 autostart = true
 
@@ -453,9 +452,7 @@ autostart = true
 position = Vector2(0, -2)
 scale = Vector2(0.07, 0.07)
 sprite_frames = SubResource("SpriteFrames_ei0ly")
-animation = &"run_to_idle"
-frame = 1
-frame_progress = 0.35159695
+animation = &"jump_mid"
 
 [node name="Jump" type="AudioStreamPlayer2D" parent="Player"]
 stream = ExtResource("58_1dg4t")

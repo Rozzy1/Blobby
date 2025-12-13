@@ -1,11 +1,11 @@
 [gd_scene load_steps=13 format=3 uid="uid://cpyd07vx21ri"]
 
 [ext_resource type="PackedScene" uid="uid://dlv0q1cyfs5sh" path="res://collision_polygons.tscn" id="1_anw8r"]
-[ext_resource type="Script" path="res://FrictionlessBodyScript.gd" id="2_dmjnh"]
-[ext_resource type="Script" path="res://DashButtonScript.gd" id="3_e4oyf"]
+[ext_resource type="Script" uid="uid://bkw7lbap4mp44" path="res://FrictionlessBodyScript.gd" id="2_dmjnh"]
+[ext_resource type="Script" uid="uid://7ibi1rqvfd88" path="res://DashButtonScript.gd" id="3_e4oyf"]
 [ext_resource type="AudioStream" uid="uid://dyjlylplk4vwr" path="res://Foozle_2DT0001_Science_Fiction_Labs_Tileset/HALFTONE SFX Pack LITE/UI/1. Buttons/Button_24.wav" id="4_kv8um"]
-[ext_resource type="Script" path="res://MovingPlatformScipt.gd" id="5_kcyue"]
-[ext_resource type="Script" path="res://KillBrick.gd" id="6_2n24e"]
+[ext_resource type="Script" uid="uid://bnx2ap3lioyd" path="res://MovingPlatformScipt.gd" id="5_kcyue"]
+[ext_resource type="Script" uid="uid://c1ywa40ru6db" path="res://KillBrick.gd" id="6_2n24e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_naxdv"]
 size = Vector2(402.455, 40)

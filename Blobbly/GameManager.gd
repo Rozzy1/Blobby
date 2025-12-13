@@ -15,13 +15,6 @@ func _ready():
 	LevelChange.connect(level_change)
 	
 
-
-
-
-
-
-
-
 func _process(_delta: float) -> void:
 #	Write_Inputs()
 	pass

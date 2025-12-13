@@ -5,7 +5,7 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mf2jb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a76i3"]
-bg_color = Color(0.65891117, 1.9131974e-06, 5.2943824e-07, 1)
+bg_color = Color(0.658911, 1.9132e-06, 5.29438e-07, 1)
 border_width_left = 5
 border_width_top = 5
 border_width_bottom = 5
